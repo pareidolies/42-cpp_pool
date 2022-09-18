@@ -3,7 +3,10 @@
 
 class Phonebook
 {
+    
 public:
+    Phonebook(void);
+    ~Phonebook(void);
 };
 
 #endif

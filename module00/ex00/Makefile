@@ -13,9 +13,9 @@ RM	=	rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "\033[92m[Object files : OK].\033[0m"
+	@echo "\033[92m[object files : OK].\033[0m"
 	$(CC) $(CPPFLAGS) $(OBJS) -o $(NAME)
-	@echo "\033[92m[Executable : OK].\033[0m"
+	@echo "\033[92m[executable : OK].\033[0m"
 
 %.o: %.cpp
 	$(CC) $(CPPFLAGS) -c $< -o $@
@@ -25,7 +25,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	@echo "\x1b[31m[Cleaning : OK].\033[0m"
+	@echo "\033[93m[cleaning : OK].\033[0m"
 
 re:	fclean all
 

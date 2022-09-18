@@ -34,7 +34,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	@echo "\x1b[31m[cleaning : OK].\033[0m"
+	@echo "\033[93m[cleaning : OK].\033[0m"
 
 re:	fclean all
 
