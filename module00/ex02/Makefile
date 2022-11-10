@@ -23,7 +23,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	$(RM) $(NAME)
