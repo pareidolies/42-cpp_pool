@@ -10,11 +10,11 @@ class Contact
 	public:
 	    Contact(void);
 	    ~Contact(void);
-    	std::string	give_first_name(void);
-		std::string	give_last_name(void);
-		std::string	give_nickname(void);
-		std::string	give_phone_number(void);
-		std::string	give_darkest_secret(void);
+    	std::string	get_first_name(void);
+		std::string	get_last_name(void);
+		std::string	get_nickname(void);
+		std::string	get_phone_number(void);
+		std::string	get_darkest_secret(void);
 		void		change_contact(std::string str1, std::string str2, std::string str3,std::string str4,std::string str5);
 
 	private:

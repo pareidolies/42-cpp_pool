@@ -7,6 +7,8 @@
 # include <stdlib.h>
 # include <iomanip>
 
+# define MEMORY 8
+
 class PhoneBook
 {
 	public:
@@ -18,7 +20,7 @@ class PhoneBook
 		int		number_of_contacts(void);
 
 	private:
-		Contact	List[8];
+		Contact	List[MEMORY];
 		int		nbr_contacts;
 		void    truncate_text(std::string str);
 };
