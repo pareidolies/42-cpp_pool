@@ -6,12 +6,17 @@
 
 PhoneBook::PhoneBook()
 {
+	std::cout << "\e[1;1H\e[2J";
+	std::cout << ANSI_PURPLE << "---------------------------------------" << ANSI_COLOR_RESET << std::endl;
+	std::cout << ANSI_PURPLE << "  Welcome to your (awesome) phonebook " << ANSI_COLOR_RESET << std::endl;
+	std::cout << ANSI_PURPLE << "---------------------------------------" << ANSI_COLOR_RESET << std::endl;
+	std::cout << ANSI_PURPLE << "Would you like to ADD, SEARCH or EXIT ?" << ANSI_COLOR_RESET << std::endl;
 	nbr_contacts = 0;
 }
 
 PhoneBook::~PhoneBook()
 {
-
+	std::cout << ANSI_PURPLE << "See you soon!" << ANSI_COLOR_RESET << std::endl;
 }
 
 void	PhoneBook::add_contact(int i)

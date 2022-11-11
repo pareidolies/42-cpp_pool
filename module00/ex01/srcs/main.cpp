@@ -7,14 +7,6 @@
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_COLOR_RESET		"\x1b[0m"
 
-void	say_hello()
-{
-	std::cout << ANSI_PURPLE << "---------------------------------------" << ANSI_COLOR_RESET << std::endl;
-	std::cout << ANSI_PURPLE << "  Welcome to your (awesome) phonebook " << ANSI_COLOR_RESET << std::endl;
-	std::cout << ANSI_PURPLE << "---------------------------------------" << ANSI_COLOR_RESET << std::endl;
-	std::cout << ANSI_PURPLE << "Would you like to ADD, SEARCH or EXIT ?" << ANSI_COLOR_RESET << std::endl;
-}
-
 int main()
 {
 	PhoneBook	book;
@@ -23,7 +15,6 @@ int main()
 	int	index;
 
 	i = 0;
-	say_hello();
 	while (1)
 	{
 		std::cout << "> ";
@@ -51,9 +42,7 @@ int main()
 			}
 		}
 		else if (choice == "EXIT")
-		{
-			exit(0);
-		}
+			return(0);
 	}
 	return (0);
 }
