@@ -12,27 +12,27 @@ Contact::~Contact()
 
 std::string	Contact::give_first_name()
 {
-	return first_name;
+	return (first_name);
 }
 
 std::string	Contact::give_last_name()
 {
-	return last_name;
+	return (last_name);
 }
 
 std::string	Contact::give_nickname()
 {
-	return nickname;
+	return (nickname);
 }
 
 std::string	Contact::give_phone_number()
 {
-	return phone_number;
+	return (phone_number);
 }
 
 std::string	Contact::give_darkest_secret()
 {
-	return darkest_secret;
+	return (darkest_secret);
 }
 
 void	Contact::change_contact(std::string str1, std::string str2, std::string str3,std::string str4,std::string str5)
