@@ -31,16 +31,16 @@ void	PhoneBook::add_contact(int i)
 	if (std::getline(std::cin, first_name) == NULL || first_name == "")
 		exit (1);
 	std::cout << ANSI_PURPLE << "Last name: " << ANSI_COLOR_RESET;
-	if (std::getline(std::cin, last_name) == NULL || first_name == "")
+	if (std::getline(std::cin, last_name) == NULL || last_name == "")
 		exit (1);
 	std::cout << ANSI_PURPLE << "Nickname: " << ANSI_COLOR_RESET;
-	if (std::getline(std::cin, nickname) == NULL || first_name == "")
+	if (std::getline(std::cin, nickname) == NULL || nickname == "")
 			exit (1);
 	std::cout << ANSI_PURPLE << "Phone number: " << ANSI_COLOR_RESET;
-	if (std::getline(std::cin, phone_number) == NULL || first_name == "")
+	if (std::getline(std::cin, phone_number) == NULL || phone_number == "")
 		exit (1);
 	std::cout << ANSI_PURPLE << "Darkest secret: " << ANSI_COLOR_RESET;
-	if (std::getline(std::cin, darkest_secret) == NULL || first_name == "")
+	if (std::getline(std::cin, darkest_secret) == NULL || darkest_secret == "")
 			exit (1);
 	if (nbr_contacts < MEMORY)
 		nbr_contacts++;
