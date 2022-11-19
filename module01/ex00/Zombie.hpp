@@ -1,19 +1,25 @@
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
 
-# include <iostream>
-# include <stdlib.h>
 # include <string>
+# include <iostream>
+
+# define ANSI_PURPLE		"\x1b[95m"
+# define ANSI_RESET			"\x1b[0m"
 
 class Zombie
 {
 	public:
-	    Zombie(void);
+	    Zombie(std::string name);
 	    ~Zombie(void);
-	    void	announce( void );
+	    void	announce(void) const;
+		std::string	get_name(void) const;
 
 	private:
 		std::string	name;
 };
+
+Zombie	*newZombie(std::string name);
+void	randomChump(std::string name);
 
 #endif
