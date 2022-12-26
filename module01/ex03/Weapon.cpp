@@ -1,21 +1,21 @@
-# include "Zombie.hpp"
+# include "Weapon.hpp"
 
-Zombie::Zombie(void)
+Weapon::Weapon(void)
 {
     std::cout << ANSI_PURPLE << "constructor called" << ANSI_RESET << std::endl;
 }
 
-Zombie::~Zombie(void)
+Weapon::~Weapon(void)
 {
     std::cout << ANSI_PURPLE << "destructor called" << ANSI_RESET << std::endl;
 }
 
-void	Zombie::announce(void)
+std::string	&Weapon::getType(void)
 {
-    std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    return (this->_type);
 }
 
-void	Zombie::setName(std::string name)
+void	Weapon::setType(std::string newType)
 {
-    this->name = name;
+    this->_type = newType;
 }

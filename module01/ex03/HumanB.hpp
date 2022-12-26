@@ -1,24 +1,20 @@
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HUMAN_B_HPP
+# define HUMAN_B_HPP
 
+# include "Weapon.hpp"
 # include <string>
 # include <iostream>
 
-# define ANSI_PURPLE		"\x1b[95m"
-# define ANSI_RESET			"\x1b[0m"
-
-class Zombie
+class HumanB
 {
 	public:
-	    Zombie(void);
-	    ~Zombie(void);
-	    void	announce(void);
-		void	setName(std::string name);
+	    HumanB(void);
+	    ~HumanB(void);
+	    void	attack(void);
 
 	private:
-		std::string	name;
+		std::string	_name;
+		Weapon		_weapon;
 };
-
-Zombie*    zombieHorde(int N, std::string name);
 
 #endif
