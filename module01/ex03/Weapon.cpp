@@ -1,21 +1,29 @@
 # include "Weapon.hpp"
 
-Weapon::Weapon(void)
+Weapon::Weapon(std::string const type) : _type(type)
 {
-    std::cout << ANSI_PURPLE << "constructor called" << ANSI_RESET << std::endl;
+    if (type == "")
+        std::cout << ANSI_PURPLE << "[...] new weapon created (type : empty)" << ANSI_RESET << std::endl;
+    else
+        std::cout << ANSI_PURPLE << "[...] new weapon created (type : " << this->_type << ")" << ANSI_RESET << std::endl;
+}
+
+Weapon::Weapon(void) : _type("")
+{
+    std::cout << ANSI_PURPLE << "[...] new weapon created (type : empty)" << ANSI_RESET << std::endl;
 }
 
 Weapon::~Weapon(void)
 {
-    std::cout << ANSI_PURPLE << "destructor called" << ANSI_RESET << std::endl;
+    std::cout << ANSI_PURPLE << "[...] destruction of weapon (type : " << this->_type << ")" << ANSI_RESET << std::endl;
 }
 
-std::string	&Weapon::getType(void)
+std::string const &Weapon::getType(void) const
 {
     return (this->_type);
 }
 
-void	Weapon::setType(std::string newType)
+void	Weapon::setType(std::string const type)
 {
-    this->_type = newType;
+    this->_type = type;
 }

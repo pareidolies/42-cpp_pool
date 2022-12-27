@@ -8,13 +8,15 @@
 class HumanB
 {
 	public:
-	    HumanB(void);
+		HumanB(std::string const name, Weapon * weapon);
+	    HumanB(std::string const name);
 	    ~HumanB(void);
 	    void	attack(void);
+		void    setWeapon(Weapon & weapon);
 
 	private:
-		std::string	_name;
-		Weapon		_weapon;
+		std::string	const _name;
+		Weapon		* _weapon;
 };
 
 #endif

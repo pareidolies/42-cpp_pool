@@ -1,16 +1,47 @@
-# include "Zombie.hpp"
+# include "HumanA.hpp"
+# include "HumanB.hpp"
+# include "Weapon.hpp"
+# include <iostream>
 
-# define NB 7
-
-int main()
+int main() 
 {
-    Zombie  *zombies = zombieHorde(NB, "Eurus");
-    for (int i = 0; i < NB; i++)
     {
-        std::cout << i + 1 << ": ";
-        zombies[i].announce();
+        std::cout << "---- HUMAN A TESTS ----" << std::endl;
+        Weapon  club = Weapon("crude spiked club");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club");
+        bob.attack();
     }
-    if (NB > 0)
-        delete [] zombies;
-    return (0);
+    std::cout << std::endl;
+    {
+        std::cout << "---- HUMAN B TESTS ----" << std::endl;
+        Weapon  club = Weapon("crude spiked club");
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club");
+        jim.attack();
+    }
+    std::cout << std::endl;
+    {
+        std::cout << "---- EMPTY STRING TESTS ----" << std::endl;
+        Weapon  club = Weapon("");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("sword");
+        bob.attack(); 
+    }
+    std::cout << std::endl;
+    {
+        std::cout << "---- NULL TESTS ----" << std::endl;
+        Weapon  club = Weapon();
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("net");
+        jim.attack();
+    }
+    std::cout << std::endl;
+    return 0; 
 }

@@ -1,6 +1,6 @@
-NAME	=	zombie
+NAME	=	battle
 
-SRCS	=	main.cpp Zombie.cpp zombieHorde.cpp
+SRCS	=	main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 OBJS	= 	$(SRCS:%.cpp=%.o)
 
