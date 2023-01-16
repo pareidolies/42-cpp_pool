@@ -17,3 +17,9 @@ Juste quelques notes et conseils
 
 ## Module 01:
 
+## Module 02:
+
+**Ex03 :** 
+
+* détecter si un point se situe à l'intérieur d'un triangle : https://www.youtube.com/watch?v=kkucCUlyIUE
+* pour faire les tests : https://www.geogebra.org/?lang=fr
