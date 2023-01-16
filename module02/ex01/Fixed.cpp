@@ -51,12 +51,12 @@ void	Fixed::setRawBits(const int raw)
 	this->_fixedPointNbr = raw;
 }
 
-float Fixed::toFloat( void ) const
+float Fixed::toFloat(void) const
 {
 	return ((float) this->_fixedPointNbr / (float) (1 << Fixed::_fractBitsNbr));
 }
 
-int Fixed::toInt( void ) const
+int Fixed::toInt(void) const
 {
 	return (this->_fixedPointNbr / (1 << Fixed::_fractBitsNbr));
 }
