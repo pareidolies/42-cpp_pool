@@ -1,16 +1,17 @@
-# include <iostream>
-# include "Fixed.hpp"
+# include "ClapTrap.hpp"
 
-int main(void) 
+int main()
 {
-    Fixed a;
-    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-    std::cout << a << std::endl;
-    std::cout << ++a << std::endl;
-    std::cout << a << std::endl;
-    std::cout << a++ << std::endl;
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << Fixed::max( a, b ) << std::endl;
-    return (0);
+	ClapTrap	woolf = ClapTrap("Woolf");
+	ClapTrap	labradoodle = ClapTrap();
+
+	for (int i = 0; i < 10; i++)
+	{
+		woolf.attack("Labradoodle");
+		labradoodle.takeDamage(1);
+	}
+	labradoodle.attack("Woolf");
+	labradoodle.beRepaired(1);
+    woolf.attack("Labradoodle");
+	return (0);
 }
