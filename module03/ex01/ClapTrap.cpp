@@ -10,9 +10,9 @@ ClapTrap::ClapTrap(void) : _name("Labradoodle"), _hitPoints(10), _energyPoints(1
 	std::cout << ANSI_BLUE << "ClapTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string const name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(std::string const & name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << ANSI_BLUE << "ClapTrap Name constructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "ClapTrap name constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -44,7 +44,7 @@ ClapTrap	&ClapTrap::operator=(ClapTrap const & rhs)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << ANSI_BLUE << "Destructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "ClapTrap destructor called for " << _name << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************

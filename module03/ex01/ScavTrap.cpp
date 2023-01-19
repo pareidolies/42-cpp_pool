@@ -5,13 +5,21 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(void) : _name("Labradoodle"), _hitPoints(100), _energyPoints(50), _attackDamage(20)
+ScavTrap::ScavTrap(void) : ClapTrap()
 {
+    this->_name = "Labradoodle";
+    this->_hitPoints = 100;
+    this->_energyPoints = 50;
+    this->_attackDamage = 20;
 	std::cout << ANSI_BLUE << "ScavTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string const name) : _name(name), _hitPoints(100), _energyPoints(50), _attackDamage(20)
+ScavTrap::ScavTrap(std::string const & name) : ClapTrap()
 {
+    this->_name = name;
+    this->_hitPoints = 100;
+    this->_energyPoints = 50;
+    this->_attackDamage = 20;
 	std::cout << ANSI_BLUE << "ScavTrap name constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
@@ -19,7 +27,7 @@ ScavTrap::ScavTrap(std::string const name) : _name(name), _hitPoints(100), _ener
 *                                   COPY                                      *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(ScavTrap const & copy)
+ScavTrap::ScavTrap(ScavTrap const & copy) : ClapTrap(copy._name)
 {
     *this = copy;
 	std::cout << ANSI_YELLOW << "ScavTrap copy constructor called" << ANSI_RESET << std::endl;

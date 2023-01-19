@@ -18,13 +18,13 @@ class ClapTrap
 		ClapTrap(ClapTrap const & copy); // constructeur de recopie
 		ClapTrap	&operator=(ClapTrap const & rhs); // surcharge de l'opérateur d'affectation
 		~ClapTrap(void); //destructeur
-		ClapTrap(std::string const name); //name constructor
+		ClapTrap(std::string const & name); //name constructor
 
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 
-	private:
+	protected:
 
 		std::string			_name;
 		unsigned int		_hitPoints;
