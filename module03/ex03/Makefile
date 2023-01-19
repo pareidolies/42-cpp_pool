@@ -8,7 +8,7 @@ DEPS	= 	$(SRCS:%.cpp=%.d)
 
 CC	=	c++
 
-CPPFLAGS	=	-Wall -Werror -Wextra -Wshadow -Wno-shadow -std=c++98 -I -MMD
+CPPFLAGS	=	-Wall -Werror -Wextra -Wshadow -std=c++98 -I -MMD
 
 RM	=	rm -rf
 
