@@ -1,5 +1,5 @@
-#include "FragTrap.hpp"
-#include <iostream>
+# include "FragTrap.hpp"
+# include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *

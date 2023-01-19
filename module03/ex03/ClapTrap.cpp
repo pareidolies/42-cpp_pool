@@ -1,5 +1,5 @@
-#include "ClapTrap.hpp"
-#include <iostream>
+# include "ClapTrap.hpp"
+# include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *

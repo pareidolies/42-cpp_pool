@@ -1,5 +1,5 @@
-#include "ScavTrap.hpp"
-#include <iostream>
+# include "ScavTrap.hpp"
+# include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
