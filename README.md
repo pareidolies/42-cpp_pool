@@ -22,7 +22,7 @@ Juste quelques notes et conseils
 **Ex03 :** 
 
 * détecter si un point se situe à l'intérieur d'un triangle : https://www.youtube.com/watch?v=kkucCUlyIUE
-* pour faire les tests : https://www.geogebra.org/?lang=fr
+* pour visualiser les tests sur un graphe : https://www.geogebra.org/?lang=fr
 
 ## Module 03:
 
