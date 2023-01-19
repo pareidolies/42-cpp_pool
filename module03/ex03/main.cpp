@@ -1,6 +1,6 @@
 # include "DiamondTrap.hpp"
 
-//faire des macros pour les points de damage
+//vérifier les valeurs héritées
 
 int main()
 {
