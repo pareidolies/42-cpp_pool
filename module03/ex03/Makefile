@@ -1,4 +1,4 @@
-NAME	=	fragtrap
+NAME	=	diamondtrap
 
 SRCS	=	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
@@ -8,7 +8,7 @@ DEPS	= 	$(SRCS:%.cpp=%.d)
 
 CC	=	c++
 
-CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I -MMD
+CPPFLAGS	=	-Wall -Werror -Wextra -Wshadow -Wno-shadow -std=c++98 -I -MMD
 
 RM	=	rm -rf
 

@@ -1,5 +1,4 @@
-# include "ScavTrap.hpp"
-# include "FragTrap.hpp"
+# include "DiamondTrap.hpp"
 
 //faire des macros pour les points de damage
 
@@ -36,6 +35,19 @@ int main()
     dolphin.attack("Lion");
     lion.takeDamage(30);
 	dolphin.highFivesGuys();
+
+	DiamondTrap	cat = DiamondTrap("Cat");
+	DiamondTrap	dog = DiamondTrap("Dog");
+
+	dog.whoAmI();
+	cat.whoAmI();
+
+	cat.attack("Dog");
+    dog.takeDamage(30);
+    dog.beRepaired(30);
+    dog.attack("Cat");
+    cat.takeDamage(30);
+	
 
 	return (0);
 }

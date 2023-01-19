@@ -5,18 +5,20 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-DiamondTrap::DiamondTrap(void) : ClapTrap("Labradoodle" + "_clap_name"), FragTrap("Labradoodle"), ScavTrap("Labradoodle")
+DiamondTrap::DiamondTrap(void)
 {
     this->_name = "Labradoodle";
+	ClapTrap::_name = "Labradoodle_clap_name";
     this->_hitPoints = FragTrap::_hitPoints;
     this->_energyPoints = ScavTrap::_energyPoints;
     this->_attackDamage = FragTrap::_attackDamage;
 	std::cout << ANSI_BLUE << "DiamondTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string const & name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
+DiamondTrap::DiamondTrap(std::string const & name)
 {
     this->_name = name;
+	ClapTrap::_name = _name + "_clap_name";
     this->_hitPoints = FragTrap::_hitPoints;
     this->_energyPoints = ScavTrap::_energyPoints;
     this->_attackDamage = FragTrap::_attackDamage;
@@ -61,6 +63,6 @@ DiamondTrap::~DiamondTrap(void)
 
 void DiamondTrap::whoAmI(void)
 {
-    std::cout << ANSI_GREEN << "I am DiamondTrap " << _name << "and my ClapTrap is "
+    std::cout << ANSI_GREEN << "I am DiamondTrap " << _name << " and my ClapTrap is "
 		<< ClapTrap::_name << ANSI_RESET << std::endl;
 }
