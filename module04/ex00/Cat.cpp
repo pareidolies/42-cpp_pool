@@ -1,48 +1,31 @@
-#include "ScavTrap.hpp"
+#include "Cat.hpp"
 #include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(void) : ClapTrap()
+Cat::Cat(void) : Animal()
 {
-    this->_name = "Labradoodle";
-    this->_hitPoints = 100;
-    this->_energyPoints = 50;
-    this->_attackDamage = 20;
-	std::cout << ANSI_BLUE << "ScavTrap default constructor called for " << _name << ANSI_RESET << std::endl;
-}
-
-ScavTrap::ScavTrap(std::string const & name) : ClapTrap()
-{
-    this->_name = name;
-    this->_hitPoints = 100;
-    this->_energyPoints = 50;
-    this->_attackDamage = 20;
-	std::cout << ANSI_BLUE << "ScavTrap name constructor called for " << _name << ANSI_RESET << std::endl;
+    this->type = "Cat";
+	std::cout << ANSI_BLUE << "Cat constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(ScavTrap const & copy) : ClapTrap(copy._name)
+Cat::Cat(Cat const & copy)
 {
     *this = copy;
-	std::cout << ANSI_YELLOW << "ScavTrap copy constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Cat copy constructor called" << ANSI_RESET << std::endl;
 }
 
-ScavTrap	&ScavTrap::operator=(ScavTrap const & rhs)
+Cat	&Cat::operator=(Cat const & rhs)
 {
-	std::cout << ANSI_YELLOW << "ScavTrap copy assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Cat assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
-	{
-		this->_name = rhs._name;
-		this->_hitPoints = rhs._hitPoints;
-		this->_energyPoints = rhs._energyPoints;
-		this->_attackDamage = rhs._attackDamage;
-	}
+		this->type = rhs.type;
 	return (*this);
 }
 
@@ -50,37 +33,16 @@ ScavTrap	&ScavTrap::operator=(ScavTrap const & rhs)
 *                               DESTRUCTOR                                    *
 ******************************************************************************/
 
-ScavTrap::~ScavTrap(void)
+Cat::~Cat(void)
 {
-	std::cout << ANSI_BLUE << "ScavTrap destructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "Cat destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-void	ScavTrap::attack(const std::string& target)
-{
-	if (this->_energyPoints <= 0)
-	{
-		std::cout << ANSI_RED << "ScavTrap "
-			<< _name << " has no more energy, and so cannot attack" << ANSI_RESET << std::endl;
-		return;
-	}
-	if (this->_hitPoints <= 0)
-	{
-		std::cout << ANSI_RED << "ScavTrap "
-			<< _name << " is dead, and so cannot attack" << ANSI_RESET << std::endl;
-		return;
-	}
-	this->_energyPoints--;
-	std::cout << ANSI_PURPLE << "ScavTrap "
-	<< _name << " attacks " << target << ", causing " << _attackDamage
-	<< " points of damage!"<< ANSI_RESET << std::endl;
-	return;
-}
-
-void ScavTrap::guardGate(void)
-{
-    std::cout << ANSI_GREEN << "ScavTrap " << _name << " in gate keeper mode!" << ANSI_RESET << std::endl;
+void	Cat::makeSound(void) const
+{	
+	std::cout << ANSI_RED << "Meow meow!" << ANSI_RESET << std::endl;
 }

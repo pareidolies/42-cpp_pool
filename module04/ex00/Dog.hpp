@@ -1,21 +1,19 @@
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
 # include <iostream>
-# include "ClapTrap.hpp"
+# include "Animal.hpp"
 
-class ScavTrap : public ClapTrap
+class Dog : public Animal
 {
 	public:
 
-		ScavTrap(void); //default constructor
-        ScavTrap(std::string const & name); //name constructor
-		ScavTrap(ScavTrap const & copy); // constructeur de recopie
-		ScavTrap	&operator=(ScavTrap const & rhs); // surcharge de l'opérateur d'affectation
-		~ScavTrap(void); //destructeur
+		Dog(void); //default constructor
+		Dog(Dog const & copy); //copy constructor
+		Dog	&operator=(Dog const & rhs); //assignement operator
+		~Dog(void); //destructor
 
-		void attack(const std::string& target);
-		void guardGate(void);
+		void makeSound(void) const;
 
 };
 

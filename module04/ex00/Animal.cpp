@@ -10,11 +10,6 @@ Animal::Animal(void) : type("Animal")
 	std::cout << ANSI_BLUE << "Animal default constructor called" << ANSI_RESET << std::endl;
 }
 
-Animal::Animal(std::string const & type) : type(type)
-{
-	std::cout << ANSI_BLUE << "Animal name constructor called" << ANSI_RESET << std::endl;
-}
-
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
@@ -46,7 +41,12 @@ Animal::~Animal(void)
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-void	makeSound(void);
+void	Animal::makeSound(void) const
 {	
 	std::cout << ANSI_RED << "Animal makes sound!" << ANSI_RESET << std::endl;
+}
+
+std::string	Animal::getType(void) const
+{
+	return(this->type);
 }

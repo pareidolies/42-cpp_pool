@@ -1,48 +1,31 @@
-#include "ScavTrap.hpp"
+#include "Dog.hpp"
 #include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(void) : ClapTrap()
+Dog::Dog(void) : Animal()
 {
-    this->_name = "Labradoodle";
-    this->_hitPoints = 100;
-    this->_energyPoints = 50;
-    this->_attackDamage = 20;
-	std::cout << ANSI_BLUE << "ScavTrap default constructor called for " << _name << ANSI_RESET << std::endl;
-}
-
-ScavTrap::ScavTrap(std::string const & name) : ClapTrap()
-{
-    this->_name = name;
-    this->_hitPoints = 100;
-    this->_energyPoints = 50;
-    this->_attackDamage = 20;
-	std::cout << ANSI_BLUE << "ScavTrap name constructor called for " << _name << ANSI_RESET << std::endl;
+    this->type = "Dog";
+	std::cout << ANSI_BLUE << "Dog constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-ScavTrap::ScavTrap(ScavTrap const & copy) : ClapTrap(copy._name)
+Dog::Dog(Dog const & copy)
 {
     *this = copy;
-	std::cout << ANSI_YELLOW << "ScavTrap copy constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Dog copy constructor called" << ANSI_RESET << std::endl;
 }
 
-ScavTrap	&ScavTrap::operator=(ScavTrap const & rhs)
+Dog	&Dog::operator=(Dog const & rhs)
 {
-	std::cout << ANSI_YELLOW << "ScavTrap copy assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Dog assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
-	{
-		this->_name = rhs._name;
-		this->_hitPoints = rhs._hitPoints;
-		this->_energyPoints = rhs._energyPoints;
-		this->_attackDamage = rhs._attackDamage;
-	}
+		this->type = rhs.type;
 	return (*this);
 }
 
@@ -50,37 +33,16 @@ ScavTrap	&ScavTrap::operator=(ScavTrap const & rhs)
 *                               DESTRUCTOR                                    *
 ******************************************************************************/
 
-ScavTrap::~ScavTrap(void)
+Dog::~Dog(void)
 {
-	std::cout << ANSI_BLUE << "ScavTrap destructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "Dog destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-void	ScavTrap::attack(const std::string& target)
-{
-	if (this->_energyPoints <= 0)
-	{
-		std::cout << ANSI_RED << "ScavTrap "
-			<< _name << " has no more energy, and so cannot attack" << ANSI_RESET << std::endl;
-		return;
-	}
-	if (this->_hitPoints <= 0)
-	{
-		std::cout << ANSI_RED << "ScavTrap "
-			<< _name << " is dead, and so cannot attack" << ANSI_RESET << std::endl;
-		return;
-	}
-	this->_energyPoints--;
-	std::cout << ANSI_PURPLE << "ScavTrap "
-	<< _name << " attacks " << target << ", causing " << _attackDamage
-	<< " points of damage!"<< ANSI_RESET << std::endl;
-	return;
-}
-
-void ScavTrap::guardGate(void)
-{
-    std::cout << ANSI_GREEN << "ScavTrap " << _name << " in gate keeper mode!" << ANSI_RESET << std::endl;
+void	Dog::makeSound(void) const
+{	
+	std::cout << ANSI_RED << "Woof woof!" << ANSI_RESET << std::endl;
 }

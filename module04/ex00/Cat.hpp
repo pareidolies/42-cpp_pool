@@ -13,7 +13,7 @@ class Cat : public Animal
 		Cat	&operator=(Cat const & rhs); //assignement operator
 		~Cat(void); //destructor
 
-		void makeSound(void);
+		void makeSound(void) const;
 
 };
 

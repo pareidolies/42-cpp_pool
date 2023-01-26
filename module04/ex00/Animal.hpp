@@ -15,12 +15,12 @@ class Animal
 	public:
 
 		Animal(void); //default constructor
-		Animal(std::string const & name); //name constructor
-		Animal(ClapTrap const & copy); //copy constructor
+		Animal(Animal const & copy); //copy constructor
 		Animal	&operator=(Animal const & rhs); //assignment operator
-		~Animal(void); //destructor
+		virtual ~Animal(void); //destructor
 
-		virtual void makeSound(void);
+		virtual void makeSound(void) const;
+		std::string	getType(void) const;
 
 	protected:
 
