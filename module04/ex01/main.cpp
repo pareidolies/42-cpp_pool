@@ -8,34 +8,24 @@
 
 # include <iostream>
 
-int main() 
+int main()
 {
-	const Animal* animal = new Animal(); 
-	const Animal* dog = new Dog();
-	const Animal* cat = new Cat();
-	std::cout << animal->getType() << " : ";
-	animal->makeSound();
-	std::cout << dog->getType() << " : ";
-	dog->makeSound();
-	std::cout << cat->getType() << " : ";
-	cat->makeSound();
-	delete animal;
-	delete dog;
-	delete cat;
+	Animal	*animals[4];
 
-	const WrongAnimal* wronganimal = new WrongAnimal(); 
-	const WrongAnimal* wrongdog = new WrongDog();
-	const WrongAnimal* wrongcat = new WrongCat();
-	std::cout << wronganimal->getType() << " : ";
-	wronganimal->makeSound();
-	std::cout << wrongdog->getType() << " : ";
-	wrongdog->makeSound();
-	std::cout << wrongcat->getType() << " : ";
-	wrongcat->makeSound();
-	delete wronganimal;
-	delete wrongdog;
-	delete wrongcat;
-	return (0);
+	std::cout << "TEST 1 : Constructor and destructor order" << std::endl << std::endl;
+
+	for (int i = 0; i < 2; i++)
+		animals[i] = new Dog();
+	for (int i = 2; i < 4; i++)
+		animals[i] = new Cat();
+
+	for (int i = 0; i < 2; i++)
+		delete animals[i];
+	for (int i = 2; i < 4; i++)
+		delete animals[i];
+
+	std::cout << "TEST 2 : Shallow and deep copy" << std::endl << std::endl;
+
 
 	return (0);
 }
