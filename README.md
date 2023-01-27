@@ -31,3 +31,7 @@ Juste quelques notes et conseils
 - protected
 - using
 - -Wshadow : Warn whenever a local variable or type declaration shadows another variable, parameter, type, class member (in C++), or instance variable (in Objective-C) or whenever a built-in function is shadowed. Note that in C++, the compiler warns if a local variable shadows an explicit typedef, but not if it shadows a struct/class/enum. If this warning is enabled, it includes also all instances of local shadowing. This means that -Wno-shadow=local and -Wno-shadow=compatible-local are ignored when -Wshadow is used. Same as -Wshadow=global.
+
+## Module 04 : 
+
+**Sur la différence entre copie profonde et superficielle :** https://fr.wikipedia.org/wiki/Copie_d%27un_objet
