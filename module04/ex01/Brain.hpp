@@ -19,8 +19,8 @@ class Brain
 		Brain	&operator=(Brain const & rhs); //assignment operator
 		virtual ~Brain(void); //destructor
 
-		virtual void makeSound(void) const;
-		std::string	getType(void) const;
+		void		setIdea(int i, std::string idea);
+		std::string	getIdea(int i);
 
 	private:
 

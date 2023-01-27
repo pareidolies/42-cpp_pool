@@ -29,7 +29,10 @@ Cat	&Cat::operator=(Cat const & rhs)
 {
 	std::cout << ANSI_YELLOW << "Cat assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
+	{
+		this->brain = rhs.brain;
 		this->type = rhs.type;
+	}
 	return (*this);
 }
 
@@ -50,4 +53,14 @@ Cat::~Cat(void)
 void	Cat::makeSound(void) const
 {	
 	std::cout << ANSI_RED << "Meow meow!" << ANSI_RESET << std::endl;
+}
+
+void	Cat::setIdea(int i, std::string idea)
+{
+	brain->setIdea(i, idea);
+}
+
+std::string	Cat::getIdea(int i)
+{
+	return(brain->getIdea(i));
 }

@@ -18,10 +18,8 @@ Dog::Dog(void) : Animal()
 
 Dog::Dog(Dog const & copy)
 {
-	if (this == &copy)
-		return ;
 	this->brain = new Brain;
-    *this = copy;
+	*this = copy;
 	std::cout << ANSI_YELLOW << "Dog copy constructor called" << ANSI_RESET << std::endl;
 }
 
@@ -29,7 +27,10 @@ Dog	&Dog::operator=(Dog const & rhs)
 {
 	std::cout << ANSI_YELLOW << "Dog assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
-		this->type = rhs.type;
+	{
+		this->brain = rhs.brain;
+		this->type = rhs.type;	
+	}
 	return (*this);
 }
 
@@ -50,4 +51,14 @@ Dog::~Dog(void)
 void	Dog::makeSound(void) const
 {	
 	std::cout << ANSI_RED << "Woof woof!" << ANSI_RESET << std::endl;
+}
+
+void	Dog::setIdea(int i, std::string idea)
+{
+	brain->setIdea(i, idea);
+}
+
+std::string	Dog::getIdea(int i)
+{
+	return(brain->getIdea(i));
 }

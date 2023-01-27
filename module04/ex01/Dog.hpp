@@ -14,7 +14,9 @@ class Dog : public Animal
 		Dog	&operator=(Dog const & rhs); //assignement operator
 		~Dog(void); //destructor
 
-		void makeSound(void) const;
+		void 		makeSound(void) const;
+		void		setIdea(int i, std::string idea);
+		std::string	getIdea(int i);
 
 	private:
 
