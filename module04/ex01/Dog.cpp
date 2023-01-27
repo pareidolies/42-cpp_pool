@@ -16,9 +16,8 @@ Dog::Dog(void) : Animal()
 *                                   COPY                                      *
 ******************************************************************************/
 
-Dog::Dog(Dog const & copy)
+Dog::Dog(Dog const & copy) : Animal(), brain(NULL)
 {
-	this->brain = new Brain;
 	*this = copy;
 	std::cout << ANSI_YELLOW << "Dog copy constructor called" << ANSI_RESET << std::endl;
 }
@@ -26,11 +25,12 @@ Dog::Dog(Dog const & copy)
 Dog	&Dog::operator=(Dog const & rhs)
 {
 	std::cout << ANSI_YELLOW << "Dog assignment operator called" << ANSI_RESET << std::endl;
-	if (this != &rhs)
-	{
-		this->brain = rhs.brain;
-		this->type = rhs.type;	
-	}
+	if (this->brain)
+		delete (this->brain);
+	this->brain = new Brain();
+	for (size_t i = 0; i < 100; i++)
+		this->brain->setIdea(i, rhs.brain->getIdea(i));
+	this->type = rhs.type;	
 	return (*this);
 }
 
@@ -40,7 +40,7 @@ Dog	&Dog::operator=(Dog const & rhs)
 
 Dog::~Dog(void)
 {
-	delete brain;
+	delete (this->brain);
 	std::cout << ANSI_BLUE << "Dog destructor called" << ANSI_RESET << std::endl;
 }
 
@@ -53,12 +53,7 @@ void	Dog::makeSound(void) const
 	std::cout << ANSI_RED << "Woof woof!" << ANSI_RESET << std::endl;
 }
 
-void	Dog::setIdea(int i, std::string idea)
+Brain *Dog::getBrain() const
 {
-	brain->setIdea(i, idea);
-}
-
-std::string	Dog::getIdea(int i)
-{
-	return(brain->getIdea(i));
+	return (this->brain);
 }

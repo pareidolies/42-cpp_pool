@@ -7,6 +7,7 @@
 # include "WrongCat.hpp"
 
 # include <iostream>
+# include <string>
 
 int main()
 {
@@ -25,29 +26,36 @@ int main()
 	for (int i = 0; i < 4; i++)
 		delete animals[i];
 
+	std::cout << std::endl;
+	
 	std::cout << "TEST 2 : Shallow and deep copy" << std::endl << std::endl;
 
 	Dog		*dog = new Dog();
 	Dog		*deepdog;
 	Dog		*shallowdog;
 
-	dog->setIdea(0, "Dogs are better than cats");
+	dog->getBrain()->setIdea(0, "Dogs are better than cats");
 
-	std::cout << "Dog idea : " << dog->getIdea(0) << std::endl;
-	std::cout << "Dog idea address : " << &dog->getIdea(0) << std::endl;
+	std::cout << "Dog idea : " << dog->getBrain()->getIdea(0) << std::endl;
+
+	std::cout << std::endl;
 
 	deepdog = new Dog(*dog);
+	std::cout << "Deep dog idea after copy : " << deepdog->getBrain()->getIdea(0) << std::endl;
+	deepdog->getBrain()->setIdea(0, "No, Cats are better than dogs!");
+	std::cout << "Deep dog idea after setting idea : " << deepdog->getBrain()->getIdea(0) << std::endl;
+	std::cout << "Did dog initial idea change ? " << dog->getBrain()->getIdea(0) << std::endl;
 
-	std::cout << "Deep dog idea : " << deepdog->getIdea(0) << std::endl;
-	std::cout << "Deep dog idea address : " << deepdog->getIdea(0) << std::endl;
+	std::cout << std::endl;
 
 	shallowdog = dog;
-
-	std::cout << "Shallow dog idea : " << shallowdog->getIdea(0) << std::endl;
-	std::cout << "Shallow dog idea address : " << shallowdog->getIdea(0) << std::endl;
+	std::cout << "Shallow dog idea after copy : " << shallowdog->getBrain()->getIdea(0) << std::endl;
+	shallowdog->getBrain()->setIdea(0, "No, Cats are better than dogs!");
+	std::cout << "Shallow dog idea after setting idea : " << shallowdog->getBrain()->getIdea(0) << std::endl;
+	std::cout << "Did dog initial idea change ? " << dog->getBrain()->getIdea(0) << std::endl;
 
 	delete dog;
-	//delete deepdog;
+	delete deepdog;
 
 	return (0);
 }

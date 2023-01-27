@@ -18,9 +18,6 @@ Cat::Cat(void) : Animal()
 
 Cat::Cat(Cat const & copy)
 {
-	if (this == &copy)
-		return ;
-	this->brain = new Brain;
     *this = copy;
 	std::cout << ANSI_YELLOW << "Cat copy constructor called" << ANSI_RESET << std::endl;
 }
@@ -28,11 +25,12 @@ Cat::Cat(Cat const & copy)
 Cat	&Cat::operator=(Cat const & rhs)
 {
 	std::cout << ANSI_YELLOW << "Cat assignment operator called" << ANSI_RESET << std::endl;
-	if (this != &rhs)
-	{
-		this->brain = rhs.brain;
-		this->type = rhs.type;
-	}
+	if (this->brain)
+		delete (this->brain);
+	this->brain = new Brain();
+	for (size_t i = 0; i < 100; i++)
+		this->brain->setIdea(i, rhs.brain->getIdea(i));
+	this->type = rhs.type;	
 	return (*this);
 }
 
@@ -42,7 +40,7 @@ Cat	&Cat::operator=(Cat const & rhs)
 
 Cat::~Cat(void)
 {
-	delete brain;
+	delete (this->brain);
 	std::cout << ANSI_BLUE << "Cat destructor called" << ANSI_RESET << std::endl;
 }
 
@@ -55,12 +53,7 @@ void	Cat::makeSound(void) const
 	std::cout << ANSI_RED << "Meow meow!" << ANSI_RESET << std::endl;
 }
 
-void	Cat::setIdea(int i, std::string idea)
+Brain *Cat::getBrain() const
 {
-	brain->setIdea(i, idea);
-}
-
-std::string	Cat::getIdea(int i)
-{
-	return(brain->getIdea(i));
+	return (this->brain);
 }

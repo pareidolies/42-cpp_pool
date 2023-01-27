@@ -15,8 +15,7 @@ class Cat : public Animal
 		~Cat(void); //destructor
 
 		void makeSound(void) const;
-		void		setIdea(int i, std::string idea);
-		std::string	getIdea(int i);
+		Brain 		*getBrain(void) const;
 
 	private:
 
