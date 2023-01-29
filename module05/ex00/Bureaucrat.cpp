@@ -1,59 +1,111 @@
-#include "Bureaucrat.hpp"
-#include <iostream>
+# include "Bureaucrat.hpp"
+# include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-Bureaucrat::Bureaucrat(void)
+Bureaucrat::Bureaucrat(void) : _name("Bureaucrat"), _grade(75)
 {
-    this->type = "Bureaucrat";
-	brain = new Brain;
-	std::cout << ANSI_BLUE << "Bureaucrat constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "Default bureaucrat constructor called" << ANSI_RESET << std::endl;
+}
+
+Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name), _grade(grade)
+{
+	std::cout << ANSI_BLUE << "Name and grade bureaucrat constructor called" << ANSI_RESET << std::endl;
+	if (grade < 1)
+		throw (Bureaucrat::GradeTooHighException());
+	else if (grade > 150)
+		throw (Bureaucrat::GradeTooLowException());
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-Bureaucrat::Bureaucrat(Bureaucrat const & copy) : AAnimal(), brain(NULL)
+Bureaucrat::Bureaucrat(Bureaucrat const & copy) : _name(copy._name), _grade(copy._grade)
 {
-	*this = copy;
 	std::cout << ANSI_YELLOW << "Bureaucrat copy constructor called" << ANSI_RESET << std::endl;
 }
 
 Bureaucrat	&Bureaucrat::operator=(Bureaucrat const & rhs)
 {
 	std::cout << ANSI_YELLOW << "Bureaucrat assignment operator called" << ANSI_RESET << std::endl;
-	if (this->brain)
-		delete (this->brain);
-	this->brain = new Brain();
-	for (size_t i = 0; i < 100; i++)
-		this->brain->setIdea(i, rhs.brain->getIdea(i));
-	this->type = rhs.type;	
+	if (this != &rhs)
+		this->_grade = rhs._grade;
 	return (*this);
 }
 
 /******************************************************************************
-*                               DESTRUCTOR                                    *
+*                                DESTRUCTOR                                   *
 ******************************************************************************/
 
 Bureaucrat::~Bureaucrat(void)
 {
-	delete (this->brain);
 	std::cout << ANSI_BLUE << "Bureaucrat destructor called" << ANSI_RESET << std::endl;
+}
+
+/******************************************************************************
+*                                 GETTERS                                     *
+******************************************************************************/
+
+std::string const Bureaucrat::getName(void) const
+{
+	return (this->_name);
+}
+
+int	Bureaucrat::getGrade(void) const
+{
+	return (this->_grade);
+}
+
+/******************************************************************************
+*                                 EXCEPTIONS                                  *
+******************************************************************************/
+
+const char *	Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return ("Exception: Bureaucrat's grade is too high");
+}
+
+const char *	Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return ("Exception: Bureaucrat's grade is too low");
 }
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-void	Bureaucrat::makeSound(void) const
-{	
-	std::cout << ANSI_RED << "Woof woof!" << ANSI_RESET << std::endl;
+void	Bureaucrat::upgrade(void)
+{
+	if (this->_grade - 1 < Bureaucrat::highestGrade)
+		return (throw (Bureaucrat::GradeTooHighException()));
+	else
+	{
+		this->_grade--;
+		std::cout << "Bureaucrat " << this->_name << " got upgraded." << std::endl;
+	}
 }
 
-Brain *Bureaucrat::getBrain() const
+void	Bureaucrat::downgrade(void)
 {
-	return (this->brain);
+	if (this->_grade + 1 > Bureaucrat::highestGrade)
+		return (throw (Bureaucrat::GradeTooLowException()));
+	else
+	{
+		this->_grade++;
+		std::cout << "Bureaucrat " << this->_name << " got downgraded." << std::endl;
+	}
+}
+
+/******************************************************************************
+*                                  OPERATOR                                   *
+******************************************************************************/
+
+std::ostream &	operator<<(std::ostream & stream, Bureaucrat const & rhs)
+{
+	stream << rhs.getName() << ", bureaucrat grade " 
+		<< rhs.getGrade() << "." << std::endl;
+	return (stream);
 }

@@ -3,6 +3,13 @@
 
 # include <iostream>
 
+# define ANSI_PURPLE		"\x1b[95m"
+# define ANSI_BLUE			"\x1b[94m"
+# define ANSI_YELLOW		"\x1b[93m"
+# define ANSI_RED			"\x1b[91m"
+# define ANSI_GREEN			"\x1b[92m"
+# define ANSI_RESET			"\x1b[0m"
+
 class Bureaucrat
 {
 	public:
@@ -27,10 +34,10 @@ class Bureaucrat
 		Bureaucrat	&operator=(Bureaucrat const & rhs); //assignement operator
 
 		std::string const 		getName(void) const;
-		int 					getGrade(void) const;
+		unsigned int 			getGrade(void) const;
 
-		void					incrementGrade(void);
-		void					decrementGrade(void);
+		void					upgrade(void);
+		void					downgrade(void);
 
 		static unsigned int const	highestGrade = 1;
 		static unsigned int const	lowestGrade = 150;
@@ -38,7 +45,7 @@ class Bureaucrat
 	private:
 
 		std::string const	_name;
-		int					_grade;
+		unsigned int		_grade;
 
 };
 
