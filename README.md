@@ -34,4 +34,11 @@ Juste quelques notes et conseils
 
 ## Module 04 : 
 
-**Sur la différence entre copie profonde et superficielle :** https://fr.wikipedia.org/wiki/Copie_d%27un_objet
+
+**Ex01 :** 
+
+Sur la différence entre copie profonde et superficielle : https://fr.wikipedia.org/wiki/Copie_d%27un_objet
+
+**Ex02 :**
+
+Sur les classes abstraites et les méthodes virtuelles pures : https://fr.wikipedia.org/wiki/Classe_abstraite
