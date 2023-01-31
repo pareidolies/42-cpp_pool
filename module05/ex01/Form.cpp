@@ -87,7 +87,7 @@ bool			Form::beSigned(Bureaucrat bureaucrat)
 {
 	if (this->_isSigned)
 	{
-		std::cout << "Form has already been signed." << std::endl;
+		std::cout << bureaucrat.getName() << " couldn't sign " << _name << " because form has already been signed" << std::endl;
 		return (false);
 	}
 	else if (bureaucrat.getGrade() <= this->_gradeToSign)
