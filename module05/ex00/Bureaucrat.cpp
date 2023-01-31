@@ -54,7 +54,7 @@ std::string const Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-int	Bureaucrat::getGrade(void) const
+unsigned int	Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
 }
@@ -90,7 +90,7 @@ void	Bureaucrat::upgrade(void)
 
 void	Bureaucrat::downgrade(void)
 {
-	if (this->_grade + 1 > Bureaucrat::highestGrade)
+	if (this->_grade + 1 > Bureaucrat::lowestGrade)
 		return (throw (Bureaucrat::GradeTooLowException()));
 	else
 	{
@@ -105,7 +105,7 @@ void	Bureaucrat::downgrade(void)
 
 std::ostream &	operator<<(std::ostream & stream, Bureaucrat const & rhs)
 {
-	stream << rhs.getName() << ", bureaucrat grade " 
-		<< rhs.getGrade() << "." << std::endl;
+	stream << ANSI_PURPLE << rhs.getName() << ", bureaucrat grade " 
+		<< rhs.getGrade() << "." << ANSI_RESET;
 	return (stream);
 }

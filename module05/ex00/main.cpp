@@ -1,64 +1,106 @@
-# include "Dog.hpp"
-# include "Cat.hpp"
-
-# include "WrongAnimal.hpp"
-# include "WrongDog.hpp"
-# include "WrongCat.hpp"
+# include "Bureaucrat.hpp"
 
 # include <iostream>
 # include <string>
 
 int main()
 {
-	/* TEST 0 : Abstract class */
-	
-	/* AAnimal test = AAnimal(); */
-
-	AAnimal	*animals[4];
-
-	std::cout << "TEST 1 : Constructor and destructor order" << std::endl << std::endl;
-
-	for (int i = 0; i < 2; i++)
-		animals[i] = new Dog();
-	for (int i = 2; i < 4; i++)
-		animals[i] = new Cat();
-
-	for (int i = 0; i < 4; i++)
-		animals[i]->makeSound();
-
-	for (int i = 0; i < 4; i++)
-		delete animals[i];
-
-	std::cout << std::endl;
-	
-	std::cout << "TEST 2 : Shallow and deep copy" << std::endl << std::endl;
-
-	Dog		*dog = new Dog();
-	Dog		*deepdog;
-	Dog		*shallowdog;
-
-	dog->getBrain()->setIdea(0, "Dogs are better than cats");
-
-	std::cout << "Dog idea : " << dog->getBrain()->getIdea(0) << std::endl;
-
-	std::cout << std::endl;
-
-	deepdog = new Dog(*dog);
-	std::cout << "Deep dog idea after copy : " << deepdog->getBrain()->getIdea(0) << std::endl;
-	deepdog->getBrain()->setIdea(0, "No, Cats are better than dogs!");
-	std::cout << "Deep dog idea after setting idea : " << deepdog->getBrain()->getIdea(0) << std::endl;
-	std::cout << "Did dog initial idea change ? " << dog->getBrain()->getIdea(0) << std::endl;
-
-	std::cout << std::endl;
-
-	shallowdog = dog;
-	std::cout << "Shallow dog idea after copy : " << shallowdog->getBrain()->getIdea(0) << std::endl;
-	shallowdog->getBrain()->setIdea(0, "No, Cats are better than dogs!");
-	std::cout << "Shallow dog idea after setting idea : " << shallowdog->getBrain()->getIdea(0) << std::endl;
-	std::cout << "Did dog initial idea change ? " << dog->getBrain()->getIdea(0) << std::endl;
-
-	delete dog;
-	delete deepdog;
-
+	{
+		try
+		{
+			Bureaucrat MrPaddington = Bureaucrat("Mr Paddington", 151);
+			std::cout << MrPaddington << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat MrsPaddington = Bureaucrat("MrsPaddington", 0);
+			std::cout << MrsPaddington << std::endl;
+			
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat MrSmith = Bureaucrat("Mr Smith", 75);
+			std::cout << MrSmith << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat MrsSmith = Bureaucrat("Mrs Smith", 150);
+			MrsSmith.downgrade();
+			std::cout << MrsSmith << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat MrJones = Bureaucrat("Mr Jones", 1);
+			MrJones.upgrade();
+			std::cout << MrJones << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat MrsJones = Bureaucrat("MrsJones", 75);
+			std::cout << MrsJones << std::endl;
+			MrsJones.upgrade();
+			std::cout << MrsJones << std::endl;
+			MrsJones.downgrade();
+			std::cout << MrsJones << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
 	return (0);
 }
