@@ -1,4 +1,5 @@
 # include "Bureaucrat.hpp"
+# include "Form.hpp"
 # include <iostream>
 
 /******************************************************************************
@@ -54,7 +55,7 @@ std::string const Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-unsigned int	Bureaucrat::getGrade(void) const
+int	Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
 }
@@ -101,10 +102,15 @@ void	Bureaucrat::downgrade(void)
 
 void	Bureaucrat::signForm(Form & form)
 {
-	if (form.isSigned())
-		std::cout << "Form has already been signed."<< std::endl;
-	else
-		form.beSigned(this);
+	try
+	{
+		if (form.beSigned(*this))
+			std::cout << _name << " signed " << form.getName() << std::endl;
+	}
+	catch(const Form::GradeTooLowException& e)
+	{
+		std::cout << _name << " couldn't sign " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
+	}
 }
 
 /******************************************************************************

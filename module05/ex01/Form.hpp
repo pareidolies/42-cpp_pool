@@ -36,20 +36,20 @@ class Form
 		Form	&operator=(Form const & rhs); //assignement operator
 
 		std::string const 		getName(void) const;
-		unsigned int 			getGradeToSign(void) const;
-		unsigned int 			getGradeToExecute(void) const;
+		int 					getGradeToSign(void) const;
+		int 					getGradeToExecute(void) const;
 
 		bool					beSigned(Bureaucrat bureaucrat);
 
-		static unsigned int const	highestGrade = 1;
-		static unsigned int const	lowestGrade = 150;
+		static int const	highestGrade = 1;
+		static int const	lowestGrade = 150;
 
 	private:
 
 		std::string const	_name;
 		bool				_isSigned;
-		unsigned int const	_gradeToSign;
-		unsigned int const	_gradeToExecute;
+		int const			_gradeToSign;
+		int const			_gradeToExecute;
 
 };
 
