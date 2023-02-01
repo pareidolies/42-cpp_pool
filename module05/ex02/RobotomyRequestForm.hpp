@@ -1,6 +1,7 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
+# include "Form.hpp"
 # include <iostream>
 
 # define ANSI_PURPLE		"\x1b[95m"
@@ -12,7 +13,7 @@
 
 class	Bureaucrat;
 
-class Form
+class RobotomyRequestForm : public Form
 {
 	public:
 
@@ -28,24 +29,21 @@ class Form
 				virtual const char * what(void) const throw(); 
 		};
 
-		Form(void); //default constructor
-		Form(std::string const name, int gradeToSign, int gradeToExecute); //name and grade constructor
-		Form(Form const & copy); //copy constructor
-		~Form(void); //destructor
+		RobotomyRequestForm(void); //default constructor
+		RobotomyRequestForm(std::string const name, int gradeToSign, int gradeToExecute); //name and grade constructor
+		RobotomyRequestForm(RobotomyRequestForm const & copy); //copy constructor
+		~RobotomyRequestForm(void); //destructor
 
-		Form	&operator=(Form const & rhs); //assignement operator
+		RobotomyRequestForm	&operator=(RobotomyRequestForm const & rhs); //assignement operator
 
 		std::string const 		getName(void) const;
 		int 					getGradeToSign(void) const;
 		int 					getGradeToExecute(void) const;
-		bool					getStatus(void) const;
 
 		bool					beSigned(Bureaucrat bureaucrat);
 
-		virtual void			execute(Bureaucrat const & executor) const = 0;
-
-		static int const		highestGrade = 1;
-		static int const		lowestGrade = 150;
+		static int const	highestGrade = 1;
+		static int const	lowestGrade = 150;
 
 	private:
 
@@ -56,6 +54,6 @@ class Form
 
 };
 
-std::ostream &	operator<<(std::ostream & o, Form const & rhs);
+std::ostream &	operator<<(std::ostream & o, RobotomyRequestForm const & rhs);
 
 #endif
