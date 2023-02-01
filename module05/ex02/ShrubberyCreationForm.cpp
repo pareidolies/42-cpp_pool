@@ -8,13 +8,13 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("Shrubbery Creation Form", 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("Shrubbery Creation Form", 145, 137)
 {
 	this->_target = "Garden";
 	std::cout << ANSI_BLUE << "Default Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 145, 137)
 {
 	this->_target = target;
 	std::cout << ANSI_BLUE << "Target Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
@@ -104,8 +104,9 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 			<< M11 << std::endl
 			<< M12 << std::endl
 			<< M13 << std::endl << std::endl;
-		usleep(1000);
+		usleep(1000000);
 		std::cout << "Done!" << ANSI_RESET << std::endl;
+		usleep(1000000);
 		return (true);
 	}
 	else

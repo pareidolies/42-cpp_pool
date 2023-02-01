@@ -3,18 +3,19 @@
 # include <iostream>
 # include <stdlib.h>
 # include <time.h> 
+# include <unistd.h>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(void) : Form("Robotomy Request Form", 25, 5)
+RobotomyRequestForm::RobotomyRequestForm(void) : Form("Robotomy Request Form", 72, 45)
 {
 	this->_target = "President";
 	std::cout << ANSI_BLUE << "Default Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 25, 5)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 72, 45)
 {
 	this->_target = target;
 	std::cout << ANSI_BLUE << "Target Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
@@ -66,10 +67,17 @@ bool	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 		srand (time(NULL));
 		result = rand() % 2;
 		std::cout << "BZZZZZZZZZ RRRRRRRRR" << std::endl;
+		usleep(1000000);
 		if (result)
+		{
 			std::cout << _target << " has been robotomized" << std::endl;
+			usleep(1000000);
+		}
 		else 
+		{
 			std::cout << _target << " has not been robotomized" << std::endl;
+			usleep(1000000);
+		}
 		return (true);
 	}
 	else

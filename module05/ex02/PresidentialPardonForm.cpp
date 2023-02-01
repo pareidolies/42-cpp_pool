@@ -1,6 +1,7 @@
 # include "PresidentialPardonForm.hpp"
 # include "Bureaucrat.hpp"
 # include <iostream>
+# include <unistd.h>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
@@ -60,6 +61,7 @@ bool	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 	else if (this->getStatus() == true)
 	{
 		std::cout << _target << " has been pardonned by the president Zaphod Beeblebrox" << std::endl;
+		usleep(1000000);
 		return (true);
 	}
 	else
