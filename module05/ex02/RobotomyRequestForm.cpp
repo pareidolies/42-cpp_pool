@@ -1,39 +1,41 @@
 # include "RobotomyRequestForm.hpp"
 # include "Bureaucrat.hpp"
 # include <iostream>
+# include <stdlib.h>
+# include <time.h> 
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(void) : _name("RobotomyRequestForm"), _isSigned(false), _gradeToSign(72), _gradeToExecute(45)
+RobotomyRequestForm::RobotomyRequestForm(void) : Form("Robotomy Request Form", 25, 5)
 {
-	std::cout << ANSI_BLUE << "Default RobotomyRequestForm constructor called" << ANSI_RESET << std::endl;
+	this->_target = "President";
+	std::cout << ANSI_BLUE << "Default Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const name) : _name(name), _isSigned(false), _gradeToSign(72), _gradeToExecute(45)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 25, 5)
 {
-	std::cout << ANSI_BLUE << "Name and grade RobotomyRequestForm constructor called" << ANSI_RESET << std::endl;
-	if (gradeToSign < Bureaucrat::highestGrade || gradeToExecute < Bureaucrat::highestGrade)
-		throw (RobotomyRequestForm::GradeTooHighException());
-	else if (gradeToSign > Bureaucrat::lowestGrade || gradeToExecute > Bureaucrat::lowestGrade)
-		throw (RobotomyRequestForm::GradeTooLowException());
+	this->_target = target;
+	std::cout << ANSI_BLUE << "Target Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : _name(copy._name), _isSigned(copy._isSigned), _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : Form(copy)
 {
-	std::cout << ANSI_YELLOW << "RobotomyRequestForm copy constructor called" << ANSI_RESET << std::endl;
+	*this = copy;
+	std::cout << ANSI_YELLOW << "Robotomy Request Form copy constructor called" << ANSI_RESET << std::endl;
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const & rhs)
 {
-	std::cout << ANSI_YELLOW << "RobotomyRequestForm assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Robotomy Request Form assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
-		this->_isSigned = rhs._isSigned;
+		this->_target = rhs._target;
+	Form::operator=(rhs);
 	return (*this);
 }
 
@@ -43,73 +45,36 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const & 
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-	std::cout << ANSI_BLUE << "RobotomyRequestForm destructor called" << ANSI_RESET << std::endl;
-}
-
-/******************************************************************************
-*                                 GETTERS                                     *
-******************************************************************************/
-
-std::string const RobotomyRequestForm::getName(void) const
-{
-	return (this->_name);
-}
-
-int	RobotomyRequestForm::getGradeToSign(void) const
-{
-	return (this->_gradeToSign);
-}
-
-int	RobotomyRequestForm::getGradeToExecute(void) const
-{
-	return (this->_gradeToExecute);
-}
-
-/******************************************************************************
-*                                 EXCEPTIONS                                  *
-******************************************************************************/
-
-const char *	RobotomyRequestForm::GradeTooHighException::what(void) const throw()
-{
-	return ("Exception: RobotomyRequestForm's grade is too high");
-}
-
-const char *	RobotomyRequestForm::GradeTooLowException::what(void) const throw()
-{
-	return ("Exception: RobotomyRequestForm's grade is too low");
+	std::cout << ANSI_BLUE << "Robotomy Request Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-bool			RobotomyRequestForm::beSigned(Bureaucrat bureaucrat)
+bool	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	if (this->_isSigned)
+	int	result;
+
+	if (executor.getGrade() > this->getGradeToExecute())
 	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << _name << " because RobotomyRequestForm has already been signed" << std::endl;
+		throw (GradeTooLowException());
 		return (false);
 	}
-	else if (bureaucrat.getGrade() <= this->_gradeToSign)
+	else if (this->getStatus() == true)
 	{
-		this->_isSigned = true;
+		srand (time(NULL));
+		result = rand() % 2;
+		std::cout << "BZZZZZZZZZ RRRRRRRRR" << std::endl;
+		if (result)
+			std::cout << _target << " has been robotomized" << std::endl;
+		else 
+			std::cout << _target << " has not been robotomized" << std::endl;
 		return (true);
 	}
 	else
 	{
-		throw (RobotomyRequestForm::GradeTooLowException());
+		std::cout << executor.getName() << " couldn't sign " << this->getName() << " because form has not been signed yet" << std::endl;
 		return (false);
 	}
-}
-
-/******************************************************************************
-*                                  OPERATOR                                   *
-******************************************************************************/
-
-std::ostream &	operator<<(std::ostream & stream, RobotomyRequestForm const & rhs)
-{
-	stream << ANSI_PURPLE << rhs.getName() << ", RobotomyRequestForm required grade to sign " 
-		<< rhs.getGradeToSign() << ", RobotomyRequestForm required grade to execute "
-		<< rhs.getGradeToExecute() << "." << ANSI_RESET;
-	return (stream);
 }

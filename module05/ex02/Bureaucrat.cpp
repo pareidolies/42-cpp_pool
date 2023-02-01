@@ -124,7 +124,6 @@ void		Bureaucrat::executeForm(Form const & form)
 	{
 		std::cout << _name << " couldn't execute " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
 	}
-
 }
 
 /******************************************************************************

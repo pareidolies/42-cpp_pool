@@ -8,13 +8,14 @@
 
 PresidentialPardonForm::PresidentialPardonForm(void) : Form("Presidential Pardon Form", 25, 5)
 {
+	this->_target = "Prisoner";
 	std::cout << ANSI_BLUE << "Default Presidential Pardon Form constructor called" << ANSI_RESET << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("Presidential Pardon Form", 25, 5)
 {
 	this->_target = target;
-	std::cout << ANSI_BLUE << "Default Presidential Pardon Form constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "Target Presidential Pardon Form constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -42,7 +43,7 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {
-	std::cout << ANSI_BLUE << "PresidentialPardonForm destructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "Presidential Pardon Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -51,7 +52,7 @@ PresidentialPardonForm::~PresidentialPardonForm(void)
 
 bool	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	if (!(executor.getGrade() > this->getGradeToExecute()))
+	if (executor.getGrade() > this->getGradeToExecute())
 	{
 		throw (GradeTooLowException());
 		return (false);

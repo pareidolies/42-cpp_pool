@@ -1,39 +1,41 @@
 # include "ShrubberyCreationForm.hpp"
 # include "Bureaucrat.hpp"
 # include <iostream>
+# include <fstream>
+# include <unistd.h>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : _name("ShrubberyCreationForm"), _isSigned(false), _gradeToSign(145), _gradeToExecute(137)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("Shrubbery Creation Form", 25, 5)
 {
-	std::cout << ANSI_BLUE << "Default ShrubberyCreationForm constructor called" << ANSI_RESET << std::endl;
+	this->_target = "Garden";
+	std::cout << ANSI_BLUE << "Default Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const name) : _name(name), _isSigned(false), _gradeToSign(145), _gradeToExecute(137)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 25, 5)
 {
-	std::cout << ANSI_BLUE << "Name and grade ShrubberyCreationForm constructor called" << ANSI_RESET << std::endl;
-	if (gradeToSign < Bureaucrat::highestGrade || gradeToExecute < Bureaucrat::highestGrade)
-		throw (ShrubberyCreationForm::GradeTooHighException());
-	else if (gradeToSign > Bureaucrat::lowestGrade || gradeToExecute > Bureaucrat::lowestGrade)
-		throw (ShrubberyCreationForm::GradeTooLowException());
+	this->_target = target;
+	std::cout << ANSI_BLUE << "Target Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : _name(copy._name), _isSigned(copy._isSigned), _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : Form(copy)
 {
-	std::cout << ANSI_YELLOW << "ShrubberyCreationForm copy constructor called" << ANSI_RESET << std::endl;
+	*this = copy;
+	std::cout << ANSI_YELLOW << "Shrubbery Creation Form copy constructor called" << ANSI_RESET << std::endl;
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs)
 {
-	std::cout << ANSI_YELLOW << "ShrubberyCreationForm assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Shrubbery Creation Form assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
-		this->_isSigned = rhs._isSigned;
+		this->_target = rhs._target;
+	Form::operator=(rhs);
 	return (*this);
 }
 
@@ -43,73 +45,72 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
-	std::cout << ANSI_BLUE << "ShrubberyCreationForm destructor called" << ANSI_RESET << std::endl;
-}
-
-/******************************************************************************
-*                                 GETTERS                                     *
-******************************************************************************/
-
-std::string const ShrubberyCreationForm::getName(void) const
-{
-	return (this->_name);
-}
-
-int	ShrubberyCreationForm::getGradeToSign(void) const
-{
-	return (this->_gradeToSign);
-}
-
-int	ShrubberyCreationForm::getGradeToExecute(void) const
-{
-	return (this->_gradeToExecute);
-}
-
-/******************************************************************************
-*                                 EXCEPTIONS                                  *
-******************************************************************************/
-
-const char *	ShrubberyCreationForm::GradeTooHighException::what(void) const throw()
-{
-	return ("Exception: ShrubberyCreationForm's grade is too high");
-}
-
-const char *	ShrubberyCreationForm::GradeTooLowException::what(void) const throw()
-{
-	return ("Exception: ShrubberyCreationForm's grade is too low");
+	std::cout << ANSI_BLUE << "Shrubbery Creation Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-bool			ShrubberyCreationForm::beSigned(Bureaucrat bureaucrat)
+bool	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	if (this->_isSigned)
+	if (executor.getGrade() > this->getGradeToExecute())
 	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << _name << " because ShrubberyCreationForm has already been signed" << std::endl;
+		throw (GradeTooLowException());
 		return (false);
 	}
-	else if (bureaucrat.getGrade() <= this->_gradeToSign)
+	else if (this->getStatus() == true)
 	{
-		this->_isSigned = true;
+		std::string		file;
+		file = _target + "_shrubbery";
+		std::cout << "Shrubbery creation in progress..." << ANSI_RESET << std::endl;
+		std::ofstream	ofs(file.c_str());
+		if (!ofs.good())
+		{
+			std::cerr << "Opening of file (" << file << ") failed" << std::endl;
+			return (false);
+		}
+		ofs << K1 << std::endl
+			<< K2 << std::endl
+			<< K3 << std::endl
+			<< K4 << std::endl
+			<< K5 << std::endl
+			<< K6 << std::endl
+			<< K7 << std::endl
+			<< K8 << std::endl
+			<< K9 << std::endl
+			<< K10 << std::endl
+			<< K11 << std::endl << std::endl
+			<< L1 << std::endl
+			<< L2 << std::endl
+			<< L3 << std::endl
+			<< L4 << std::endl
+			<< L5 << std::endl
+			<< L6 << std::endl
+			<< L7 << std::endl
+			<< L8 << std::endl
+			<< L9 << std::endl
+			<< L10 << std::endl << std::endl
+			<< M1 << std::endl
+			<< M2 << std::endl
+			<< M3 << std::endl
+			<< M4 << std::endl
+			<< M5 << std::endl
+			<< M6 << std::endl
+			<< M7 << std::endl
+			<< M8 << std::endl
+			<< M9 << std::endl
+			<< M10 << std::endl
+			<< M11 << std::endl
+			<< M12 << std::endl
+			<< M13 << std::endl << std::endl;
+		usleep(1000);
+		std::cout << "Done!" << ANSI_RESET << std::endl;
 		return (true);
 	}
 	else
 	{
-		throw (ShrubberyCreationForm::GradeTooLowException());
+		std::cout << executor.getName() << " couldn't sign " << this->getName() << " because form has not been signed yet" << std::endl;
 		return (false);
 	}
-}
-
-/******************************************************************************
-*                                  OPERATOR                                   *
-******************************************************************************/
-
-std::ostream &	operator<<(std::ostream & stream, ShrubberyCreationForm const & rhs)
-{
-	stream << ANSI_PURPLE << rhs.getName() << ", ShrubberyCreationForm required grade to sign " 
-		<< rhs.getGradeToSign() << ", ShrubberyCreationForm required grade to execute "
-		<< rhs.getGradeToExecute() << "." << ANSI_RESET;
-	return (stream);
 }

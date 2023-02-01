@@ -1,4 +1,7 @@
 # include "Bureaucrat.hpp"
+# include "ShrubberyCreationForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "PresidentialPardonForm.hpp"
 # include "Form.hpp"
 
 # include <iostream>
@@ -6,40 +9,27 @@
 
 int main()
 {
-	Bureaucrat MrPaddington = Bureaucrat("Mr Paddington", 100);
-	Bureaucrat MrsPaddington = Bureaucrat("Mrs Paddington", 50);
-	{
-		try
-		{
-			Form F00 = Form("F00", 0, 75);
-		}
-		catch (const Form::GradeTooLowException& e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		catch (const Form::GradeTooHighException& e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-	}
-	{
-		try
-		{
-			Form F01 = Form("F01", 75, 151);
-		}
-		catch (const Form::GradeTooLowException& e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		catch (const Form::GradeTooHighException& e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-	}
-	Form F02 = Form("F02", 75, 75);
-	std::cout << F02 << std::endl;
-	MrPaddington.signForm(F02);
-	MrsPaddington.signForm(F02);
-	MrsPaddington.signForm(F02);
+	Bureaucrat bureaucrat = Bureaucrat("Bureaucrat", 70);
+	Bureaucrat boss = Bureaucrat("Boss", 1);
+
+	Form *shrubbery = new ShrubberyCreationForm("Garden");
+	Form *robotomy = new RobotomyRequestForm("President");
+	Form *pardon = new PresidentialPardonForm("Prisoner");
+
+	bureaucrat.signForm(*shrubbery);
+	bureaucrat.executeForm(*shrubbery);
+
+	bureaucrat.signForm(*robotomy);
+	bureaucrat.executeForm(*robotomy);
+	boss.executeForm(*robotomy);
+
+	bureaucrat.signForm(*pardon);
+	boss.signForm(*pardon);
+	boss.executeForm(*pardon);
+
+	delete shrubbery;
+	delete robotomy;
+	delete pardon;
+
 	return (0);
 }

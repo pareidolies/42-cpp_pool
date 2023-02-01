@@ -1,5 +1,5 @@
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef RobotomyRequestForm_HPP
+# define RobotomyRequestForm_HPP
 
 # include "Form.hpp"
 # include <iostream>
@@ -17,40 +17,18 @@ class RobotomyRequestForm : public Form
 {
 	public:
 
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
 		RobotomyRequestForm(void); //default constructor
-		RobotomyRequestForm(std::string const name, int gradeToSign, int gradeToExecute); //name and grade constructor
+		RobotomyRequestForm(std::string target); //target constructor
 		RobotomyRequestForm(RobotomyRequestForm const & copy); //copy constructor
 		~RobotomyRequestForm(void); //destructor
 
 		RobotomyRequestForm	&operator=(RobotomyRequestForm const & rhs); //assignement operator
 
-		std::string const 		getName(void) const;
-		int 					getGradeToSign(void) const;
-		int 					getGradeToExecute(void) const;
-
-		bool					beSigned(Bureaucrat bureaucrat);
-
-		static int const	highestGrade = 1;
-		static int const	lowestGrade = 150;
+		bool					execute(Bureaucrat const & executor) const;
 
 	private:
 
-		std::string const	_name;
-		bool				_isSigned;
-		int const			_gradeToSign;
-		int const			_gradeToExecute;
+		std::string			_target;
 
 };
 

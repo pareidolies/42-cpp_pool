@@ -1,5 +1,5 @@
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef ShrubberyCreationForm_HPP
+# define ShrubberyCreationForm_HPP
 
 # include "Form.hpp"
 # include <iostream>
@@ -11,46 +11,61 @@
 # define ANSI_GREEN			"\x1b[92m"
 # define ANSI_RESET			"\x1b[0m"
 
+# define K1 "     ccee88oo "
+# define K2 "  C8O8O8Q8PoOb o8oo "
+# define K3 " dOB69QO8PdUOpugoO9bD "
+# define K4 "CgggbU8OU qOp qOdoUOdcb "
+# define K5 "    6OuU  |p u gcoUodpP "
+# define K6 "      |||||  |douUP "
+# define K7 "        ||||||| "
+# define K8 "         ||||| "
+# define K9 "         ||||| "
+# define K10 "         ||||| "
+# define K11 "   .....|||||||.... "
+
+# define L1 "              ,@@@@@@@,"
+# define L2 "       ,,,.   ,@@@@@@/@@,  .oo8888o."
+# define L3 "    ,&%&&%&&%,@@@@@/@@@@@@,8888\\88/8o"
+# define L4 "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'"
+# define L5 "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'"
+# define L6 "   %&&%/ %&&%&&@@\\ V /@@' `88\\8 `/88'"
+# define L7 "   `&%\\ ` /%&'    |.|        \\ '|8'"
+# define L8 "       |o|        | |         | |"
+# define L9 "       |.|        | |         | |"
+# define L10 "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_"
+
+# define M1 "    oxoxoo    ooxoo"
+# define M2 "  ooxoxo oo  oxoxooo"
+# define M3 " oooo xxoxoo ooo ooox"
+# define M4 " oxo o oxoxo  xoxxoxo"
+# define M5 "  oxo xooxoooo o ooo"
+# define M6 "    ooo\\oo\\  /o/o"
+# define M7 "        \\  \\/ /"
+# define M8 "         |   /"
+# define M9 "         |  |"
+# define M10 "         | D|"
+# define M11 "         |  |"
+# define M12 "         |  |"
+# define M13 "  ______/____\\____"
+
 class	Bureaucrat;
 
 class ShrubberyCreationForm : public Form
 {
 	public:
 
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
 		ShrubberyCreationForm(void); //default constructor
-		ShrubberyCreationForm(std::string const name, int gradeToSign, int gradeToExecute); //name and grade constructor
+		ShrubberyCreationForm(std::string target); //target constructor
 		ShrubberyCreationForm(ShrubberyCreationForm const & copy); //copy constructor
 		~ShrubberyCreationForm(void); //destructor
 
 		ShrubberyCreationForm	&operator=(ShrubberyCreationForm const & rhs); //assignement operator
 
-		std::string const 		getName(void) const;
-		int 					getGradeToSign(void) const;
-		int 					getGradeToExecute(void) const;
-
-		bool					beSigned(Bureaucrat bureaucrat);
-
-		static int const	highestGrade = 1;
-		static int const	lowestGrade = 150;
+		bool					execute(Bureaucrat const & executor) const;
 
 	private:
 
-		std::string const	_name;
-		bool				_isSigned;
-		int const			_gradeToSign;
-		int const			_gradeToExecute;
+		std::string			_target;
 
 };
 

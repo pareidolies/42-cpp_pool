@@ -31,7 +31,7 @@ class Form
 		Form(void); //default constructor
 		Form(std::string const name, int gradeToSign, int gradeToExecute); //name and grade constructor
 		Form(Form const & copy); //copy constructor
-		~Form(void); //destructor
+		virtual ~Form(void); //destructor
 
 		Form	&operator=(Form const & rhs); //assignement operator
 
@@ -42,7 +42,7 @@ class Form
 
 		bool					beSigned(Bureaucrat bureaucrat);
 
-		virtual void			execute(Bureaucrat const & executor) const = 0;
+		virtual bool			execute(Bureaucrat const & executor) const = 0;
 
 		static int const		highestGrade = 1;
 		static int const		lowestGrade = 150;
