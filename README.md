@@ -42,3 +42,7 @@ Sur la différence entre copie profonde et superficielle : https://fr.wikipedia.
 **Ex02 :**
 
 Sur les classes abstraites et les méthodes virtuelles pures : https://fr.wikipedia.org/wiki/Classe_abstraite
+
+## Module 05 :
+
+Shrubbery ascii art credit : https://ascii.co.uk/art/tree
