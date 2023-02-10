@@ -1,8 +1,4 @@
-# include "Bureaucrat.hpp"
-# include "ShrubberyCreationForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "PresidentialPardonForm.hpp"
-# include "Form.hpp"
+# include "ScalarConverter.hpp"
 
 # include <iostream>
 # include <string>
