@@ -139,9 +139,8 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 				<< "float: -inf" << std::endl
 				<< "double: -inff" << std::endl; 
 		}
-		return;
 	}
-	if (_isNan)
+	else if (_isNan)
 	{
 		stream	<< "char: impossible" << std::endl
 				<< "int: impossible" << std::endl
@@ -149,22 +148,25 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 				<< "double: nan" << std::endl;
 		return;
 	}
-	if (_char >= 32 && _char <= 127)
-		stream << "char: \'" << _char << "\'" << std::endl;
 	else
-		stream << "char: Non displayable" << std::endl;
-	if (_double >= INT_MIN && _double <= INT_MAX)
-		stream << "int: " << _int << std::endl;
-	else
-		stream << "int: impossible" << std::endl;
-	if (_float - roundf(_float) == 0)
-		stream << "float: " << _float << ".0f" << std::endl;
-	else
-		stream << "float: " << _float << "f" << std::endl;
-	if (_double - roundf(_double) == 0)
-		stream << "double: " << _double << ".0" << std::endl;
-	else
-		stream << "double: " << _double << std::endl;
+	{
+		if (_char >= 32 && _char <= 127)
+			stream << "char: \'" << _char << "\'" << std::endl;
+		else
+			stream << "char: Non displayable" << std::endl;
+		if (_double >= INT_MIN && _double <= INT_MAX)
+			stream << "int: " << _int << std::endl;
+		else
+			stream << "int: impossible" << std::endl;
+		if (_float - roundf(_float) == 0)
+			stream << "float: " << _float << ".0f" << std::endl;
+		else
+			stream << "float: " << _float << "f" << std::endl;
+		if (_double - roundf(_double) == 0)
+			stream << "double: " << _double << ".0" << std::endl;
+		else
+			stream << "double: " << _double << std::endl;
+	}
 }
 
 /******************************************************************************
