@@ -10,5 +10,7 @@ int main()
 	std::cout << scalar << std::endl;
 	scalar.convert("42.0f");
 	std::cout << scalar << std::endl;
+	scalar.convert("42.0");
+	std::cout << scalar << std::endl;
 	return (0);
 }

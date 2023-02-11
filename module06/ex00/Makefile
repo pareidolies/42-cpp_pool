@@ -1,4 +1,4 @@
-NAME	=	bureaucrat
+NAME	=	scalar
 
 SRCS	=	main.cpp ScalarConverter.cpp
 

@@ -43,6 +43,13 @@ ScalarConverter::~ScalarConverter(void)
 
 void	ScalarConverter::convert(std::string value)
 {
+	this->_isNan = false;
+	this->_isExtreme = false;
+	this->_isChar = false;
+	this->_float = 0;
+	this->_int = 0;
+	this->_char = 0;
+	this->_double = 0;
 	if (checkValue(value))
 		convertValue(value);
 }
@@ -79,6 +86,7 @@ bool	ScalarConverter::checkValue(std::string value)
 	if (i != tmp.size() && tmp[i] != '.')
 	{
 		_isNan = true;
+		std::cout << "1" << std::endl;
 		return (false);
 	}
 	if (tmp[i] == '.' && tmp[i + 1])
@@ -88,6 +96,7 @@ bool	ScalarConverter::checkValue(std::string value)
 	if (i != tmp.size())
 	{
 		_isNan = true;
+		std::cout << "2" << std::endl;
 		return (false);
 	}
 	return (true);
