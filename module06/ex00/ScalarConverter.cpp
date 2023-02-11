@@ -149,8 +149,8 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 				<< "double: nan" << std::endl;
 		return;
 	}
-	if (_value[1] >= 32 && _value[1] <= 127)
-		stream << "char: \"" << _value[1] << "\"" << std::endl;
+	if (_char >= 32 && _char <= 127)
+		stream << "char: \'" << _char << "\'" << std::endl;
 	else
 		stream << "char: Non displayable" << std::endl;
 	if (_double >= INT_MIN && _double <= INT_MAX)
