@@ -119,13 +119,43 @@ std::ostream &	operator<<(std::ostream & stream, ScalarConverter const & rhs)
 {
 	if (_isExtreme)
 	{
-		stream << ANSI_PURPLE 
-			<< rhs.getName() 
-			<< ", ScalarConverter grade " 
-			<< rhs.getGrade() 
-			<< "." 
-			<< ANSI_RESET;
+		if (_value.compare("inf") == 0 || _value.compare("inff") == 0 
+		|| _value.compare("+inf") == 0 || _value.compare("+inff") == 0)
+		{
+			stream << ANSI_BLUE 
+				<< "char: impossible" << std::endl
+				<< "int: impossible" << std::endl
+				<< "float: +inf" << std::endl
+				<< "double: +inff" << std::endl; 
+				<< ANSI_RESET;
+		}
+		if (_value.compare("-inf") == 0 || _value.compare("-inff") == 0)
+		{
+			stream << ANSI_BLUE 
+				<< "char: impossible" << std::endl
+				<< "int: impossible" << std::endl
+				<< "float: -inf" << std::endl
+				<< "double: -inff" << std::endl; 
+				<< ANSI_RESET;
+		}
 	}
-	if (_isNan)
+	else if (_isNan)
+	{
+		stream	<< "char: impossible" << std::endl
+				<< "int: impossible" << std::endl
+				<< "float: nanf" << std::endl
+				<< "double: nan" << std::endl;
+	}
+	else if (_isChar)
+	{
+		if (_value[1] >= 32 && _value[1] <= 127)
+			stream << "char: \"" << _value[1] << "\"" << std::endl;
+		else
+			stream << "char: Non displayable" << std::endl;
+	}
+	else
+	{
+
+	}
 	return (stream);
 }
