@@ -21,6 +21,9 @@ class ScalarConverter
 		ScalarConverter	&operator=(ScalarConverter const & rhs); //assignement operator
 
 		void	convert(std::string value);
+		bool	checkValue(std::string value);
+		void	convertValue(std::string value);
+		void	printAll(std::ostream &stream) const;
 
 	private:
 

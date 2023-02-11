@@ -18,7 +18,7 @@ ScalarConverter::ScalarConverter(void) : _isNan(false), _isExtreme(false), _isCh
 
 ScalarConverter::ScalarConverter(ScalarConverter const & copy)
 {
-
+	(void) copy;
 }
 
 ScalarConverter	&ScalarConverter::operator=(ScalarConverter const & rhs)
@@ -47,7 +47,7 @@ void	ScalarConverter::convert(std::string value)
 		convertValue(value);
 }
 
-void	ScalarConverter::checkValue(std::string value)
+bool	ScalarConverter::checkValue(std::string value)
 {
 	unsigned long	i;
 	std::string		tmp(value);
@@ -111,51 +111,59 @@ void	ScalarConverter::convertValue(std::string value)
 	}
 }
 
-/******************************************************************************
-*                                  OPERATOR                                   *
-******************************************************************************/
-
-std::ostream &	operator<<(std::ostream & stream, ScalarConverter const & rhs)
+void	ScalarConverter::printAll(std::ostream &stream) const
 {
 	if (_isExtreme)
 	{
 		if (_value.compare("inf") == 0 || _value.compare("inff") == 0 
 		|| _value.compare("+inf") == 0 || _value.compare("+inff") == 0)
 		{
-			stream << ANSI_BLUE 
-				<< "char: impossible" << std::endl
+			stream << "char: impossible" << std::endl
 				<< "int: impossible" << std::endl
 				<< "float: +inf" << std::endl
 				<< "double: +inff" << std::endl; 
-				<< ANSI_RESET;
 		}
 		if (_value.compare("-inf") == 0 || _value.compare("-inff") == 0)
 		{
-			stream << ANSI_BLUE 
-				<< "char: impossible" << std::endl
+			stream << "char: impossible" << std::endl
 				<< "int: impossible" << std::endl
 				<< "float: -inf" << std::endl
 				<< "double: -inff" << std::endl; 
-				<< ANSI_RESET;
 		}
+		return;
 	}
-	else if (_isNan)
+	if (_isNan)
 	{
 		stream	<< "char: impossible" << std::endl
 				<< "int: impossible" << std::endl
 				<< "float: nanf" << std::endl
 				<< "double: nan" << std::endl;
+		return;
 	}
-	else if (_isChar)
-	{
-		if (_value[1] >= 32 && _value[1] <= 127)
-			stream << "char: \"" << _value[1] << "\"" << std::endl;
-		else
-			stream << "char: Non displayable" << std::endl;
-	}
+	if (_value[1] >= 32 && _value[1] <= 127)
+		stream << "char: \"" << _value[1] << "\"" << std::endl;
 	else
-	{
+		stream << "char: Non displayable" << std::endl;
+	if (_double >= INT_MIN && _double <= INT_MAX)
+		stream << "int: " << _int << std::endl;
+	else
+		stream << "int: impossible" << std::endl;
+	if (_float - roundf(_float) == 0)
+		stream << "float: " << _float << ".0f" << std::endl;
+	else
+		stream << "float: " << _float << "f" << std::endl;
+	if (_double - roundf(_double) == 0)
+		stream << "double: " << _double << ".0" << std::endl;
+	else
+		stream << "double: " << _double << std::endl;
+}
 
-	}
+/******************************************************************************
+*                                  OPERATOR                                   *
+******************************************************************************/
+
+std::ostream &	operator<<(std::ostream & stream, ScalarConverter const & rhs)
+{
+	rhs.printAll(stream);
 	return (stream);
 }
