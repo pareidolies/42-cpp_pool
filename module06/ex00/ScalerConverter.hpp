@@ -25,7 +25,7 @@ class ScalarConverter
 	private:
 
 		std::string			_value;
-		bool				_isConvertable;
+		bool				_isNan;
 		bool				_isExtreme;
 		bool				_isChar;
 		float				_float;
