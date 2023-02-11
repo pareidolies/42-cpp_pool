@@ -4,12 +4,9 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ScalarConverter::ScalarConverter(void) : _isNan(false), _isExtreme(false), _isChar(false)
+ScalarConverter::ScalarConverter(void)
 {
-	this->_float = 0;
-	this->_int = 0;
-	this->_char = 0;
-	this->_double = 0;
+
 }
 
 /******************************************************************************
@@ -18,13 +15,13 @@ ScalarConverter::ScalarConverter(void) : _isNan(false), _isExtreme(false), _isCh
 
 ScalarConverter::ScalarConverter(ScalarConverter const & copy)
 {
-	(void) copy;
+	*this = copy;
 }
 
 ScalarConverter	&ScalarConverter::operator=(ScalarConverter const & rhs)
 {
-	if (this != &rhs)
-		this->_isNan = rhs._isNan;
+	this->_value = rhs._value;
+	this->convert(this->_value);
 	return (*this);
 }
 
@@ -43,6 +40,7 @@ ScalarConverter::~ScalarConverter(void)
 
 void	ScalarConverter::convert(std::string value)
 {
+	this->_value = value;
 	this->_isNan = false;
 	this->_isExtreme = false;
 	this->_isChar = false;
@@ -50,14 +48,14 @@ void	ScalarConverter::convert(std::string value)
 	this->_int = 0;
 	this->_char = 0;
 	this->_double = 0;
-	if (checkValue(value))
-		convertValue(value);
+	if (checkValue())
+		convertValue();
 }
 
-bool	ScalarConverter::checkValue(std::string value)
+bool	ScalarConverter::checkValue(void)
 {
 	unsigned long	i;
-	std::string		tmp(value);
+	std::string		tmp(_value);
 
 	if (tmp.compare("inf") == 0 || tmp.compare("inff") == 0 
 		|| tmp.compare("-inf") == 0 || tmp.compare("-inff") == 0
@@ -102,18 +100,18 @@ bool	ScalarConverter::checkValue(std::string value)
 	return (true);
 }
 
-void	ScalarConverter::convertValue(std::string value)
+void	ScalarConverter::convertValue(void)
 {
 	if (_isChar)
 	{
-		_char = value[1];
+		_char = _value[1];
 		_int = static_cast<int>(_char);
 		_float = static_cast<float>(_char);
 		_double = static_cast<double>(_char);
 	}
 	else
 	{
-		_double = atof(value.c_str());
+		_double = atof(_value.c_str());
 		_char = static_cast<char>(_double);
 		_int = static_cast<int>(_double);
 		_float = static_cast<float>(_double);
