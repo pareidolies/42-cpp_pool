@@ -152,16 +152,20 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 			stream << "char: \'" << _char << "\'" << std::endl;
 		else
 			stream << "char: Non displayable" << std::endl;
-		if (_double >= INT_MIN && _double <= INT_MAX)
+		if (_int >= INT_MIN && _int <= INT_MAX)
 			stream << "int: " << _int << std::endl;
 		else
 			stream << "int: impossible" << std::endl;
 		if (_float - roundf(_float) == 0)
 			stream << "float: " << _float << ".0f" << std::endl;
+		else if (_float >= static_cast<float>(INT_MIN) && _float <= static_cast<float>(INT_MAX))
+			stream << "float: impossible" << std::endl;
 		else
 			stream << "float: " << _float << "f" << std::endl;
 		if (_double - roundf(_double) == 0)
 			stream << "double: " << _double << ".0" << std::endl;
+		else if (_double >= static_cast<double>(INT_MIN) && _double <= static_cast<double>(INT_MAX))
+			stream << "double: impossible" << std::endl;
 		else
 			stream << "double: " << _double << std::endl;
 	}
