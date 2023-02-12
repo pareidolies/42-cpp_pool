@@ -1,26 +1,22 @@
 # include "Base.hpp"
+# include "A.hpp"
+# include "B.hpp"
+# include "C.hpp"
 
 int main()
 {
-	Serializer	serializer;
-	Data *initial = new Data();
-	uintptr_t ptr;
-	Data *final;
+	Base	base = Base();
 
-	initial->value = "test";
-	initial->c = 'a';
-	initial->f = 22.5;
-	initial->d = 14.7;
-
-	ptr = serializer.serialize(initial);
-	final = serializer.deserialize(ptr);
-	
-	std::cout << "value initial : " << initial->value << "	| 	value final : " << final->value << std::endl;
-	std::cout << "c initial : " << initial->c << "		| 	c final : " << final->c << std::endl;
-	std::cout << "f initial : " << initial->f << "	| 	f final : " << final->f << std::endl;
-	std::cout << "d initial : " << initial->d << "	| 	d final : " << final->d << std::endl;
-
-	delete initial;
-
+	srand (time(NULL));
+	Base *ptr;
+	for (int i = 0; i < 30; i++)
+	{
+		ptr = base.generate();
+		base.identify(ptr);
+		base.identify(*ptr);
+		delete ptr;
+		std::cout << std::endl;
+		usleep(10000);
+	}
 	return (0);
 }
