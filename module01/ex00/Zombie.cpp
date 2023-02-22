@@ -2,8 +2,8 @@
 
 Zombie::Zombie(std::string name)
 {
-    std::cout << ANSI_PURPLE << "constructor called for " << name << ANSI_RESET << std::endl;
     this->name = name;
+    std::cout << ANSI_PURPLE << "constructor called for " << this->name << ANSI_RESET << std::endl;
 }
 
 Zombie::~Zombie(void)
