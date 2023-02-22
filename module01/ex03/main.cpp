@@ -39,6 +39,8 @@ int main()
         HumanB jim("Jim");
         jim.setWeapon(club);
         jim.attack();
+        club.setType("");
+        jim.attack();
         club.setType("net");
         jim.attack();
     }

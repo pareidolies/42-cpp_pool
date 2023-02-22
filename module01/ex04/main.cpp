@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	}
 	filename = argv[1];
     //ifstream = input stream class to operate on files
-	ifs.open(filename, std::ifstream::in); //file open for reading
+	ifs.open(filename.c_str(), std::ifstream::in); //file open for reading
 	if (!ifs.good())
 	{
 		std::cout << "File unknown" << std::endl;
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	ifs.seekg(0, ifs.beg);
 	filename += ".replace";
     //ofstream = output stream class to operate on files
-	ofs.open(filename, std::ofstream::out); //file open for writing
+	ofs.open(filename.c_str(), std::ofstream::out); //file open for writing
 	if (!ofs.good())
 	{
 		std::cout << "New file creation failed" << std::endl;

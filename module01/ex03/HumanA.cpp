@@ -5,7 +5,7 @@ HumanA::HumanA(std::string const name, Weapon const & weapon) : _name(name), _we
     if (this->_weapon.getType() == "")
     {
         std::cout << ANSI_YELLOW << "[...] new human A created (name : " << this->_name
-        << ", no weapon)"
+        << ", hands)"
         << ANSI_RESET << std::endl;
     }
     else
@@ -26,7 +26,7 @@ HumanA::~HumanA(void)
 void	HumanA::attack(void)
 {
     if (this->_weapon.getType() == "")
-		std::cout << this->_name << " has no weapon to launch an attack..." << std::endl;
+		std::cout << this->_name << " attacks with their hands!" << std::endl;
     else
         std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;
 }
