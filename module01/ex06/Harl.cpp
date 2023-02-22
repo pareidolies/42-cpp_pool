@@ -20,10 +20,7 @@ void	Harl::complain(std::string level) const
 	for (int i = 0; i < 4; i++)
 	{
 		if (level == alert[i])
-		{
 			index = i;
-			break ;
-		}
 	}
 	switch (index)
 	{
@@ -39,7 +36,8 @@ void	Harl::complain(std::string level) const
 		case 3:
 			(this->*f[index])();
 			index++;
-		default:
+			break;
+		default :
 			std::cout << "[Probably complaining about insignificant problems]" << std::endl;
 	}
 }

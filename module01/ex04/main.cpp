@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	{
 		std::cout << "New file creation failed" << std::endl;
 		return (1);
-	}	
+	}
 	replace(ifs, ofs, argv[2], argv[3]);
     ifs.close();
 	ofs.close();
