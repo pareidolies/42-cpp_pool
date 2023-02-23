@@ -38,9 +38,9 @@ class Fixed
 		Fixed operator/(const Fixed &rhs);
 		Fixed operator*(const Fixed &rhs);
 		Fixed operator-(const Fixed &rhs);
-		Fixed& operator++();
-		Fixed operator++(int);
-		Fixed& operator--();
+		Fixed& operator++(void); //++i
+		Fixed operator++(int); //i++
+		Fixed& operator--(void);
 		Fixed operator--(int);
 
 		static Fixed max(const Fixed &ref1, const Fixed &ref2);
