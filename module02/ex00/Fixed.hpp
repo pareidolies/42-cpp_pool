@@ -11,10 +11,10 @@ class Fixed
 {
 	public:
 
-		Fixed(void); //constructeur
-		Fixed(Fixed const & copy); // constructeur de recopie
-		Fixed	&operator=(Fixed const & rhs); // surcharge de l'opérateur d'affectation
-		~Fixed(void); //destructeur
+		Fixed(void); //constructor
+		Fixed(Fixed const & copy); //copy constructor called
+		Fixed	&operator=(Fixed const & rhs); //copy assignment operator
+		~Fixed(void); //destructor
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);

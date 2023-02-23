@@ -7,7 +7,7 @@
 # include <string>
 
 # define ANSI_PURPLE		"\x1b[95m"
-# define ANSI_BLUE		"\x1b[94m"
+# define ANSI_BLUE			"\x1b[94m"
 # define ANSI_YELLOW		"\x1b[93m"
 # define ANSI_RESET			"\x1b[0m"
 
@@ -16,11 +16,12 @@ class Fixed
 	public:
 
 		Fixed(void); //default constructor
-		Fixed(Fixed const & copy); // constructeur de recopie
-		Fixed	&operator=(Fixed const & rhs); // surcharge de l'opérateur d'affectation
-		~Fixed(void); //destructeur
 		Fixed(int const nbr); //int constructor
 		Fixed(float const nbr); //float constructor
+
+		Fixed(Fixed const & copy); //copy constructor
+		Fixed	&operator=(Fixed const & rhs); //copy assignment operator
+		~Fixed(void); //destructor
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
