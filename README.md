@@ -17,7 +17,17 @@ Juste quelques notes et conseils
 
 ## Module 01:
 
+Sur les pointeurs et les références : https://cpp.developpez.com/cours/cpp/?page=page_6
+
 ## Module 02:
+
+**Ex01 :** 
+
+* sur les nombres à virgule fixe : https://msxvillage.fr/wiki/nombre-a-virgule-fixe et https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html
+
+**Ex02 :** 
+
+* sur la surcharge des opérateurs : http://casteyde.christian.free.fr/cpp/cours/online/x3244.html
 
 **Ex03 :** 
 
@@ -33,7 +43,6 @@ Juste quelques notes et conseils
 - -Wshadow : Warn whenever a local variable or type declaration shadows another variable, parameter, type, class member (in C++), or instance variable (in Objective-C) or whenever a built-in function is shadowed. Note that in C++, the compiler warns if a local variable shadows an explicit typedef, but not if it shadows a struct/class/enum. If this warning is enabled, it includes also all instances of local shadowing. This means that -Wno-shadow=local and -Wno-shadow=compatible-local are ignored when -Wshadow is used. Same as -Wshadow=global.
 
 ## Module 04 : 
-
 
 **Ex01 :** 
 
