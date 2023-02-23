@@ -24,10 +24,12 @@ Sur les pointeurs et les références : https://cpp.developpez.com/cours/cpp/?pa
 **Ex01 :** 
 
 * sur les nombres à virgule fixe : https://msxvillage.fr/wiki/nombre-a-virgule-fixe et https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html
+* attention aux casts qui tronquent les valeurs, il faudra penser à utiliser roundf
 
 **Ex02 :** 
 
 * sur la surcharge des opérateurs : http://casteyde.christian.free.fr/cpp/cours/online/x3244.html
+* pour la décrémentation et l'incrémentation, la valeur n'est pas 1 mais 1/256 car nous manipulons des nombres à virgule fixe
 
 **Ex03 :** 
 
