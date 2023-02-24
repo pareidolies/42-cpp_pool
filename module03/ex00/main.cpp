@@ -15,7 +15,7 @@ int main()
 		labradoodle.beRepaired(1);
 	    woolf.attack("Labradoodle");
 	}
-
+	std::cout << std::endl;
 	{
 		ClapTrap	fox = ClapTrap("Fox");
 		ClapTrap	mouse = ClapTrap("Mouse");

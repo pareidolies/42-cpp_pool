@@ -7,14 +7,14 @@
 
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
-    this->_name = "Labradoodle";
+    this->_name = "Anonymous";
     this->_hitPoints = 100;
     this->_energyPoints = 50;
     this->_attackDamage = 20;
 	std::cout << ANSI_BLUE << "ScavTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string const & name) : ClapTrap()
+ScavTrap::ScavTrap(std::string const & name) : ClapTrap(name)
 {
     this->_name = name;
     this->_hitPoints = 100;
@@ -82,5 +82,17 @@ void	ScavTrap::attack(const std::string& target)
 
 void ScavTrap::guardGate(void)
 {
+	if (this->_energyPoints <= 0)
+	{
+		std::cout << ANSI_RED << "ScavTrap "
+			<< _name << " has no more energy, and so cannot enter gate keeper mode" << ANSI_RESET << std::endl;
+		return;
+	}
+	if (this->_hitPoints <= 0)
+	{
+		std::cout << ANSI_RED << "ScavTrap "
+			<< _name << " is dead, and so cannot enter gate keeper mode" << ANSI_RESET << std::endl;
+		return;
+	}
     std::cout << ANSI_GREEN << "ScavTrap " << _name << " in gate keeper mode!" << ANSI_RESET << std::endl;
 }

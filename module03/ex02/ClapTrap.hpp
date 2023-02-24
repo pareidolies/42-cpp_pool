@@ -15,10 +15,10 @@ class ClapTrap
 	public:
 
 		ClapTrap(void); //default constructor
-		ClapTrap(ClapTrap const & copy); // constructeur de recopie
-		ClapTrap	&operator=(ClapTrap const & rhs); // surcharge de l'opérateur d'affectation
-		~ClapTrap(void); //destructeur
 		ClapTrap(std::string const & name); //name constructor
+		ClapTrap(ClapTrap const & copy); //copy constructor
+		ClapTrap	&operator=(ClapTrap const & rhs); //copy assignment operator
+		~ClapTrap(void); //destructor
 
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
