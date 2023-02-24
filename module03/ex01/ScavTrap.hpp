@@ -10,9 +10,9 @@ class ScavTrap : public ClapTrap
 
 		ScavTrap(void); //default constructor
         ScavTrap(std::string const & name); //name constructor
-		ScavTrap(ScavTrap const & copy); // constructeur de recopie
-		ScavTrap	&operator=(ScavTrap const & rhs); // surcharge de l'opérateur d'affectation
-		~ScavTrap(void); //destructeur
+		ScavTrap(ScavTrap const & copy); //copy constructor
+		ScavTrap	&operator=(ScavTrap const & rhs); //copy assignment operator
+		~ScavTrap(void); //destructor
 
 		void attack(const std::string& target);
 		void guardGate(void);

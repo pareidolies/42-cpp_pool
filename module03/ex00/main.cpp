@@ -4,7 +4,7 @@ int main()
 {
 	{
 		ClapTrap	woolf = ClapTrap("Woolf");
-		ClapTrap	labradoodle = ClapTrap();
+		ClapTrap	labradoodle = ClapTrap("Labradoodle");
 
 		for (int i = 0; i < 10; i++)
 		{
