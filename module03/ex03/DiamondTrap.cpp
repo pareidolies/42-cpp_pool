@@ -19,8 +19,11 @@ DiamondTrap::DiamondTrap(std::string const & name)
 {
     this->_name = name;
 	ClapTrap::_name = _name + "_clap_name";
+	//std::cout << this->_hitPoints << std::endl;
     this->_hitPoints = FragTrap::_hitPoints;
+	//std::cout << this->_energyPoints << std::endl;
     this->_energyPoints = ScavTrap::_energyPoints;
+	//std::cout << this->_attackDamage << std::endl;
     this->_attackDamage = FragTrap::_attackDamage;
 	std::cout << ANSI_BLUE << "DiamondTrap name constructor called for " << _name << ANSI_RESET << std::endl;
 }
