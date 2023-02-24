@@ -54,6 +54,9 @@ int main()
 	    dog.beRepaired(30);
 	    dog.attack("Cat");
    		cat.takeDamage(30);
+
+		dog.guardGate();
+		cat.highFivesGuys();
 	}
 	return (0);
 }
