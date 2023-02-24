@@ -11,9 +11,9 @@ class DiamondTrap : public FragTrap, public ScavTrap
 
 		DiamondTrap(void); //default constructor
         DiamondTrap(std::string const & name); //name constructor
-		DiamondTrap(DiamondTrap const & copy); // constructeur de recopie
-		DiamondTrap	&operator=(DiamondTrap const & rhs); // surcharge de l'opérateur d'affectation
-		~DiamondTrap(void); //destructeur
+		DiamondTrap(DiamondTrap const & copy); //copy constructor
+		DiamondTrap	&operator=(DiamondTrap const & rhs); //copy assignment operator
+		~DiamondTrap(void); //destructor
 
 		using ScavTrap::attack;
 

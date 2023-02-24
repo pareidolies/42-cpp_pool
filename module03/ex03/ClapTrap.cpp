@@ -1,11 +1,11 @@
-# include "ClapTrap.hpp"
-# include <iostream>
+#include "ClapTrap.hpp"
+#include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ClapTrap::ClapTrap(void) : _name("Labradoodle"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(void) : _name("Anonymous"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << ANSI_BLUE << "ClapTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
@@ -74,6 +74,12 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
+	if (this->_hitPoints <= 0)
+	{
+		std::cout << ANSI_RED << "ClapTrap "
+			<< _name << " is already dead..." << ANSI_RESET << std::endl;
+		return;
+	}
 	this->_hitPoints -= amount;
 	std::cout << ANSI_RED << "ClapTrap " << _name << " takes " << amount << " points of damage!" << std::endl;
 	return;
@@ -84,13 +90,13 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	if (this->_energyPoints <= 0)
 	{
 		std::cout << ANSI_RED << "ClapTrap "
-			<< _name << "has no more energy, and so cannot be repaired" << ANSI_RESET << std::endl;
+			<< _name << " has no more energy, and so cannot be repaired" << ANSI_RESET << std::endl;
 		return;
 	}
 	if (this->_hitPoints <= 0)
 	{
 		std::cout << ANSI_RED << "ClapTrap "
-			<< _name << "is dead, he cannot be resurrected" << ANSI_RESET << std::endl;
+			<< _name << " is dead, he cannot be resurrected" << ANSI_RESET << std::endl;
 		return;
 	}
 	this->_hitPoints += amount;

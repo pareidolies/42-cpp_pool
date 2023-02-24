@@ -10,9 +10,9 @@ class FragTrap : virtual public ClapTrap
 
 		FragTrap(void); //default constructor
         FragTrap(std::string const & name); //name constructor
-		FragTrap(FragTrap const & copy); // constructeur de recopie
-		FragTrap	&operator=(FragTrap const & rhs); // surcharge de l'opérateur d'affectation
-		~FragTrap(void); //destructeur
+		FragTrap(FragTrap const & copy); //copy constructor
+		FragTrap	&operator=(FragTrap const & rhs); //copy assignment operator
+		~FragTrap(void); //destructor
 
 		void highFivesGuys(void);
 

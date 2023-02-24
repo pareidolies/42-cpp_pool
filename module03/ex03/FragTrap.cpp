@@ -1,5 +1,5 @@
-# include "FragTrap.hpp"
-# include <iostream>
+#include "FragTrap.hpp"
+#include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
@@ -7,14 +7,14 @@
 
 FragTrap::FragTrap(void) : ClapTrap()
 {
-    this->_name = "Labradoodle";
+    this->_name = "Anonymous";
     this->_hitPoints = 100;
     this->_energyPoints = 100;
     this->_attackDamage = 30;
 	std::cout << ANSI_BLUE << "FragTrap default constructor called for " << _name << ANSI_RESET << std::endl;
 }
 
-FragTrap::FragTrap(std::string const & name) : ClapTrap()
+FragTrap::FragTrap(std::string const & name) : ClapTrap(name)
 {
     this->_name = name;
     this->_hitPoints = 100;
@@ -52,7 +52,7 @@ FragTrap	&FragTrap::operator=(FragTrap const & rhs)
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << ANSI_BLUE << "FragTrap destructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "ScavTrap destructor called for " << _name << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -61,5 +61,17 @@ FragTrap::~FragTrap(void)
 
 void FragTrap::highFivesGuys(void)
 {
+	if (this->_energyPoints <= 0)
+	{
+		std::cout << ANSI_RED << "FragTrap "
+			<< _name << " has no more energy, and so cannot enter gate keeper mode" << ANSI_RESET << std::endl;
+		return;
+	}
+	if (this->_hitPoints <= 0)
+	{
+		std::cout << ANSI_RED << "FragTrap "
+			<< _name << " is dead, and so cannot enter gate keeper mode" << ANSI_RESET << std::endl;
+		return;
+	}
     std::cout << ANSI_GREEN << "High five guys!" << ANSI_RESET << std::endl;
 }
