@@ -2,6 +2,8 @@
 
 Juste quelques notes et conseils
 
+Makefile cpp : https://www.hiroom2.com/2016/09/03/makefile-header-dependencies/
+
 ## Module 00:
 
 **Ex00 :** 
@@ -57,3 +59,9 @@ Sur les classes abstraites et les méthodes virtuelles pures : https://fr.wikipe
 ## Module 05 :
 
 Shrubbery ascii art credit : https://ascii.co.uk/art/tree
+
+## General :
+
+https://github.com/hugorclt/PiscineCPP
+
+
