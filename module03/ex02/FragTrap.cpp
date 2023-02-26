@@ -52,7 +52,7 @@ FragTrap	&FragTrap::operator=(FragTrap const & rhs)
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << ANSI_BLUE << "ScavTrap destructor called for " << _name << ANSI_RESET << std::endl;
+	std::cout << ANSI_BLUE << "FragTrap destructor called for " << _name << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
