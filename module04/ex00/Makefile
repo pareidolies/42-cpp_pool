@@ -18,6 +18,7 @@ $(NAME): $(OBJS)
 	@echo "\033[92m[object files : OK].\033[0m"
 	$(CC) $(CPPFLAGS) $(OBJS) -o $(NAME)
 	@echo "\033[92m[executable : OK].\033[0m"
+	@echo "Executable name : ./$(NAME)"
 
 %.o: %.cpp
 	$(CC) $(CPPFLAGS) -c $< -o $@
@@ -30,5 +31,7 @@ fclean: clean
 	@echo "\033[93m[cleaning : OK].\033[0m"
 
 re:	fclean all
+
+-include $(DEPS)
 
 .PHONY:	all clean fclean re

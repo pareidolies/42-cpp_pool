@@ -17,12 +17,12 @@ Animal::Animal(void) : type("Animal")
 Animal::Animal(Animal const & copy)
 {
     *this = copy;
-	std::cout << ANSI_YELLOW << "Copy constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Animal copy constructor called" << ANSI_RESET << std::endl;
 }
 
 Animal	&Animal::operator=(Animal const & rhs)
 {
-	std::cout << ANSI_YELLOW << "Assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Animal assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
 		this->type = rhs.type;
 	return (*this);
