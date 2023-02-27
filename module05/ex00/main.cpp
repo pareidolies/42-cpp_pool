@@ -20,6 +20,7 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
@@ -36,6 +37,7 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
@@ -51,10 +53,12 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
 			Bureaucrat MrsSmith = Bureaucrat("Mrs Smith", 150);
+			std::cout << MrsSmith << std::endl;
 			MrsSmith.downgrade();
 			std::cout << MrsSmith << std::endl;
 		}
@@ -67,10 +71,12 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
 			Bureaucrat MrJones = Bureaucrat("Mr Jones", 1);
+			std::cout << MrJones << std::endl;
 			MrJones.upgrade();
 			std::cout << MrJones << std::endl;
 		}
@@ -83,15 +89,36 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
-			Bureaucrat MrsJones = Bureaucrat("MrsJones", 75);
+			Bureaucrat MrsJones = Bureaucrat("Mrs Jones", 75);
 			std::cout << MrsJones << std::endl;
 			MrsJones.upgrade();
 			std::cout << MrsJones << std::endl;
 			MrsJones.downgrade();
 			std::cout << MrsJones << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooLowException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		catch (const Bureaucrat::GradeTooHighException& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	std::cout << std::endl;
+	{
+		try
+		{
+			Bureaucrat Anonymous = Bureaucrat("Anonymous", -100);
+			std::cout << Anonymous << std::endl;
+			Anonymous.upgrade();
+			std::cout << Anonymous << std::endl;
+			Anonymous.downgrade();
+			std::cout << Anonymous << std::endl;
 		}
 		catch (const Bureaucrat::GradeTooLowException& e)
 		{
