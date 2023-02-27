@@ -21,6 +21,7 @@ class Brain
 
 		void		setIdea(int i, std::string idea);
 		std::string	getIdea(int i);
+		std::string	*getIdeaAddress(int i);
 
 	private:
 

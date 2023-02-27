@@ -16,9 +16,8 @@ Cat::Cat(void) : Animal()
 *                                   COPY                                      *
 ******************************************************************************/
 
-Cat::Cat(Cat const & copy)
+Cat::Cat(Cat const & copy) : Animal(copy.type), brain(new Brain (*copy.brain))
 {
-    *this = copy;
 	std::cout << ANSI_YELLOW << "Cat copy constructor called" << ANSI_RESET << std::endl;
 }
 

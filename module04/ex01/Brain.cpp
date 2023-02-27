@@ -17,12 +17,12 @@ Brain::Brain(void)
 Brain::Brain(Brain const & copy)
 {
     *this = copy;
-	std::cout << ANSI_YELLOW << "Copy constructor called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Brain copy constructor called" << ANSI_RESET << std::endl;
 }
 
 Brain	&Brain::operator=(Brain const & rhs)
 {
-	std::cout << ANSI_YELLOW << "Assignment operator called" << ANSI_RESET << std::endl;
+	std::cout << ANSI_YELLOW << "Brain assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
 	{
 		for (int i = 0; i < 100; i++)
@@ -57,6 +57,13 @@ void	Brain::setIdea(int i, std::string idea)
 std::string	Brain::getIdea(int i)
 {
 	if (i < 0 || i >= 100)
-		return "Please enter a number between 0 and 99";
+		return ("Please enter a number between 0 and 99");
 	return (ideas[i]);
+}
+
+std::string *Brain::getIdeaAddress(int i)
+{
+	if (i < 0 || i >= 100)
+		return (NULL);
+	return (&ideas[i]);
 }

@@ -15,6 +15,7 @@ class Animal
 	public:
 
 		Animal(void); //default constructor
+		Animal(std::string type); //type constructor
 		Animal(Animal const & copy); //copy constructor
 		Animal	&operator=(Animal const & rhs); //assignment operator
 		virtual ~Animal(void); //destructor

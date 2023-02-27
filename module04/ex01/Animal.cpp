@@ -10,6 +10,11 @@ Animal::Animal(void) : type("Animal")
 	std::cout << ANSI_BLUE << "Animal default constructor called" << ANSI_RESET << std::endl;
 }
 
+Animal::Animal(std::string value) : type(value)
+{
+	std::cout << ANSI_BLUE << "Animal default constructor called" << ANSI_RESET << std::endl;
+}
+
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/

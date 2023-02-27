@@ -16,9 +16,8 @@ Dog::Dog(void) : Animal()
 *                                   COPY                                      *
 ******************************************************************************/
 
-Dog::Dog(Dog const & copy) : Animal(), brain(NULL)
+Dog::Dog(Dog const & copy) : Animal(copy.type), brain(new Brain(*copy.brain))
 {
-	*this = copy;
 	std::cout << ANSI_YELLOW << "Dog copy constructor called" << ANSI_RESET << std::endl;
 }
 
