@@ -56,6 +56,7 @@ Pour eviter que le sous-objet ClapTrap soit cree plusieurs fois : https://www.lj
 **Ex01 :** 
 
 Sur la différence entre copie profonde et superficielle : https://fr.wikipedia.org/wiki/Copie_d%27un_objet
+http://www-igm.univ-mlv.fr/~dr/CPP/TransparantsC++6.pdf
 
 **Ex02 :**
 
