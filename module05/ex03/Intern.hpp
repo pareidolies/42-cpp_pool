@@ -2,7 +2,7 @@
 # define INTERN_HPP
 
 # include <iostream>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -21,10 +21,10 @@ class Intern
 
 		Intern	&operator=(Intern const & rhs); //assignement operator
 
-		Form		*makeForm(std::string form, std::string target);
-		Form		*makeShrubberyCreationForm(std::string target) const;
-		Form		*makeRobotomyRequestForm(std::string target) const;
-		Form		*makePresidentialPardonForm(std::string target) const;
+		AForm		*makeForm(std::string form, std::string target);
+		AForm		*makeShrubberyCreationForm(std::string target) const;
+		AForm		*makeRobotomyRequestForm(std::string target) const;
+		AForm		*makePresidentialPardonForm(std::string target) const;
 
 	private:
 

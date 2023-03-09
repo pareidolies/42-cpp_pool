@@ -2,7 +2,7 @@
 # include "ShrubberyCreationForm.hpp"
 # include "RobotomyRequestForm.hpp"
 # include "PresidentialPardonForm.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
 # include "Intern.hpp"
 
 # include <iostream>
@@ -16,22 +16,32 @@ int main()
 
 	std::cout << bureaucrat << std::endl;
 	std::cout << boss << std::endl;
+
+	std::cout << std::endl;
 	
-	Form *shrubbery = intern.makeForm("shrubbery creation", "Garden");
-	Form *robotomy = intern.makeForm("robotomy request", "President");
-	Form *pardon = intern.makeForm("presidential pardon", "Prisoner");
-	Form *error = intern.makeForm("error", "error");
+	AForm *shrubbery = intern.makeForm("shrubbery creation", "Garden");
+	AForm *robotomy = intern.makeForm("robotomy request", "President");
+	AForm *pardon = intern.makeForm("presidential pardon", "Prisoner");
+	AForm *error = intern.makeForm("error", "error");
+
+	std::cout << std::endl;
 
 	std::cout << *shrubbery << std::endl;
 	std::cout << *robotomy << std::endl;
 	std::cout << *pardon << std::endl;
 
+	std::cout << std::endl;
+
 	bureaucrat.signForm(*shrubbery);
 	bureaucrat.executeForm(*shrubbery);
+
+	std::cout << std::endl;
 
 	bureaucrat.signForm(*robotomy);
 	bureaucrat.executeForm(*robotomy);
 	boss.executeForm(*robotomy);
+
+	std::cout << std::endl;
 
 	bureaucrat.signForm(*pardon);
 	boss.signForm(*pardon);

@@ -1,5 +1,5 @@
 # include "Bureaucrat.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <iostream>
 
 /******************************************************************************
@@ -8,12 +8,12 @@
 
 Bureaucrat::Bureaucrat(void) : _name("Bureaucrat"), _grade(75)
 {
-	std::cout << ANSI_BLUE << "Default bureaucrat constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Default bureaucrat constructor called" << ANSI_RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name), _grade(grade)
 {
-	std::cout << ANSI_BLUE << "Name and grade bureaucrat constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Name and grade bureaucrat constructor called" << ANSI_RESET << std::endl;
 	if (grade < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else if (grade > 150)
@@ -26,12 +26,12 @@ Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name), _grade(
 
 Bureaucrat::Bureaucrat(Bureaucrat const & copy) : _name(copy._name), _grade(copy._grade)
 {
-	std::cout << ANSI_YELLOW << "Bureaucrat copy constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Bureaucrat copy constructor called" << ANSI_RESET << std::endl;
 }
 
 Bureaucrat	&Bureaucrat::operator=(Bureaucrat const & rhs)
 {
-	std::cout << ANSI_YELLOW << "Bureaucrat assignment operator called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Bureaucrat assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
 		this->_grade = rhs._grade;
 	return (*this);
@@ -43,7 +43,7 @@ Bureaucrat	&Bureaucrat::operator=(Bureaucrat const & rhs)
 
 Bureaucrat::~Bureaucrat(void)
 {
-	std::cout << ANSI_BLUE << "Bureaucrat destructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Bureaucrat destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -100,29 +100,29 @@ void	Bureaucrat::downgrade(void)
 	}
 }
 
-void	Bureaucrat::signForm(Form & form)
+void	Bureaucrat::signForm(AForm & AForm)
 {
 	try
 	{
-		if (form.beSigned(*this))
-			std::cout << _name << " signed " << form.getName() << std::endl;
+		if (AForm.beSigned(*this))
+			std::cout << _name << " signed " << AForm.getName() << std::endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cout << _name << " couldn't sign " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
+		std::cout << _name << " couldn't sign " << AForm.getName() << " because bureaucrat's grade is too low" << std::endl;;
 	}
 }
 
-void		Bureaucrat::executeForm(Form const & form)
+void		Bureaucrat::executeForm(AForm const & AForm)
 {
 	try
 	{
-		if (form.execute(*this))
-			std::cout << _name << " executed " << form.getName() << std::endl;
+		if (AForm.execute(*this))
+			std::cout << _name << " executed " << AForm.getName() << std::endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cout << _name << " couldn't execute " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
+		std::cout << _name << " couldn't execute " << AForm.getName() << " because bureaucrat's grade is too low" << std::endl;;
 	}
 }
 
