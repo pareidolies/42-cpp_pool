@@ -1,5 +1,5 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <iostream>
 
@@ -12,7 +12,7 @@
 
 class	Bureaucrat;
 
-class Form
+class AForm
 {
 	public:
 

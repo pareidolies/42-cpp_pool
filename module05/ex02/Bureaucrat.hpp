@@ -10,7 +10,7 @@
 # define ANSI_GREEN			"\x1b[92m"
 # define ANSI_RESET			"\x1b[0m"
 
-class	Form;
+class	AForm;
 
 class Bureaucrat
 {
@@ -41,8 +41,8 @@ class Bureaucrat
 		void					upgrade(void);
 		void					downgrade(void);
 
-		void					signForm(Form & form);
-		void					executeForm(Form const & form);
+		void					signForm(AForm & AForm);
+		void					executeForm(AForm const & AForm);
 
 		static int const	highestGrade = 1;
 		static int const	lowestGrade = 150;

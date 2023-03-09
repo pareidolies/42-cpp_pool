@@ -1,8 +1,8 @@
 # include "Bureaucrat.hpp"
-# include "ShrubberyCreationForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "PresidentialPardonForm.hpp"
-# include "Form.hpp"
+# include "ShrubberyCreationAForm.hpp"
+# include "RobotomyRequestAForm.hpp"
+# include "PresidentialPardonAForm.hpp"
+# include "AForm.hpp"
 
 # include <iostream>
 # include <string>
@@ -15,24 +15,24 @@ int main()
 	std::cout << bureaucrat << std::endl;
 	std::cout << boss << std::endl;
 
-	Form *shrubbery = new ShrubberyCreationForm("Garden");
-	Form *robotomy = new RobotomyRequestForm("President");
-	Form *pardon = new PresidentialPardonForm("Prisoner");
+	AForm *shrubbery = new ShrubberyCreationAForm("Garden");
+	AForm *robotomy = new RobotomyRequestAForm("President");
+	AForm *pardon = new PresidentialPardonAForm("Prisoner");
 
 	std::cout << *shrubbery << std::endl;
 	std::cout << *robotomy << std::endl;
 	std::cout << *pardon << std::endl;
 
-	bureaucrat.signForm(*shrubbery);
-	bureaucrat.executeForm(*shrubbery);
+	bureaucrat.signAForm(*shrubbery);
+	bureaucrat.executeAForm(*shrubbery);
 
-	bureaucrat.signForm(*robotomy);
-	bureaucrat.executeForm(*robotomy);
-	boss.executeForm(*robotomy);
+	bureaucrat.signAForm(*robotomy);
+	bureaucrat.executeAForm(*robotomy);
+	boss.executeAForm(*robotomy);
 
-	bureaucrat.signForm(*pardon);
-	boss.signForm(*pardon);
-	boss.executeForm(*pardon);
+	bureaucrat.signAForm(*pardon);
+	boss.signAForm(*pardon);
+	boss.executeAForm(*pardon);
 
 	delete shrubbery;
 	delete robotomy;

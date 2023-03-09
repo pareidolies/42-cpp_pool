@@ -1,5 +1,5 @@
 # include "Bureaucrat.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <iostream>
 
 /******************************************************************************
@@ -100,29 +100,29 @@ void	Bureaucrat::downgrade(void)
 	}
 }
 
-void	Bureaucrat::signForm(Form & form)
+void	Bureaucrat::signForm(AForm & AForm)
 {
 	try
 	{
-		if (form.beSigned(*this))
-			std::cout << _name << " signed " << form.getName() << std::endl;
+		if (AForm.beSigned(*this))
+			std::cout << _name << " signed " << AForm.getName() << std::endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cout << _name << " couldn't sign " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
+		std::cout << _name << " couldn't sign " << AForm.getName() << " because bureaucrat's grade is too low" << std::endl;;
 	}
 }
 
-void		Bureaucrat::executeForm(Form const & form)
+void		Bureaucrat::executeForm(AForm const & AForm)
 {
 	try
 	{
-		if (form.execute(*this))
-			std::cout << _name << " executed " << form.getName() << std::endl;
+		if (AForm.execute(*this))
+			std::cout << _name << " executed " << AForm.getName() << std::endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cout << _name << " couldn't execute " << form.getName() << " because bureaucrat's grade is too low" << std::endl;;
+		std::cout << _name << " couldn't execute " << AForm.getName() << " because bureaucrat's grade is too low" << std::endl;;
 	}
 }
 
