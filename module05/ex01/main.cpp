@@ -8,6 +8,7 @@ int main()
 {
 	Bureaucrat MrPaddington = Bureaucrat("Mr Paddington", 100);
 	Bureaucrat MrsPaddington = Bureaucrat("Mrs Paddington", 50);
+	std::cout << std::endl;
 	{
 		try
 		{
@@ -22,6 +23,7 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		try
 		{
@@ -36,6 +38,7 @@ int main()
 			std::cerr << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	Form F02 = Form("F02", 75, 75);
 	std::cout << F02 << std::endl;
 	MrPaddington.signForm(F02);

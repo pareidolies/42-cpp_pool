@@ -38,6 +38,7 @@ class Form
 		std::string const 		getName(void) const;
 		int 					getGradeToSign(void) const;
 		int 					getGradeToExecute(void) const;
+		bool 					getStatus(void) const;
 
 		bool					beSigned(Bureaucrat bureaucrat);
 
