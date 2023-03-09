@@ -9,34 +9,34 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(void) : Form("Robotomy Request Form", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(void) : AForm("Robotomy Request Form", 72, 45)
 {
 	this->_target = "President";
-	std::cout << ANSI_BLUE << "Default Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Default Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request Form", 72, 45)
 {
 	this->_target = target;
-	std::cout << ANSI_BLUE << "Target Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Target Robotomy Request Form constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : Form(copy)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & copy) : AForm(copy)
 {
 	*this = copy;
-	std::cout << ANSI_YELLOW << "Robotomy Request Form copy constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Robotomy Request Form copy constructor called" << ANSI_RESET << std::endl;
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const & rhs)
 {
-	std::cout << ANSI_YELLOW << "Robotomy Request Form assignment operator called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Robotomy Request Form assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
 		this->_target = rhs._target;
-	Form::operator=(rhs);
+	AForm::operator=(rhs);
 	return (*this);
 }
 
@@ -46,7 +46,7 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const & 
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-	std::cout << ANSI_BLUE << "Robotomy Request Form destructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Robotomy Request Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -66,23 +66,23 @@ bool	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	{
 		srand (time(NULL));
 		result = rand() % 2;
-		std::cout << "BZZZZZZZZZ RRRRRRRRR" << std::endl;
+		std::cout << ANSI_YELLOW << "BZZZZZZZZZ RRRRRRRRR" << ANSI_RESET << std::endl;
 		usleep(1000000);
 		if (result)
 		{
-			std::cout << _target << " has been robotomized" << std::endl;
+			std::cout << ANSI_YELLOW << _target << " has been robotomized!" << ANSI_RESET << std::endl;
 			usleep(1000000);
 		}
 		else 
 		{
-			std::cout << _target << " has not been robotomized" << std::endl;
+			std::cout << ANSI_YELLOW << _target << " has not been robotomized... yet!" << ANSI_RESET << std::endl;
 			usleep(1000000);
 		}
 		return (true);
 	}
 	else
 	{
-		std::cout << executor.getName() << " couldn't sign " << this->getName() << " because form has not been signed yet" << std::endl;
+		std::cout << executor.getName() << " couldn't execute " << this->getName() << " because form has not been signed yet" << std::endl;
 		return (false);
 	}
 }

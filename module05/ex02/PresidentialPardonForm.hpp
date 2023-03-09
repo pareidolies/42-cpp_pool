@@ -1,7 +1,7 @@
 #ifndef PRESIDENTIALPARDONFORM_HPP
 # define PRESIDENTIALPARDONFORM_HPP
 
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <iostream>
 
 # define ANSI_PURPLE		"\x1b[95m"
@@ -13,7 +13,7 @@
 
 class	Bureaucrat;
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
 	public:
 

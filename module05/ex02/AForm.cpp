@@ -6,7 +6,7 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-AForm::AForm(void) : _name("AForm"), _isSigned(false), _gradeToSign(75), _gradeToExecute(75)
+AForm::AForm(void) : _name("Form"), _isSigned(false), _gradeToSign(75), _gradeToExecute(75)
 {
 	//std::cout << ANSI_BLUE << "Default Form constructor called" << ANSI_RESET << std::endl;
 }
@@ -43,7 +43,7 @@ AForm	&AForm::operator=(AForm const & rhs)
 
 AForm::~AForm(void)
 {
-	std::cout << ANSI_BLUE << "Form destructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -92,7 +92,7 @@ bool			AForm::beSigned(Bureaucrat bureaucrat)
 {
 	if (this->_isSigned)
 	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << _name << " because Form has already been signed" << std::endl;
+		std::cout << bureaucrat.getName() << " couldn't sign " << _name << " because form has already been signed" << std::endl;
 		return (false);
 	}
 	else if (bureaucrat.getGrade() <= this->_gradeToSign)

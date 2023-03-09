@@ -1,7 +1,7 @@
 #ifndef RobotomyRequestForm_HPP
 # define RobotomyRequestForm_HPP
 
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <iostream>
 
 # define ANSI_PURPLE		"\x1b[95m"
@@ -13,7 +13,7 @@
 
 class	Bureaucrat;
 
-class RobotomyRequestForm : public Form
+class RobotomyRequestForm : public AForm
 {
 	public:
 

@@ -8,34 +8,34 @@
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("Shrubbery Creation Form", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("Shrubbery Creation Form", 145, 137)
 {
 	this->_target = "Garden";
-	std::cout << ANSI_BLUE << "Default Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Default Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation Form", 145, 137)
 {
 	this->_target = target;
-	std::cout << ANSI_BLUE << "Target Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Target Shrubbery Creation Form constructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : Form(copy)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & copy) : AForm(copy)
 {
 	*this = copy;
-	std::cout << ANSI_YELLOW << "Shrubbery Creation Form copy constructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Shrubbery Creation Form copy constructor called" << ANSI_RESET << std::endl;
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs)
 {
-	std::cout << ANSI_YELLOW << "Shrubbery Creation Form assignment operator called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_YELLOW << "Shrubbery Creation Form assignment operator called" << ANSI_RESET << std::endl;
 	if (this != &rhs)
 		this->_target = rhs._target;
-	Form::operator=(rhs);
+	AForm::operator=(rhs);
 	return (*this);
 }
 
@@ -45,7 +45,7 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
-	std::cout << ANSI_BLUE << "Shrubbery Creation Form destructor called" << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "Shrubbery Creation Form destructor called" << ANSI_RESET << std::endl;
 }
 
 /******************************************************************************
@@ -63,7 +63,7 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	{
 		std::string		file;
 		file = _target + "_shrubbery";
-		std::cout << "Shrubbery creation in progress..." << ANSI_RESET << std::endl;
+		std::cout << ANSI_YELLOW << "Shrubbery creation in progress..." << ANSI_RESET << std::endl;
 		std::ofstream	ofs(file.c_str());
 		if (!ofs.good())
 		{
@@ -104,14 +104,15 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 			<< M11 << std::endl
 			<< M12 << std::endl
 			<< M13 << std::endl << std::endl;
+		ofs.close();
 		usleep(1000000);
-		std::cout << "Done!" << ANSI_RESET << std::endl;
+		std::cout << ANSI_YELLOW << "Done!" << ANSI_RESET << std::endl;
 		usleep(1000000);
 		return (true);
 	}
 	else
 	{
-		std::cout << executor.getName() << " couldn't sign " << this->getName() << " because form has not been signed yet" << std::endl;
+		std::cout << executor.getName() << " couldn't execute " << this->getName() << " because form has not been signed yet" << std::endl;
 		return (false);
 	}
 }

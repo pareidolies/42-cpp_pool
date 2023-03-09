@@ -1,7 +1,7 @@
 #ifndef ShrubberyCreationForm_HPP
 # define ShrubberyCreationForm_HPP
 
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <iostream>
 
 # define ANSI_PURPLE		"\x1b[95m"
@@ -50,7 +50,7 @@
 
 class	Bureaucrat;
 
-class ShrubberyCreationForm : public Form
+class ShrubberyCreationForm : public AForm
 {
 	public:
 
