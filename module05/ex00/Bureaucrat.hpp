@@ -34,18 +34,18 @@ class Bureaucrat
 		Bureaucrat	&operator=(Bureaucrat const & rhs); //assignement operator
 
 		std::string const 		getName(void) const;
-		unsigned int 			getGrade(void) const;
+		int 					getGrade(void) const;
 
 		void					upgrade(void);
 		void					downgrade(void);
 
-		static unsigned int const	highestGrade = 1;
-		static unsigned int const	lowestGrade = 150;
+		static int const			highestGrade = 1;
+		static int	const			lowestGrade = 150;
 
 	private:
 
 		std::string const	_name;
-		unsigned int		_grade;
+		int					_grade;
 
 };
 

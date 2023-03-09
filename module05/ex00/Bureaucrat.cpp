@@ -13,9 +13,9 @@ Bureaucrat::Bureaucrat(void) : _name("Bureaucrat"), _grade(75)
 Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name), _grade(grade)
 {
 	std::cout << ANSI_BLUE << "Name and grade bureaucrat constructor called" << ANSI_RESET << std::endl;
-	if (grade < 1)
+	if (grade < Bureaucrat::highestGrade)
 		throw (Bureaucrat::GradeTooHighException());
-	else if (grade > 150)
+	else if (grade > Bureaucrat::lowestGrade)
 		throw (Bureaucrat::GradeTooLowException());
 }
 
@@ -54,7 +54,7 @@ std::string const Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
-unsigned int	Bureaucrat::getGrade(void) const
+int	Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
 }

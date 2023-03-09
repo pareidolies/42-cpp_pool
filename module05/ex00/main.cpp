@@ -24,7 +24,7 @@ int main()
 	{
 		try
 		{
-			Bureaucrat MrsPaddington = Bureaucrat("MrsPaddington", 0);
+			Bureaucrat MrsPaddington = Bureaucrat("Mrs Paddington", 0);
 			std::cout << MrsPaddington << std::endl;
 			
 		}
