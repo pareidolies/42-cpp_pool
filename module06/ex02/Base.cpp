@@ -17,7 +17,7 @@ Base::~Base(void)
 *                                 FUNCTIONS                                   *
 ******************************************************************************/
 
-Base *	Base::generate(void)
+Base *	generate(void)
 {
 	int result;
 	
@@ -34,7 +34,7 @@ Base *	Base::generate(void)
 	return (NULL);
 }
 
-void	Base::identify(Base* p)
+void	identify(Base* p)
 {
 	if (dynamic_cast<A *>(p))
 		std::cout << "Pointer is of base A" << std::endl;
@@ -46,7 +46,7 @@ void	Base::identify(Base* p)
 		std::cout << "Pointer is neither of base A, B nor C" << std::endl;
 }
 
-void	Base::identify(Base& p)
+void	identify(Base& p)
 {
 	int	base = 0;
 	try

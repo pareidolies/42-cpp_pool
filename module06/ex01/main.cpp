@@ -13,7 +13,7 @@ int main()
 
 	ptr = Serializer::serialize(initial);
 	final = Serializer::deserialize(ptr);
-	
+
 	std::cout << "value initial : " << initial->value << "	| 	value final : " << final->value << std::endl;
 	std::cout << "c initial : " << initial->c << "		| 	c final : " << final->c << std::endl;
 	std::cout << "f initial : " << initial->f << "	| 	f final : " << final->f << std::endl;

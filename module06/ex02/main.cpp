@@ -11,9 +11,9 @@ int main()
 	Base *ptr;
 	for (int i = 0; i < 30; i++)
 	{
-		ptr = base.generate();
-		base.identify(ptr);
-		base.identify(*ptr);
+		ptr = generate();
+		identify(ptr);
+		identify(*ptr);
 		delete ptr;
 		std::cout << std::endl;
 		usleep(10000);
