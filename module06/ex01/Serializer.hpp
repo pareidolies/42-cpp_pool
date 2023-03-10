@@ -22,18 +22,18 @@ typedef struct e_Data
 class Serializer
 {
 	public:
-
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
+		
+	private:
 		Serializer(void); //default constructor
 		Serializer(Serializer const & copy); //copy constructor
 		~Serializer(void); //destructor
 
 		Serializer	&operator=(Serializer const & rhs); //assignement operator
 
-		uintptr_t serialize(Data* ptr);
-		Data* deserialize(uintptr_t raw);
+		
 
-	private:
-	
 };
 
 #endif

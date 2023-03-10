@@ -2,7 +2,6 @@
 
 int main()
 {
-	Serializer	serializer;
 	Data *initial = new Data();
 	uintptr_t ptr;
 	Data *final;
@@ -12,8 +11,8 @@ int main()
 	initial->f = 22.5;
 	initial->d = 14.7;
 
-	ptr = serializer.serialize(initial);
-	final = serializer.deserialize(ptr);
+	ptr = Serializer::serialize(initial);
+	final = Serializer::deserialize(ptr);
 	
 	std::cout << "value initial : " << initial->value << "	| 	value final : " << final->value << std::endl;
 	std::cout << "c initial : " << initial->c << "		| 	c final : " << final->c << std::endl;
