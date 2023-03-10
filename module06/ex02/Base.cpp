@@ -48,31 +48,23 @@ void	identify(Base* p)
 
 void	identify(Base& p)
 {
-	int	base = 0;
 	try
 	{
 		(void) dynamic_cast<A&>(p);
 		std::cout << "Reference is of base A" << std::endl;
-		base = 1;
-	}
-	catch (const std::exception & e)
-	{}
+		return;
+	} catch (const std::exception & e) {}
 	try
 	{
 		(void) dynamic_cast<B&>(p);
 		std::cout << "Reference is of base B" << std::endl;
-		base = 1;
-	}
-	catch (const std::exception & e)
-	{}
+		return;
+	} catch (const std::exception & e) {}
 	try
 	{
 		(void) dynamic_cast<C&>(p);
 		std::cout << "Reference is of base C" << std::endl;
-		base = 1;
-	}
-	catch (const std::exception & e)
-	{}
-	if (!base)
-		std::cout << "Reference is neither of base A, B nor C" << std::endl;
+		return;
+	} catch (const std::exception & e) {}
+	std::cout << "Reference is neither of base A, B nor C" << std::endl;
 }
