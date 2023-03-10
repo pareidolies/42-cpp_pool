@@ -149,7 +149,7 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 	}
 	else
 	{
-		if (isprint(_int))
+		if (_char >= ' ' && _char <= '~')
 			stream << "char: \'" << _char << "\'" << std::endl;
 		else
 			stream << "char: Non displayable" << std::endl;
