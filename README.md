@@ -66,6 +66,10 @@ Sur les classes abstraites et les méthodes virtuelles pures : https://fr.wikipe
 
 Shrubbery ascii art credit : https://ascii.co.uk/art/tree
 
+## Module 06 :
+
+Sur les differents types de cast : https://zestedesavoir.com/tutoriels/553/les-conversions-de-types-en-c/
+
 ## General :
 
 https://github.com/hugorclt/PiscineCPP
