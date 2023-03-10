@@ -44,6 +44,7 @@ void	ScalarConverter::convert(std::string value)
 	this->_isNan = false;
 	this->_isExtreme = false;
 	this->_isChar = false;
+	this->_isOverflow = false;
 	this->_float = 0;
 	this->_int = 0;
 	this->_char = 0;
@@ -84,7 +85,6 @@ bool	ScalarConverter::checkValue(void)
 	if (i != tmp.size() && tmp[i] != '.')
 	{
 		_isNan = true;
-		std::cout << "1" << std::endl;
 		return (false);
 	}
 	if (tmp[i] == '.' && tmp[i + 1])
@@ -94,7 +94,6 @@ bool	ScalarConverter::checkValue(void)
 	if (i != tmp.size())
 	{
 		_isNan = true;
-		std::cout << "2" << std::endl;
 		return (false);
 	}
 	return (true);
@@ -115,6 +114,9 @@ void	ScalarConverter::convertValue(void)
 		_char = static_cast<char>(_double);
 		_int = static_cast<int>(_double);
 		_float = static_cast<float>(_double);
+		if (_double < INT_MIN || _double > INT_MAX)
+			_isOverflow = true;
+
 	}
 }
 
@@ -144,28 +146,23 @@ void	ScalarConverter::printAll(std::ostream &stream) const
 				<< "int: impossible" << std::endl
 				<< "float: nanf" << std::endl
 				<< "double: nan" << std::endl;
-		return;
 	}
 	else
 	{
-		if (_char >= 32 && _char <= 127)
+		if (isprint(_int))
 			stream << "char: \'" << _char << "\'" << std::endl;
 		else
 			stream << "char: Non displayable" << std::endl;
-		if (_int >= INT_MIN && _int <= INT_MAX)
-			stream << "int: " << _int << std::endl;
-		else
+		if (_isOverflow)
 			stream << "int: impossible" << std::endl;
-		if (_float - roundf(_float) == 0)
+		else
+			stream << "int: " << _int << std::endl;
+		if ((_float - roundf(_float) == 0) && !isinf(_float) && (_float < 1000000) && (_float > -1000000))
 			stream << "float: " << _float << ".0f" << std::endl;
-		else if (_float >= FLT_MIN && _float <= FLT_MAX)
-			stream << "float: impossible" << std::endl;
 		else
 			stream << "float: " << _float << "f" << std::endl;
-		if (_double - roundf(_double) == 0)
+		if ((_double - roundf(_double) == 0) && !isinf(_double) && (_double < 1000000) && (_double > -1000000))
 			stream << "double: " << _double << ".0" << std::endl;
-		else if (_double >= DBL_MIN && _double <= DBL_MAX)
-			stream << "double: impossible" << std::endl;
 		else
 			stream << "double: " << _double << std::endl;
 	}

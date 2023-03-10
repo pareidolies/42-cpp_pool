@@ -4,6 +4,8 @@
 # include <iostream>
 # include <limits.h>
 # include <float.h>
+# include <cctype>
+# include <cmath>
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -33,6 +35,7 @@ class ScalarConverter
 		bool				_isNan;
 		bool				_isExtreme;
 		bool				_isChar;
+		bool				_isOverflow;
 		float				_float;
 		int					_int;
 		char				_char;
