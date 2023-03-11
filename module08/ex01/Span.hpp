@@ -1,9 +1,9 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <iostream>
-# include <list>
-# include <cmath>
+# include <exception>
+# include <iterator>
+# include <vector>
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -39,7 +39,7 @@ class Span
 
 		Span	&operator=(Span const & rhs); //assignement operator
 
-		void			addNumber(int i);
+		void			addNumber(int nbr);
 		unsigned int	longestSpan(void) const;
 		unsigned int	shortestSpan(void) const;
 		void			print(void) const;

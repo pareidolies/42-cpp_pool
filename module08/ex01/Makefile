@@ -1,4 +1,4 @@
-NAME	=	convert
+NAME	=	span
 
 SRCS	=	main.cpp Span.cpp
 
