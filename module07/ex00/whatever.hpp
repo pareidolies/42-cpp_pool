@@ -1,11 +1,5 @@
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
-
-# include <iostream>
-# include <limits.h>
-# include <float.h>
-# include <cctype>
-# include <cmath>
+#ifndef WHATEVER_HPP
+# define WHATEVER_HPP
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -14,35 +8,30 @@
 # define ANSI_GREEN			"\x1b[92m"
 # define ANSI_RESET			"\x1b[0m"
 
-class ScalarConverter
+template <typename T>
+void swap(T &a, T &b)
 {
-	public:
+	T tmp;
 
-		ScalarConverter(void); //default constructor
-		ScalarConverter(ScalarConverter const & copy); //copy constructor
-		~ScalarConverter(void); //destructor
+	tmp = a;
+	a = b;
+	b = tmp;
+}
 
-		ScalarConverter	&operator=(ScalarConverter const & rhs); //assignement operator
+template <typename T>
+T max(T a, T b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
 
-		void	convert(std::string value);
-		bool	checkValue(void);
-		void	convertValue(void);
-		void	printAll(std::ostream &stream) const;
-
-	private:
-
-		std::string			_value;
-		bool				_isNan;
-		bool				_isExtreme;
-		bool				_isChar;
-		bool				_isOverflow;
-		float				_float;
-		int					_int;
-		char				_char;
-		double				_double;
-
-};
-
-std::ostream &	operator<<(std::ostream & o, ScalarConverter const & rhs);
+template <typename T>
+T min(T a, T b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
 
 #endif
