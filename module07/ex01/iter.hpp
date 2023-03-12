@@ -11,7 +11,7 @@
 # define ANSI_RESET			"\x1b[0m"
 
 template <typename T>
-void iter(T *tab, size_t size, void (*f)(const T &))
+void iter(T *tab, size_t size, void (f)(const T &))
 {
 	if (!tab || !f)
 		return ;

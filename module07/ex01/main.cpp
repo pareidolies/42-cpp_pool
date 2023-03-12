@@ -27,16 +27,16 @@ int main()
 	float	f[] = {21.21f, 42.42f, 84.84f};
 	char	s[] = "Hello everyone!";
 
-	iter<int>(i, sizeof(i) / sizeof(int), &ft_print);
+	iter<int>(i, sizeof(i) / sizeof(int), ft_print);
 	std::cout << std::endl;
-	iter<int>(i, sizeof(i) / sizeof(int), &ft_increment);
+	iter<int>(i, sizeof(i) / sizeof(int), ft_increment);
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
 
-	iter<float>(f, sizeof(f) / sizeof(float), &ft_print);
+	iter<float>(f, sizeof(f) / sizeof(float), ft_print);
 	std::cout << std::endl;
-	iter<float>(f, sizeof(f) / sizeof(float), &ft_increment);
+	iter<float>(f, sizeof(f) / sizeof(float), ft_increment);
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -47,22 +47,3 @@ int main()
 
 	return 0;
 }
-
-/*class Awesome
-{
-public:
-Awesome( void ) : _n( 42 ) { return; }
-int get( void ) const { return this->_n; }
-private:
-int _n;
-};
-std::ostream & operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; }
-template< typename T >
-void print( T const & x ) { std::cout << x << std::endl; return; }
-int main() {
-int tab[] = { 0, 1, 2, 3, 4 }; // <--- I never understood why you can't write int[] tab. Wouldn't that make more sense?
-Awesome tab2[5];
-iter( tab, 5, print );
-iter( tab2, 5, print );
-return 0;
-}*/

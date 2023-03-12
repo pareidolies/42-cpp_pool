@@ -2,6 +2,8 @@
 
 # include <iostream>
 # include <stddef.h>
+# include <stddef.h>
+# include <stdlib.h>
 
 # define MAX_VAL 750
 
@@ -43,7 +45,6 @@ int main(void)
 
 		fortytwo[0] = 21;
 		fortytwo[1] = 42;
-		fibonacci = fortytwo;
 
 		std::cout << std::endl;
 
@@ -56,6 +57,8 @@ int main(void)
 		std::cout << "Size: " << fortytwo.size() << std::endl;
 		
 		std::cout << std::endl;
+
+		fibonacci = fortytwo;
 
 		std::cout << "Fibonacci array becomes fortytwo array:" << std::endl;
 		for (unsigned int i = 0; i < fibonacci.size(); i++)

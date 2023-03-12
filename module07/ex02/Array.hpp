@@ -27,8 +27,8 @@ class Array
 				}
 		};
 
-		Array(void) :  _size(0), _array(NULL) {} //default constructor
-		Array(unsigned int n) :  _size(n), _array(new T[n]) {} //unsigned int constructor
+		Array(void) :  _size(0), _array(new T[0]()) {} //default constructor
+		Array(unsigned int n) :  _size(n), _array(new T[n]()) {} //unsigned int constructor
 		Array(Array<T> const & copy) : _size(copy._size), _array(new T[copy._size]) //copy constructor
 		{
 			for (unsigned int i = 0; i < _size; i++)
