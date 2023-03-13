@@ -55,6 +55,4 @@ class Span
 		std::vector<int>	_vector;
 };
 
-std::ostream &	operator<<(std::ostream & o, Span const & rhs);
-
 #endif
