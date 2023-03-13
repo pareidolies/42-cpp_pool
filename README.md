@@ -70,6 +70,10 @@ Shrubbery ascii art credit : https://ascii.co.uk/art/tree
 
 Sur les differents types de cast : https://zestedesavoir.com/tutoriels/553/les-conversions-de-types-en-c/
 
+## Module 08 :
+
+http://tvaira.free.fr/dev/cours/cours-conteneurs-stl.pdf
+
 ## General :
 
 https://github.com/hugorclt/PiscineCPP
