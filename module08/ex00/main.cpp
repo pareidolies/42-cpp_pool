@@ -1,33 +1,58 @@
 # include "easyfind.hpp"
 
 # include <vector>
-# include <deque>
 # include <iostream>
 
-int main(void)
+int main()
 {
-	std::vector<int>	v (4, 0);
+	std::vector<int>	v;
 
-		v[0] = 21;
-		v[1] = 42;
-		v[2] = 84;
-		v[3] = 168;
-		try
-		{
-			std::cout << *easyfind(v, 42) << '\n';
-		}
-		catch (std::exception const & e)
-		{
-			std::cout << "Exception: value not found!" << '\n';
-		}
+	v.push_back(21);
+	v.push_back(42);
+	v.push_back(84);
+	v.push_back(168);
 
-		try
-		{
-			std::cout << *easyfind(v, 0) << '\n';
-		}
-		catch (std::exception const & e)
-		{
-			std::cout << "Exception: value not found!" << '\n';
-		}
-		return (0);
+	try
+	{
+		std::cout << *easyfind(v, 42) << std::endl;
+	}
+	catch (std::exception const & e)
+	{
+		std::cout << "Exception: value not found!" << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << *easyfind(v, 168) << std::endl;
+	}
+	catch (std::exception const & e)
+	{
+		std::cout << "Exception: value not found!" << std::endl;
+	}
+
+	std::cout << std::endl;
+	
+	try
+	{
+		std::cout << *easyfind(v, 0) << std::endl;
+	}
+	catch (std::exception const & e)
+	{
+		std::cout << "Exception: value not found!" << std::endl;
+	}
+
+	std::cout << std::endl;
+
+	try
+	{
+		std::cout << *easyfind(v, -128) << std::endl;
+	}
+	catch (std::exception const & e)
+	{
+		std::cout << "Exception: value not found!" << std::endl;
+	}
+
+	return (0);
 }

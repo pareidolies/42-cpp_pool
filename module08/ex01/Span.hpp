@@ -43,26 +43,15 @@ class Span
 		unsigned int	longestSpan(void) const;
 		unsigned int	shortestSpan(void) const;
 		void			print(void) const;
+		void			fillSpan(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		void			printSpan(void);
 
-		template <typename T>
-		void	fillSpan(typename T::const_iterator const & a, typename T::const_iterator const & b)
-		{
-			size_t	distance;
-
-			distance = static_cast<size_t>(std::abs(std::distance(a, b)));
-			if (distance > _size)
-				throw(TooManyNumbers());
-			else if (distance)
-			{
-				_list.insert(_list.end(), a, b); 
-				_curr_size += distance;
-			}
-		}
+		std::vector<int>	&getVector(void);
 
 	private:
 
-		unsigned int _size;
-		std::vector<int> _vector;
+		unsigned int 		_sizeMax;
+		std::vector<int>	_vector;
 };
 
 std::ostream &	operator<<(std::ostream & o, Span const & rhs);
