@@ -28,13 +28,17 @@ int main()
 	mutant.push(3);
 	mutant.push(4);
 	
-	MutantStack<int>::iterator begin = mutant.begin();
-	MutantStack<int>::iterator end = mutant.end();
-	
-	while (begin != end)
+	std::cout << "Top: " << mutant.top() << std::endl;
+
+	MutantStack<int>::iterators top = mutant.end();
+	MutantStack<int>::iterators bottom = mutant.begin();
+
+	std::cout << "Values: " << std::endl;
+
+	while (top != bottom)
 	{
-		std::cout << *begin << std::endl;
-		begin++;
+		top--;
+		std::cout << *top << std::endl;
 	}
 
 	return (0);
