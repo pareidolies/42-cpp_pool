@@ -60,6 +60,10 @@ std::vector<int>	&Span::getVector()
 	return (this->_vector);
 }
 
+unsigned int		Span::getSize()
+{
+	return (this->_vector.size());
+}
 
 /******************************************************************************
 *                             MEMBER FUNCTIONS                                *
@@ -100,7 +104,6 @@ unsigned int	Span::longestSpan(void) const
 
 void			Span::fillSpan(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	//std::cout << "distance : " << std::distance(begin, end) << std::endl;
 	if (_vector.size() + std::distance(begin, end) > _sizeMax)
 		throw (CannotAddElement());
 	_vector.insert(_vector.begin(), begin, end);

@@ -47,6 +47,7 @@ class Span
 		void			printSpan(void);
 
 		std::vector<int>	&getVector(void);
+		unsigned int		getSize(void);
 
 	private:
 
