@@ -15,24 +15,25 @@ class MutantStack : public std::stack<T>
 {
 	public:
 
-		MutantStack() {}; //default constructor
-		MutantStack(MutantStack const & copy) { *this = copy; } //copy constructor
-		~MutantStack(void) {}; //destructor
+		MutantStack<T>() {}; //default constructor
+		MutantStack<T>(MutantStack const & copy) : std::stack<T>(copy) {} //copy constructor
+		~MutantStack<T>(void) {}; //destructor
 
 		MutantStack	&operator=(MutantStack const & rhs) //assignement operator
 		{
-			this->c = rhs->c(); 
+			if (this != &rhs)
+				this = rhs; 
 			return (*this);
 		};
 
-		typedef typename std::stack<T>::container_type::iterator iterators;
+		typedef typename std::stack<T>::container_type::iterator iterator;
 
-		iterators begin()
+		iterator begin()
 		{
 			return this->c.begin();
 		}
 		
-		iterators end()
+		iterator end()
 		{
 			return this->c.end();
 		}

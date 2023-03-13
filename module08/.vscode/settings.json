@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "ostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -17,6 +18,7 @@
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+        "list": "cpp",
         "set": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
@@ -42,7 +44,6 @@
         "limits": "cpp",
         "new": "cpp",
         "numbers": "cpp",
-        "ostream": "cpp",
         "ranges": "cpp",
         "span": "cpp",
         "stdexcept": "cpp",
