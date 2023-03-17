@@ -17,6 +17,7 @@ int main(int argc, char **argv)
             std::cout << ANSI_RED << "Error: could not open file" << ANSI_RESET << std::endl;
             return (1);
         }
+        //close
         return(0);
     }
     std::cout << ANSI_RED << "Usage: " << argv[0] << "<INPUT_FILE>" << ANSI_RESET << std::endl;
