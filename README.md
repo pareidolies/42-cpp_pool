@@ -74,6 +74,10 @@ Sur les differents types de cast : https://zestedesavoir.com/tutoriels/553/les-c
 
 http://tvaira.free.fr/dev/cours/cours-conteneurs-stl.pdf
 
+## Module 09 :
+
+https://en.wikipedia.org/wiki/Reverse_Polish_notation
+
 ## General :
 
 https://github.com/hugorclt/PiscineCPP
