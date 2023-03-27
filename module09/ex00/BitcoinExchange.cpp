@@ -109,7 +109,9 @@ bool			BitcoinExchange::checkDate(std::string date)
 	timeinfo->tm_mon = month - 1;
 	timeinfo->tm_mday = day;
 
-	if (mktime (timeinfo) == -1)
+	mktime (timeinfo);
+	//is the normalized date still the same?
+	if (timeinfo->tm_year != year - 1900 || timeinfo->tm_mon != month - 1 || timeinfo->tm_mday != day)
 		return (false);
 
 	return(true);
@@ -121,12 +123,16 @@ void			BitcoinExchange::findRate(std::string & date, double value)
 	std::map<std::string, double>::iterator itBegin = _database.begin();
 			
 	if (date < itBegin->first)
-		std::cout << ANSI_RED << "Error: date too old" << ANSI_RESET << std::endl;
+		std::cout << ANSI_RED << "Error: date too old : " << date << ANSI_RESET << std::endl;
 	else 
 	{
 		if (date != it->first)
 			it--;
-		std::cout << date << " => " << value << " = " << it->second * value << std::endl;
+		std::cout << date << " => " << value << " = ";
+		//std::cout << std::fixed;
+		//std::cout.precision(2);
+		std::cout << it->second * value;
+		std::cout << std::endl;
 	}
 }
 
@@ -146,27 +152,33 @@ void			BitcoinExchange::inputParse(std::ifstream &ifs)
 		value.erase(remove_if(value.begin(), value.end(), isspace), value.end());
 
 		if (!date.length() || !value.length()) {
-			std::cout << ANSI_RED << "Error: bad input1 => " + line << ANSI_RESET << std::endl;
+			std::cout << ANSI_RED << "Error: bad input, missing date or value => " + line << ANSI_RESET << std::endl;
 			continue;
 		}
 
 		if (date != "date")
 		{
-			if (!checkDate(date) || !checkValue(value))
+			if (!checkDate(date))
 			{
-				std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+				std::cout << ANSI_RED << "Error: bad input, wrong date => " + line << ANSI_RESET << std::endl;
+				continue;
+			}
+
+			if (!checkValue(value))
+			{
+				std::cout << ANSI_RED << "Error: bad input, wrong value => " + line << ANSI_RESET << std::endl;
 				continue;
 			}
 
 			double tmp = std::atof(value.c_str());
 			if (tmp > 1000) 
 			{
-				std::cout << ANSI_RED << "Error: too large a number" << ANSI_RESET << std::endl;
+				std::cout << ANSI_RED << "Error: too large a number => " << tmp << ANSI_RESET << std::endl;
 				continue;
 			}
 			if (tmp < 0) 
 			{
-				std::cout << ANSI_RED << "Error: not a positive number" << ANSI_RESET << std::endl;
+				std::cout << ANSI_RED << "Error: not a positive number => " << tmp << ANSI_RESET << std::endl;
 				continue;
 			}
 
