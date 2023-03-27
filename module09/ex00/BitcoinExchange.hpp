@@ -22,13 +22,14 @@ class BitcoinExchange
 
 		BitcoinExchange	&operator=(BitcoinExchange const & rhs); //assignement operator
 
-		void 		csvPars(std::ifstream &csvIfs);
-		void 		txtParse(std::ifstream &txtIfs);
+		void 		databaseParse(std::ifstream &databaseIfs);
+		void 		inputParse(std::ifstream &inputIfs);
 		void		printResult();
 
 	private:
 
-		std::map<std::string, double> _data;
+		std::map<std::string, double> _database;
+		std::map<std::string, double> _input;
 };
 
 #endif

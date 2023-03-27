@@ -1,12 +1,12 @@
 # include "BitcoinExchange.hpp"
 
-# include <algorithm>
-# include <cmath>
-# include <iterator>
-# include <vector>
-# include <exception>
-# include <limits.h>
-# include <iostream>
+# include <string>
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
+#include <iostream>
+#include <cctype>
+#include <algorithm>
 
 
 /******************************************************************************
@@ -27,7 +27,7 @@ BitcoinExchange::BitcoinExchange(unsigned int n)
 *                                   COPY                                      *
 ******************************************************************************/
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const & copy) : _data(copy._data)
+BitcoinExchange::BitcoinExchange(BitcoinExchange const & copy) : _database(copy._database)
 {
 
 }
@@ -36,7 +36,7 @@ BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const & rhs)
 {
 	if (this != &rhs)
 	{
-		_data = rhs._data;
+		_database = rhs._database;
 	}
 	return (*this);
 }
@@ -54,50 +54,91 @@ BitcoinExchange::~BitcoinExchange(void)
 *                             MEMBER FUNCTIONS                                *
 ******************************************************************************/
 
-void			BitcoinExchange::addNumber(int nbr)
+void			BitcoinExchange::databaseParse(std::ifstream &ifs)
 {
-	if (this->_vector.size() == _sizeMax)
-		throw (BitcoinExchange::CannotAddElement());
+	std::string line;
 
-	this->_vector.push_back(nbr);
+	while (getline(ifs, line))
+	{
+		std::stringstream ss(line);
+		std::string date;
+		std::string rate;
+
+		getline(ss, date, ',');
+		getline(ss, rate);
+		if (date != "date") 
+			_database[date] = std::atof(rate.c_str());
+	}
 }
 
-unsigned int	BitcoinExchange::shortestBitcoinExchange(void) const
+bool			BitcoinExchange::checkValue(std::string value)
 {
-	if (this->_vector.size() == 1 || this->_vector.empty())
-		throw (BitcoinExchange::CannotFindBitcoinExchange());
-
-	std::vector<int> tmp(_vector);
-	std::sort(tmp.begin(), tmp.end());
-
-	unsigned int shortest = UINT_MAX;
-	for (std::vector<int>::iterator it = tmp.begin(); it != tmp.end() - 1; it++)
-		shortest = std::min(shortest, static_cast<unsigned int>(*(it + 1)) - (*it));
-	return (shortest);
+	for(int i = 0; i < static_cast<int>(value.length()); ++i) 
+	{
+		if (!(isdigit(value[i]) || value[i] == '.'))
+			return(false);
+	}
+	return(true);
 }
 
-unsigned int	BitcoinExchange::longestBitcoinExchange(void) const
+bool			BitcoinExchange::checkDate(std::string date)
 {
-	if (this->_vector.size() == 1 || this->_vector.empty())
-		throw (BitcoinExchange::CannotFindBitcoinExchange());
-	
-	unsigned int max = *(std::max_element(this->_vector.begin(), this->_vector.end()));
-	unsigned int min = *(std::min_element(this->_vector.begin(), this->_vector.end()));
+	time_t rawtime;
+	struct tm * timeinfo;
+	int year, month ,day;
 
-	return (max - min);
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	timeinfo->tm_year = year - 1900;
+	timeinfo->tm_mon = month - 1;
+	timeinfo->tm_mday = day;
+
+	if (mktime (timeinfo) == -1)
+		return (false);
+
+	return(true);
 }
 
-void			BitcoinExchange::fillBitcoinExchange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+void			BitcoinExchange::inputParse(std::ifstream &ifs)
 {
-	if (_vector.size() + std::distance(begin, end) > _sizeMax)
-		throw (CannotAddElement());
-	_vector.insert(_vector.begin(), begin, end);
-}
+	std::string line;
 
-void			BitcoinExchange::printBitcoinExchange()
-{
-	std::cout <<"Values: ";
-	for (std::vector<int>::iterator it = _vector.begin() ; it != _vector.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	while (getline(ifs, line))
+	{
+		std::stringstream ss(line);
+		std::string date;
+		std::string value;
+
+		getline(ss, date, '|');
+		date.erase(remove_if(date.begin(), date.end(), isspace), date.end());
+		getline(ss, value);
+		value.erase(remove_if(value.begin(), value.end(), isspace), value.end());
+
+		if (!date.length() || !value.length()) {
+			std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+			continue;
+		}
+		if (date != "date")
+		{
+			if (!checkDate(date) || !checkValue(value))
+				std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+			double tmp = std::atof(value.c_str());
+			if (tmp > 1000) 
+			{
+				std::cout << ANSI_RED << "Error: too large a number" << ANSI_RESET << std::endl;
+				continue;
+			}
+			if (tmp < 0) 
+			{
+				std::cout << ANSI_RED << "Error: not a positive number" << ANSI_RESET << std::endl;
+				continue;
+			}
+
+			std::map<std::string, double>::iterator it = _database.find(date);
+			double rate = (it != _database.end() ? _database[date] : findClosestRate(date, _database));
+			double res = tmp * rate;
+
+			std::cout << date << " => " << tmp << " = " << res << std::endl;
+		}
+	}
 }
