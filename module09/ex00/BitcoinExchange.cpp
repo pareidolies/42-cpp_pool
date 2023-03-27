@@ -83,6 +83,16 @@ bool			BitcoinExchange::checkValue(std::string value)
 
 bool			BitcoinExchange::checkDate(std::string date)
 {
+	std::istringstream	iss(date);
+	std::string			_year, _month, _day;
+
+	getline(iss, _year, '-');
+	getline(iss, _month, '-');
+	getline(iss, _day);
+
+	if (!_year.length() || !_month.length() || !_day.length())
+		return (false);
+
 	time_t rawtime;
 	struct tm * timeinfo;
 	int year, month ,day;
