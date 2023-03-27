@@ -17,6 +17,11 @@ int main(int argc, char **argv)
             std::cout << ANSI_RED << "Error: could not open file" << ANSI_RESET << std::endl;
             return (1);
         }
+
+        BitcoinExchange btc(databaseIfs);
+
+        btc.inputParse(inputIfs);
+
         inputIfs.close();
         databaseIfs.close();
         return(0);

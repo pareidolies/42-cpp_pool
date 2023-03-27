@@ -16,7 +16,7 @@ class BitcoinExchange
 	public:
 
 		BitcoinExchange(void); //default constructor
-		BitcoinExchange(unsigned int n); //unsigned int constructor
+		BitcoinExchange(std::ifstream &ifs); //unsigned int constructor
 		BitcoinExchange(BitcoinExchange const & copy); //copy constructor
 		~BitcoinExchange(void); //destructor
 
@@ -25,11 +25,13 @@ class BitcoinExchange
 		void 		databaseParse(std::ifstream &databaseIfs);
 		void 		inputParse(std::ifstream &inputIfs);
 		void		printResult();
+		bool		checkValue(std::string value);
+		bool		checkDate(std::string date);
+		void		findRate(std::string & date, int value);
 
 	private:
 
 		std::map<std::string, double> _database;
-		std::map<std::string, double> _input;
 };
 
 #endif

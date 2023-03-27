@@ -18,9 +18,9 @@ BitcoinExchange::BitcoinExchange(void)
 
 }
 
-BitcoinExchange::BitcoinExchange(unsigned int n)
+BitcoinExchange::BitcoinExchange(std::ifstream &ifs)
 {
-
+	databaseParse(ifs);
 }
 
 /******************************************************************************
@@ -97,6 +97,10 @@ bool			BitcoinExchange::checkDate(std::string date)
 	struct tm * timeinfo;
 	int year, month ,day;
 
+	year = atoi(_year.c_str());
+	month = atoi(_month.c_str());
+	day = atoi(_day.c_str());
+
 	time ( &rawtime );
 	timeinfo = localtime ( &rawtime );
 	timeinfo->tm_year = year - 1900;
@@ -107,6 +111,21 @@ bool			BitcoinExchange::checkDate(std::string date)
 		return (false);
 
 	return(true);
+}
+
+void			BitcoinExchange::findRate(std::string & date, int value)
+{
+	std::map<std::string, double>::iterator it = _database.lower_bound(date);
+	std::map<std::string, double>::iterator itBegin = _database.begin();
+			
+	if (date < itBegin->first)
+		std::cout << ANSI_RED << "Error: date too old" << ANSI_RESET << std::endl;
+	else 
+	{
+		if (date != it->first)
+			it--;
+		std::cout << it->first << " => " << value << " = " << it->second * value << std::endl;
+	}
 }
 
 void			BitcoinExchange::inputParse(std::ifstream &ifs)
@@ -128,10 +147,12 @@ void			BitcoinExchange::inputParse(std::ifstream &ifs)
 			std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
 			continue;
 		}
+
 		if (date != "date")
 		{
 			if (!checkDate(date) || !checkValue(value))
 				std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+
 			double tmp = std::atof(value.c_str());
 			if (tmp > 1000) 
 			{
@@ -144,11 +165,7 @@ void			BitcoinExchange::inputParse(std::ifstream &ifs)
 				continue;
 			}
 
-			std::map<std::string, double>::iterator it = _database.find(date);
-			double rate = (it != _database.end() ? _database[date] : findClosestRate(date, _database));
-			double res = tmp * rate;
-
-			std::cout << date << " => " << tmp << " = " << res << std::endl;
+			findRate(date, tmp);
 		}
 	}
 }
