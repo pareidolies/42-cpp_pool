@@ -27,7 +27,7 @@ class BitcoinExchange
 		void		printResult();
 		bool		checkValue(std::string value);
 		bool		checkDate(std::string date);
-		void		findRate(std::string & date, int value);
+		void		findRate(std::string & date, double value);
 
 	private:
 

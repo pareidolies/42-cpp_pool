@@ -75,6 +75,8 @@ bool			BitcoinExchange::checkValue(std::string value)
 {
 	for(int i = 0; i < static_cast<int>(value.length()); ++i) 
 	{
+		if (value[i] == '-')
+			i++;
 		if (!(isdigit(value[i]) || value[i] == '.'))
 			return(false);
 	}
@@ -113,7 +115,7 @@ bool			BitcoinExchange::checkDate(std::string date)
 	return(true);
 }
 
-void			BitcoinExchange::findRate(std::string & date, int value)
+void			BitcoinExchange::findRate(std::string & date, double value)
 {
 	std::map<std::string, double>::iterator it = _database.lower_bound(date);
 	std::map<std::string, double>::iterator itBegin = _database.begin();
@@ -124,7 +126,7 @@ void			BitcoinExchange::findRate(std::string & date, int value)
 	{
 		if (date != it->first)
 			it--;
-		std::cout << it->first << " => " << value << " = " << it->second * value << std::endl;
+		std::cout << date << " => " << value << " = " << it->second * value << std::endl;
 	}
 }
 
@@ -144,14 +146,17 @@ void			BitcoinExchange::inputParse(std::ifstream &ifs)
 		value.erase(remove_if(value.begin(), value.end(), isspace), value.end());
 
 		if (!date.length() || !value.length()) {
-			std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+			std::cout << ANSI_RED << "Error: bad input1 => " + line << ANSI_RESET << std::endl;
 			continue;
 		}
 
 		if (date != "date")
 		{
 			if (!checkDate(date) || !checkValue(value))
+			{
 				std::cout << ANSI_RED << "Error: bad input => " + line << ANSI_RESET << std::endl;
+				continue;
+			}
 
 			double tmp = std::atof(value.c_str());
 			if (tmp > 1000) 
