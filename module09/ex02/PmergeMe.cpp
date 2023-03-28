@@ -9,7 +9,7 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe(const std::string &input) :_input(input)
+PmergeMe::PmergeMe()
 {
 	
 }
@@ -18,7 +18,7 @@ PmergeMe::PmergeMe(const std::string &input) :_input(input)
 *                                   COPY                                      *
 ******************************************************************************/
 
-PmergeMe::PmergeMe(PmergeMe const & copy) : _input(copy._input), _stack(copy._stack)
+PmergeMe::PmergeMe(PmergeMe const & copy) : _vector(copy._vector), _list(copy._list)
 {
 
 }
@@ -27,8 +27,8 @@ PmergeMe	&PmergeMe::operator=(PmergeMe const & rhs)
 {
 	if (this != &rhs)
 	{
-		_input = rhs._input;
-		_stack = rhs._stack;
+		_vector = rhs._vector;
+		_list = rhs._list;
 	}
 	return (*this);
 }
