@@ -2,7 +2,8 @@
 # define PmergeMe_HPP
 
 # include <iostream>
-# include <stack>
+# include <vector>
+# include <list>
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -16,15 +17,17 @@ class PmergeMe
 	public:
 
 		PmergeMe(void);
-		PmergeMe(const std::string &input);
+		PmergeMe();
 		PmergeMe(PmergeMe const & copy);
 		~PmergeMe(void);
 
 		PmergeMe	&operator=(PmergeMe const & rhs);
 
-		double		compute(void);
-		bool		isDigit(char c);
-		bool		isOperator(char c);
+		void sortList();
+		void sortVector();
+
+		void printList();
+		void printVector();
 
 	private:
 
