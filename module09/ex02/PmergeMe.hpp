@@ -1,8 +1,9 @@
-#ifndef PmergeMe_HPP
-# define PmergeMe_HPP
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
 # include <iostream>
-# include <stack>
+# include <vector>
+# include <list>
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -15,39 +16,25 @@ class PmergeMe
 {
 	public:
 
-		class WrongOrderException : public std::exception 
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
-		class WrongCharException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
-		class DivisionByZeroException : public std::exception
-		{
-			public:
-				virtual const char * what(void) const throw(); 
-		};
-
 		PmergeMe(void);
-		PmergeMe(const std::string &input);
+		PmergeMe();
 		PmergeMe(PmergeMe const & copy);
 		~PmergeMe(void);
 
 		PmergeMe	&operator=(PmergeMe const & rhs);
 
-		double		compute(void);
-		bool		isDigit(char c);
-		bool		isOperator(char c);
+		void sortList();
+		void sortVector();
+
+		void printSortedList();
+		void printUnsortedList(std::list<int> & list);
+		void printSortedVector();
+		void printUnsortedVector(std::vector<int> & vector);
 
 	private:
 
-		std::string				_input;
-		std::stack<int> 		_stack;;
+		std::vector<int>	_vector;
+		std::list<int>		_list;
 };
 
 #endif
