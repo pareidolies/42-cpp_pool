@@ -78,6 +78,8 @@ http://tvaira.free.fr/dev/cours/cours-conteneurs-stl.pdf
 
 https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
+https://en.wikipedia.org/wiki/Merge-insertion_sort
+
 ## General :
 
 https://github.com/hugorclt/PiscineCPP
