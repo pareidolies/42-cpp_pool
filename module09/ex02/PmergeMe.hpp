@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <vector>
-# include <list>
+# include <deque>
 
 # define ANSI_PURPLE		"\x1b[95m"
 # define ANSI_BLUE			"\x1b[94m"
@@ -17,24 +17,45 @@ class PmergeMe
 	public:
 
 		PmergeMe(void);
-		PmergeMe();
+		PmergeMe(const std::string &arg);
 		PmergeMe(PmergeMe const & copy);
 		~PmergeMe(void);
 
 		PmergeMe	&operator=(PmergeMe const & rhs);
 
-		void sortList();
-		void sortVector();
+		void	checkArg();
 
-		void printSortedList();
-		void printUnsortedList(std::list<int> & list);
-		void printSortedVector();
-		void printUnsortedVector(std::vector<int> & vector);
+		void	fillDeque();
+		void	fillVector();
+
+		void	checkDuplicates();
+
+		void	sortDeque();
+		void	sortVector();
+
+		void	createPairsDeque();
+		void	createPairsVector();
+
+		void	sortPairsDeque();
+		void	sortPairsVector();
+
+		void	mergeDeque();
+		void	mergeVector();
+
+		void	binarySearchDeque();
+		void	binarySearchVector();
+
+		void	insertAtPositionDeque();
+		void	insertAtPositionVector();
+
+		void	printDeque(std::deque<int> & deque);
+		void	printVector(std::vector<int> & vector);
 
 	private:
 
 		std::vector<int>	_vector;
-		std::list<int>		_list;
+		std::deque<int>		_deque;
+		std::string			_arg;
 };
 
 #endif

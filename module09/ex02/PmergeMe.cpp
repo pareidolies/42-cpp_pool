@@ -9,7 +9,7 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe()
+PmergeMe::PmergeMe(const std::string &arg) : _arg(arg)
 {
 	
 }
@@ -18,7 +18,7 @@ PmergeMe::PmergeMe()
 *                                   COPY                                      *
 ******************************************************************************/
 
-PmergeMe::PmergeMe(PmergeMe const & copy) : _vector(copy._vector), _list(copy._list)
+PmergeMe::PmergeMe(PmergeMe const & copy) : _arg(copy._arg)
 {
 
 }
@@ -27,8 +27,7 @@ PmergeMe	&PmergeMe::operator=(PmergeMe const & rhs)
 {
 	if (this != &rhs)
 	{
-		_vector = rhs._vector;
-		_list = rhs._list;
+		_arg = rhs._arg;
 	}
 	return (*this);
 }
@@ -43,66 +42,66 @@ PmergeMe::~PmergeMe(void)
 }
 
 /******************************************************************************
-*                             MEMBER FUNCTIONS                                *
+*                          VECTOR MEMBER FUNCTIONS                            *
 ******************************************************************************/
 
-bool			PmergeMe::isOperator(char c) 
+void	PmergeMe::checkArg()
 {
-	if (c == '+' || c == '-' || c == '*' || c == '/')
-		return (true);
-	return (false);
+
 }
 
-bool			PmergeMe::isDigit(char c) 
+void	PmergeMe::fillVector()
 {
-	if (c >= '0' && c <= '9')
-		return (true);
-	return (false);
+
 }
 
-double			PmergeMe::compute(void)
+void	PmergeMe::checkDuplicates()
 {
-	int		nbr1, nbr2;
-	double	res;
-	char	c; 
 
-    for (std::string::const_iterator it = _input.begin(); it != _input.end(); ++it) 
-	{
-		c = *it;
+}
 
-        if (isDigit(c)) 
-            _stack.push(c - '0');
-		else if (isOperator(c)) 
-		{
-			if (_stack.size() < 2)
-				throw (PmergeMe::WrongOrderException());
+void	PmergeMe::sortVector()
+{
 
-            nbr2 = _stack.top();
+}
 
-			if (nbr2 == 0 && c == '/')
-				throw (PmergeMe::DivisionByZeroException()); // add check for stack size
-			
-			_stack.pop();
-            nbr1 = _stack.top();
-			_stack.pop();
-            
-            switch(c) 
-			{
-                case '+' : res = nbr1 + nbr2; break;
-                case '-' : res = nbr1 - nbr2; break;
-                case '*' : res = nbr1 * nbr2; break;
-                case '/' : res = nbr1 / nbr2; break;
-            }
-            _stack.push(res);
-        } 
-		else if (c != ' ') 
-			throw (PmergeMe::WrongCharException());
-    }
-    
-	if (_stack.size() != 1) 
-		throw (PmergeMe::WrongOrderException());
 
-    return (_stack.top());
+void	PmergeMe::createPairsVector()
+{
+
+}
+
+
+void	PmergeMe::sortPairsVector()
+{
+
+}
+
+
+void	PmergeMe::mergeVector()
+{
+
+}
+
+void	PmergeMe::binarySearchVector()
+{
+
+}
+
+void	PmergeMe::insertAtPositionVector()
+{
+
+}
+
+void	PmergeMe::printVector(std::vector<int> & vector)
+{
+	size_t size = vector.size();
+
+	std::cout << ANSI_PURPLE << "Before: ";
+	for(size_t i = 0; i < size; i++)
+		std::cout << vector[i] << " ";
+	std::cout << ANSI_RESET << std::endl;
+
 }
 
 /******************************************************************************
