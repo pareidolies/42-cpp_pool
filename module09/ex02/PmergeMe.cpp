@@ -58,15 +58,43 @@ PmergeMe::~PmergeMe(void)
 
 void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 {
-	std::vector<int> sortedVector;
-	std::vector < std::pair<int,int> > vectorPair;
+	std::vector<int>					sortedVector;
+	std::vector < std::pair<int,int> >	vectorPair;
+	int									jacobsthal[3];
+	size_t								size;
+	int									pos;
+	int									shift;
 
 	createPairs(vectorPair);
 	sortPairsRecursively(vectorPair, vectorPair.size());
 	addFirstHalf(vectorPair, sortedVector);
 	addElementPairedWithFirst(vectorPair, sortedVector);
+
 	print(unsortedVector);
 	print(sortedVector);
+	
+	pos = binarySearch(vectorPair[1].second);
+	insert(vectorPair[0].second, pos);
+	erase(vectorPair[0]);
+
+	size = vectorPair.size();
+	jacobsthal[0] = 1;
+	jacobsthal[1] = 1;
+	jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
+	shift = 2;
+	while (jacobsthal[2] < size)
+	{
+		for (int i = jacobsthal[2]; i > jacobsthal[1] && i < size; i--)
+		{
+			pos = binarySearch(vectorPair[i - shift].second);
+			insert(vectorPair[i - shift].second, pos);
+			erase(vectorPair[i - shift]);
+			shift++;
+		}
+		jacobsthal[0] = jacobsthal[1];
+		jacobsthal[1] = jacobsthal[2];
+		jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
+	}
 }
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
