@@ -80,6 +80,10 @@ https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
 https://en.wikipedia.org/wiki/Merge-insertion_sort
 
+https://numbergenerator.org/randomnumbergenerator/1-100?fb_locale=fr_FR#!numbers=100&low=1&high=100&unique=true&csv=&oddeven=&oddqty=0&sorted=false&addfilters=
+
+https://github.com/decidedlyso/merge-insertion-sort/blob/master/README.md
+
 ## General :
 
 https://github.com/hugorclt/PiscineCPP
