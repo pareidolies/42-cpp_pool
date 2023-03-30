@@ -60,22 +60,28 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 {
 	std::vector<int>					sortedVector;
 	std::vector < std::pair<int,int> >	vectorPair;
-	int									jacobsthal[3];
-	size_t								size;
-	int									pos;
+	size_t								jacobsthal[3];
+	size_t								size;	
 	int									shift;
+	int									pos;
 
 	createPairs(vectorPair);
 	sortPairsRecursively(vectorPair, vectorPair.size());
 	addFirstHalf(vectorPair, sortedVector);
 	addElementPairedWithFirst(vectorPair, sortedVector);
 
-	print(unsortedVector);
-	print(sortedVector);
+	printBefore(unsortedVector);
+	printAfter(sortedVector);
 	
-	pos = binarySearch(vectorPair[1].second);
-	insert(vectorPair[0].second, pos);
-	erase(vectorPair[0]);
+	pos = binarySearch(vectorPair[0].second, sortedVector);
+	std::cout << "pos:" << pos << std::endl;
+	sortedVector.insert(sortedVector.begin() + pos, vectorPair[0].second);
+	std::cout << "coucou" << std::endl;
+	vectorPair.erase(vectorPair.begin());
+	std::cout << "salut" << std::endl;
+
+	printBefore(unsortedVector);
+	printAfter(sortedVector);
 
 	size = vectorPair.size();
 	jacobsthal[0] = 1;
@@ -84,11 +90,11 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	shift = 2;
 	while (jacobsthal[2] < size)
 	{
-		for (int i = jacobsthal[2]; i > jacobsthal[1] && i < size; i--)
+		for (size_t i = jacobsthal[2]; i > jacobsthal[1] && i < size; i--)
 		{
-			pos = binarySearch(vectorPair[i - shift].second);
-			insert(vectorPair[i - shift].second, pos);
-			erase(vectorPair[i - shift]);
+			pos = binarySearch(vectorPair[i - shift].second, sortedVector);
+			sortedVector.insert(sortedVector.begin() + pos, vectorPair[i - shift].second);
+			vectorPair.erase(vectorPair.begin() + (i - shift));
 			shift++;
 		}
 		jacobsthal[0] = jacobsthal[1];
@@ -144,17 +150,32 @@ void	PmergeMe::addElementPairedWithFirst(std::vector < std::pair<int,int> > & ve
 	vectorPair.erase(vectorPair.begin());
 }
 
-void	PmergeMe::binarySearch()
+int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector)
 {
+	int	low = 0;
+	int	high = sortedVector.size();
 
+	//if (high == 1)
+	//	return (it);
+
+	while (low <= high) 
+	{
+        int mid = low + (high - low) / 2;
+
+        if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
+		{
+			std::cout << "mid : " << mid << std::endl;
+            return (mid);
+		}
+        if (value > sortedVector[mid])
+            low = mid + 1;
+        if (value < sortedVector[mid])
+            high = mid - 1;
+    }
+	return(0);
 }
 
-void	PmergeMe::insertAtPosition()
-{
-
-}
-
-void	PmergeMe::print(std::vector<int> & vector)
+void	PmergeMe::printBefore(std::vector<int> & vector)
 {
 	size_t size = vector.size();
 
@@ -164,6 +185,18 @@ void	PmergeMe::print(std::vector<int> & vector)
 	std::cout << ANSI_RESET << std::endl;
 
 }
+
+void	PmergeMe::printAfter(std::vector<int> & vector)
+{
+	size_t size = vector.size();
+
+	std::cout << ANSI_YELLOW << "After: ";
+	for(size_t i = 0; i < size; i++)
+		std::cout << vector[i] << " ";
+	std::cout << ANSI_RESET << std::endl;
+
+}
+
 
 /******************************************************************************
 *                           DEQUE MEMBER FUNCTIONS                            *
