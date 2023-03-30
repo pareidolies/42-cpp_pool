@@ -11,21 +11,24 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe(std::vector<int> vector) : _unsortedVector(vector), _unsortedDeque(0)
+PmergeMe::PmergeMe(std::vector<int> vector) : _unsortedVector(vector), 
+											  _unsortedDeque(0)
 {
-	fordJohnsonSort(unsortedVector);
+	fordJohnsonSort(vector);
 }
 
-PmergeMe::PmergeMe(std::deque<int> deque) : _unsortedVector(0), _unsortedDeque(deque)
-{
-	fordJohnsonSort(unsortedDeque);
-}
+//PmergeMe::PmergeMe(std::deque<int> deque) : _unsortedVector(0), 
+											//  _unsortedDeque(deque)
+//{
+//	fordJohnsonSort(deque);
+//}
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-PmergeMe::PmergeMe(PmergeMe const & copy) : _unsortedVector(copy._unsortedVector), _unsortedDeque(copy._unsortedDeque)
+PmergeMe::PmergeMe(PmergeMe const & copy) : _unsortedVector(copy._unsortedVector), 
+											_unsortedDeque(copy._unsortedDeque)
 {
 
 }
@@ -59,11 +62,11 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	std::vector < std::pair<int,int> > vectorPair;
 
 	createPairs(vectorPair);
-	sortPairsRecursively(vectorPair);
-
-
+	sortPairsRecursively(vectorPair, vectorPair.size());
+	addFirstHalf(vectorPair, sortedVector);
+	print(unsortedVector);
+	print(sortedVector);
 }
-
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 {
@@ -78,14 +81,14 @@ void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 	}
 }
 
-void	PmergeMe::sortPairsRecusively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
+void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
 {
 	int tmp;
 
 	if (size == 1)
 		return;
 
-	for (int i = 0; i < size - 1; i++)
+	for (size_t i = 0; i < size - 1; i++)
 	{
 		if (vectorPair[i].first > vectorPair[i + 1].first)
 		{
@@ -94,13 +97,16 @@ void	PmergeMe::sortPairsRecusively(std::vector < std::pair<int,int> > & vectorPa
 			vectorPair[i + 1].first = tmp;
 		}
    }
-   sortPairsRecusively(vectorPair, size - 1);
+   sortPairsRecursively(vectorPair, size - 1);
 }
 
 
-void	PmergeMe::addFirstHalf()
+void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
 {
+	size_t size = vectorPair.size();
 
+	for(size_t i = 0; i < size; i++)
+		sortedVector.push_back(vectorPair[i].first);
 }
 
 void	PmergeMe::binarySearch()

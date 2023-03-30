@@ -18,6 +18,7 @@ bool    checkArgs(int argc, char **argv)
         if (atol(argv[i]) < 0 || atol(argv[i]) > 2147483647)
             return(false);
     }
+    return (true);
 }
 
 bool    checkDuplicates(int argc, char **argv)
@@ -30,6 +31,7 @@ bool    checkDuplicates(int argc, char **argv)
                 return (false);
         }
     }
+    return (true);
 }
 
 int main(int argc, char **argv)
