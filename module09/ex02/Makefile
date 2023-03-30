@@ -8,7 +8,7 @@ DEPS	= 	$(SRCS:%.cpp=%.d)
 
 CC	=	c++
 
-CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98 -MMD
+CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98 -MMD -fsanitize=address -g3
 
 RM	=	rm -rf
 

@@ -52,22 +52,24 @@ int main(int argc, char **argv)
     if (!checkArgs(argc, argv) || !checkDuplicates(argc, argv))
         return (1);
     
+    start = clock();
     for(int i = 1; i < argc; i++)
         unsortedVector.push_back(atoi(argv[i]));
-    
-    for(int i = 1; i < argc; i++)
-        unsortedDeque.push_back(atoi(argv[i]));
-    
-    start = clock();
     PmergeMe vector(unsortedVector);
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
-	std::cout << "Time to process a range of : " << unsortedVector.size() << " elements with std::vector : "
+	std::cout << ANSI_BLUE << "Time to process a range of : " << unsortedVector.size() << " elements with std::vector : "
 	            << time << " us" << std::endl;
-    
-    //PmergeMe deque(&unsortedDeque);
-    //deque.fordJohnsonSort();
+
+    start = clock();
+    for(int i = 1; i < argc; i++)
+        unsortedDeque.push_back(atoi(argv[i]));
+    PmergeMe deque(unsortedDeque);
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cout << "Time to process a range of : " << unsortedDeque.size() << " elements with std::deque : "
+	            << time << " us" << ANSI_RESET << std::endl;
 
 	return(0);    
 }
