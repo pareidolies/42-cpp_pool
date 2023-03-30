@@ -180,13 +180,27 @@ int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector)
 	{
         int mid = low + (high - low) / 2;
 
+		/*if (mid == 0)
+		{
+			std::cout << ANSI_RED << "mid = 0" << ANSI_RESET << std::endl;
+			if (value > sortedVector[mid])
+				return (mid + 1);
+			else
+				return (mid);
+		}
 		if (mid == 1)
 		{
+			std::cout << ANSI_RED << "mid = 1" << ANSI_RESET << std::endl;
 			if (value > sortedVector[mid])
 				return (mid);
 			else
 				return (mid - 1);
-		}
+		}*/
+		/*if (!sortedVector[mid - 1])
+		{
+			std::cout << ANSI_RED << "mid:" << mid << ANSI_RESET << std::endl;
+			return (mid);
+		}*/
         if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
             return (mid);
         if (value > sortedVector[mid])

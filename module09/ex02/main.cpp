@@ -5,6 +5,8 @@
 # include <sstream>
 # include <fstream>
 # include <string>
+# include <ctime>
+
 
 bool    checkArgs(int argc, char **argv)
 {
@@ -38,6 +40,8 @@ int main(int argc, char **argv)
 {
     std::vector<int>    unsortedVector;
     std::deque<int>     unsortedDeque;
+    clock_t             start, end;
+    double              time;
 
     if (argc < 2 )
     {
@@ -54,7 +58,13 @@ int main(int argc, char **argv)
     for(int i = 1; i < argc; i++)
         unsortedDeque.push_back(atoi(argv[i]));
     
+    start = clock();
     PmergeMe vector(unsortedVector);
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "Time to process a range of : " << unsortedVector.size() << " elements with std::vector : "
+	            << time << " us" << std::endl;
     
     //PmergeMe deque(&unsortedDeque);
     //deque.fordJohnsonSort();
