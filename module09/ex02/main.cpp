@@ -32,8 +32,6 @@ bool    checkDuplicates(int argc, char **argv)
     }
 }
 
-
-
 int main(int argc, char **argv)
 {
     std::vector<int>    unsortedVector;
@@ -45,17 +43,19 @@ int main(int argc, char **argv)
         return (1);
     }
 
-    if (!checkArgs(argc, argv) || !checkduplicates(int argc, char **argv))
+    if (!checkArgs(argc, argv) || !checkDuplicates(argc, argv))
         return (1);
     
-    fillVector(int argc, char **argv, &unsortedVector);
-    fillDeque(int argc, char **argv, &unsortedDeque);
+    for(int i = 1; i < argc; i++)
+        unsortedVector.push_back(atoi(argv[i]));
     
-    PmergeMe(&unsortedVector);
-    PmergeMe.fordJohnsonSort();
+    for(int i = 1; i < argc; i++)
+        unsortedDeque.push_back(atoi(argv[i]));
     
-    PmergeMe(&unsortedDeque);
-    PmergeMe.fordJohnsonSort();
+    PmergeMe vector(unsortedVector);
+    
+    //PmergeMe deque(&unsortedDeque);
+    //deque.fordJohnsonSort();
 
 	return(0);    
 }

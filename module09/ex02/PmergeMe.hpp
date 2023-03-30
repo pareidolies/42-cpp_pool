@@ -17,45 +17,38 @@ class PmergeMe
 	public:
 
 		PmergeMe(void);
-		PmergeMe(const std::string &arg);
+		PmergeMe(std::vector<int> unsortedVector);
+		PmergeMe(std::deque<int> unsortedDeque);
 		PmergeMe(PmergeMe const & copy);
 		~PmergeMe(void);
 
 		PmergeMe	&operator=(PmergeMe const & rhs);
 
-		void	checkArg();
+		void	fordJohnsonSort(std::vector<int> unsortedVector);
+		void	fordJohnsonSort(std::deque<int> unsortedDeque);
+	
+		void	createPairs(std::vector < std::pair<int,int> > & vectorPair);
+		void	createPairs();
+		
+		void	sortPairs(std::vector < std::pair<int,int> > & vectorPair);
+		void	sortPairs();
+		
+		void	merge();
+		void	merge();
+		
+		void	binarySearch();
+		void	binarySearch();
 
-		void	fillDeque();
-		void	fillVector();
+		void	insertAtPosition();
+		void	insertAtPosition();
 
-		void	checkDuplicates();
-
-		void	sortDeque();
-		void	sortVector();
-
-		void	createPairsDeque();
-		void	createPairsVector();
-
-		void	sortPairsDeque();
-		void	sortPairsVector();
-
-		void	mergeDeque();
-		void	mergeVector();
-
-		void	binarySearchDeque();
-		void	binarySearchVector();
-
-		void	insertAtPositionDeque();
-		void	insertAtPositionVector();
-
-		void	printDeque(std::deque<int> & deque);
-		void	printVector(std::vector<int> & vector);
+		void	print(std::vector<int> & vector);
+		void	print(std::deque<int> & deque);
 
 	private:
 
-		std::vector<int>	_vector;
-		std::deque<int>		_deque;
-		std::string			_arg;
+		std::vector<int>	_unsortedVector;
+		std::deque<int>		_unsortedDeque;
 };
 
 #endif

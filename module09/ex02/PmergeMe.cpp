@@ -1,5 +1,7 @@
 # include "PmergeMe.hpp"
 
+#include <iostream>
+
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
 ******************************************************************************/
@@ -9,16 +11,21 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe(const std::string &arg) : _arg(arg)
+PmergeMe::PmergeMe(std::vector<int> unsortedVector) : _unsortedVector(unsortedVector), _unsortedDeque(0)
 {
-	
+	fordJohnsonSort(unsortedVector);
+}
+
+PmergeMe::PmergeMe(std::deque<int> unsortedDeque) : _unsortedVector(0), _unsortedDeque(unsortedDeque)
+{
+	fordJohnsonSort(unsortedDeque);
 }
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-PmergeMe::PmergeMe(PmergeMe const & copy) : _arg(copy._arg)
+PmergeMe::PmergeMe(PmergeMe const & copy) : _unsortedVector(copy._unsortedVector), _unsortedDeque(copy._unsortedDeque)
 {
 
 }
@@ -27,7 +34,8 @@ PmergeMe	&PmergeMe::operator=(PmergeMe const & rhs)
 {
 	if (this != &rhs)
 	{
-		_arg = rhs._arg;
+		_unsortedVector = rhs._unsortedVector;
+		_unsortedDeque = rhs._unsortedDeque;
 	}
 	return (*this);
 }
@@ -45,55 +53,45 @@ PmergeMe::~PmergeMe(void)
 *                          VECTOR MEMBER FUNCTIONS                            *
 ******************************************************************************/
 
-void	PmergeMe::checkArg()
+void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 {
+	std::vector<int> sortedVector;
+	std::vector < std::pair<int,int> > vectorPair;
 
-}
-
-void	PmergeMe::fillVector()
-{
-
-}
-
-void	PmergeMe::checkDuplicates()
-{
-
-}
-
-void	PmergeMe::sortVector()
-{
+	createPairs(vectorPair);
+	sortPairs(vectorPair);
 
 }
 
 
-void	PmergeMe::createPairsVector()
+void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 {
 
 }
 
 
-void	PmergeMe::sortPairsVector()
+void	PmergeMe::sortPairs(std::vector < std::pair<int,int> > & vectorPair)
 {
 
 }
 
 
-void	PmergeMe::mergeVector()
+void	PmergeMe::merge()
 {
 
 }
 
-void	PmergeMe::binarySearchVector()
+void	PmergeMe::binarySearch()
 {
 
 }
 
-void	PmergeMe::insertAtPositionVector()
+void	PmergeMe::insertAtPosition()
 {
 
 }
 
-void	PmergeMe::printVector(std::vector<int> & vector)
+void	PmergeMe::print(std::vector<int> & vector)
 {
 	size_t size = vector.size();
 
@@ -102,46 +100,4 @@ void	PmergeMe::printVector(std::vector<int> & vector)
 		std::cout << vector[i] << " ";
 	std::cout << ANSI_RESET << std::endl;
 
-}
-
-/******************************************************************************
-*                                  PRINTERS                                   *
-******************************************************************************/
-
-void PmergeMe::printSortedVector()
-{
-	size_t size = _vector.size();
-
-	std::cout << ANSI_YELLOW << "After: ";
-	for(size_t i = 0; i < size; i++)
-	{
-		std::cout << _vector[i] << " ";
-	}
-	std::cout << ANSI_RESET << std::endl;
-}
-
-void PmergeMe::printUnsortedVector(std::vector<int>	& vector)
-{
-	size_t size = vector.size();
-
-	std::cout << ANSI_PURPLE << "Before: ";
-	for(size_t i = 0; i < size; i++)
-		std::cout << vector[i] << " ";
-	std::cout << ANSI_RESET << std::endl;
-}
-
-void PmergeMe::printSortedList()
-{
-	std::cout << ANSI_YELLOW << "After: ";
-	for(std::list<int>::const_iterator it = _list.begin(); it != _list.end(); it++)
-		std::cout << *it << " ";
-	std::cout << ANSI_RESET << std::endl;
-}
-
-void PmergeMe::printUnsortedList(std::list<int>	& list)
-{
-	std::cout << ANSI_YELLOW << "Before: ";
-	for(std::list<int>::const_iterator it = list.begin(); it != list.end(); it++)
-		std::cout << *it << " ";
-	std::cout << ANSI_RESET << std::endl;
 }
