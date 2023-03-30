@@ -1,6 +1,6 @@
 # include "PmergeMe.hpp"
 
-#include <iostream>
+# include <iostream>
 
 /******************************************************************************
 *                              CONSTRUCTORS                                   *
@@ -256,7 +256,7 @@ void	PmergeMe::fordJohnsonSort(std::deque<int> unsortedDeque)
 	if (unsortedDeque.size() % 2 == 1)
 	{
 		pos = binarySearch(*(unsortedDeque.end() - 1), sortedDeque);
-		sortedDeque.insert(sortedDeque.begin() + pos, *(unsortedDeque.end() - 1));
+		sortedDeque.push_front (*(unsortedDeque.end() - 1));
 	}
 
 	printBefore(unsortedDeque);
@@ -287,6 +287,7 @@ void	PmergeMe::sortPairsRecursively(std::deque < std::pair<int,int> > & dequePai
 	{
 		if (dequePair[i].first > dequePair[i + 1].first)
 		{
+			//std::swap(dequePair[i].first, dequePair[i+1].first);
 			tmp = dequePair[i];
 			dequePair[i] = dequePair[i + 1];
 			dequePair[i + 1] = tmp;
