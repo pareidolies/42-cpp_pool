@@ -24,26 +24,16 @@ class PmergeMe
 
 		PmergeMe	&operator=(PmergeMe const & rhs);
 
+		//vector
 		void	fordJohnsonSort(std::vector<int> unsortedVector);
-		void	fordJohnsonSort(std::deque<int> unsortedDeque);
-	
 		void	createPairs(std::vector < std::pair<int,int> > & vectorPair);
-		void	createPairs();
-		
-		void	sortPairs(std::vector < std::pair<int,int> > & vectorPair);
-		void	sortPairs();
-		
-		void	merge();
-		void	merge();
-		
+		void	sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size);
+		void	addFirstHalf();
 		void	binarySearch();
-		void	binarySearch();
-
 		void	insertAtPosition();
-		void	insertAtPosition();
-
 		void	print(std::vector<int> & vector);
-		void	print(std::deque<int> & deque);
+
+		//deque
 
 	private:
 

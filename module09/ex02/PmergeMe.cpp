@@ -11,12 +11,12 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe(std::vector<int> unsortedVector) : _unsortedVector(unsortedVector), _unsortedDeque(0)
+PmergeMe::PmergeMe(std::vector<int> vector) : _unsortedVector(vector), _unsortedDeque(0)
 {
 	fordJohnsonSort(unsortedVector);
 }
 
-PmergeMe::PmergeMe(std::deque<int> unsortedDeque) : _unsortedVector(0), _unsortedDeque(unsortedDeque)
+PmergeMe::PmergeMe(std::deque<int> deque) : _unsortedVector(0), _unsortedDeque(deque)
 {
 	fordJohnsonSort(unsortedDeque);
 }
@@ -59,24 +59,46 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	std::vector < std::pair<int,int> > vectorPair;
 
 	createPairs(vectorPair);
-	sortPairs(vectorPair);
+	sortPairsRecursively(vectorPair);
+
 
 }
 
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 {
+	size_t size = _unsortedVector.size();
 
+	for(size_t i = 0; i < size - 1; i+=2)
+	{
+		if (_unsortedVector[i] <_unsortedVector[i+1])
+			vectorPair.push_back(std::make_pair(_unsortedVector[i],_unsortedVector[i+1]));
+		else
+			vectorPair.push_back(std::make_pair(_unsortedVector[i+1],_unsortedVector[i]));
+	}
 }
 
-
-void	PmergeMe::sortPairs(std::vector < std::pair<int,int> > & vectorPair)
+void	PmergeMe::sortPairsRecusively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
 {
+	int tmp;
 
+	if (size == 1)
+		return;
+
+	for (int i = 0; i < size - 1; i++)
+	{
+		if (vectorPair[i].first > vectorPair[i + 1].first)
+		{
+			tmp = vectorPair[i].first;
+			vectorPair[i].first = vectorPair[i + 1].first;
+			vectorPair[i + 1].first = tmp;
+		}
+   }
+   sortPairsRecusively(vectorPair, size - 1);
 }
 
 
-void	PmergeMe::merge()
+void	PmergeMe::addFirstHalf()
 {
 
 }
@@ -101,3 +123,7 @@ void	PmergeMe::print(std::vector<int> & vector)
 	std::cout << ANSI_RESET << std::endl;
 
 }
+
+/******************************************************************************
+*                           DEQUE MEMBER FUNCTIONS                            *
+******************************************************************************/
