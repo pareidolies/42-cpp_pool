@@ -150,7 +150,6 @@ void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorP
    sortPairsRecursively(vectorPair, size - 1);
 }
 
-
 void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
 {
 	size_t size = vectorPair.size();
@@ -177,9 +176,9 @@ int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector)
 		if (mid == 1)
 		{
 			if (value > sortedVector[mid])
-				return (mid + 1);
-			else
 				return (mid);
+			else
+				return (mid - 1);
 		}
         if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
 		{
