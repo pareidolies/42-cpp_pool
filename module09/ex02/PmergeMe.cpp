@@ -64,6 +64,7 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	createPairs(vectorPair);
 	sortPairsRecursively(vectorPair, vectorPair.size());
 	addFirstHalf(vectorPair, sortedVector);
+	addElementPairedWithFirst(vectorPair, sortedVector);
 	print(unsortedVector);
 	print(sortedVector);
 }
@@ -107,6 +108,12 @@ void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std
 
 	for(size_t i = 0; i < size; i++)
 		sortedVector.push_back(vectorPair[i].first);
+}
+
+void	PmergeMe::addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
+{
+	sortedVector.push_back(vectorPair[0].second);
+	vectorPair.erase(vectorPair.begin());
 }
 
 void	PmergeMe::binarySearch()
