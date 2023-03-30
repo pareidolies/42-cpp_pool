@@ -62,45 +62,60 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	std::vector < std::pair<int,int> >	vectorPair;
 	size_t								jacobsthal[3];
 	size_t								size;	
-	int									shift;
+	//size_t									shift;
 	int									pos;
+	size_t								stop;
 
 	createPairs(vectorPair);
 	sortPairsRecursively(vectorPair, vectorPair.size());
 	addFirstHalf(vectorPair, sortedVector);
+
+	printBefore(unsortedVector);
+	printAfter(sortedVector);
+
+	size = vectorPair.size();
+
 	addElementPairedWithFirst(vectorPair, sortedVector);
 
 	printBefore(unsortedVector);
 	printAfter(sortedVector);
 	
 	pos = binarySearch(vectorPair[0].second, sortedVector);
-	std::cout << "pos:" << pos << std::endl;
 	sortedVector.insert(sortedVector.begin() + pos, vectorPair[0].second);
-	std::cout << "coucou" << std::endl;
-	vectorPair.erase(vectorPair.begin());
-	std::cout << "salut" << std::endl;
+	//vectorPair.erase(vectorPair.begin());
 
 	printBefore(unsortedVector);
 	printAfter(sortedVector);
 
-	size = vectorPair.size();
 	jacobsthal[0] = 1;
 	jacobsthal[1] = 1;
 	jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
-	shift = 2;
-	while (jacobsthal[2] < size)
+	//shift = 2;
+	stop = 0;
+	
+	while (1)
 	{
-		for (size_t i = jacobsthal[2]; i > jacobsthal[1] && i < size; i--)
+		stop = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1;
+		for (size_t i = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1; i > jacobsthal[1] && i < size && i >= 0; i--)
 		{
-			pos = binarySearch(vectorPair[i - shift].second, sortedVector);
-			sortedVector.insert(sortedVector.begin() + pos, vectorPair[i - shift].second);
-			vectorPair.erase(vectorPair.begin() + (i - shift));
-			shift++;
+			std::cout << "to sort: " << vectorPair[i - 1].second << std::endl;
+			pos = binarySearch(vectorPair[i - 1].second, sortedVector);
+			sortedVector.insert(sortedVector.begin() + pos, vectorPair[i - 1].second);
+			//vectorPair.erase(vectorPair.begin() + (i - shift));
+			//shift++;
+			
+			std::cout << "hello" << std::endl;
 		}
+		if (stop == size - 1)
+			break;
 		jacobsthal[0] = jacobsthal[1];
 		jacobsthal[1] = jacobsthal[2];
 		jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
 	}
+
+	printBefore(unsortedVector);
+	printAfter(sortedVector);
+
 }
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
@@ -109,7 +124,7 @@ void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 
 	for(size_t i = 0; i < size - 1; i+=2)
 	{
-		if (_unsortedVector[i] <_unsortedVector[i+1])
+		if (_unsortedVector[i] >_unsortedVector[i+1])
 			vectorPair.push_back(std::make_pair(_unsortedVector[i],_unsortedVector[i+1]));
 		else
 			vectorPair.push_back(std::make_pair(_unsortedVector[i+1],_unsortedVector[i]));
@@ -118,7 +133,7 @@ void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 
 void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
 {
-	int tmp;
+	std::pair<int,int> tmp;
 
 	if (size == 1)
 		return;
@@ -127,9 +142,9 @@ void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorP
 	{
 		if (vectorPair[i].first > vectorPair[i + 1].first)
 		{
-			tmp = vectorPair[i].first;
-			vectorPair[i].first = vectorPair[i + 1].first;
-			vectorPair[i + 1].first = tmp;
+			tmp = vectorPair[i];
+			vectorPair[i] = vectorPair[i + 1];
+			vectorPair[i + 1] = tmp;
 		}
    }
    sortPairsRecursively(vectorPair, size - 1);
@@ -146,7 +161,7 @@ void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std
 
 void	PmergeMe::addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
 {
-	sortedVector.push_back(vectorPair[0].second);
+	sortedVector.insert(sortedVector.begin(), vectorPair[0].second);
 	vectorPair.erase(vectorPair.begin());
 }
 
@@ -155,13 +170,17 @@ int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector)
 	int	low = 0;
 	int	high = sortedVector.size();
 
-	//if (high == 1)
-	//	return (it);
-
 	while (low <= high) 
 	{
         int mid = low + (high - low) / 2;
 
+		if (mid == 1)
+		{
+			if (value > sortedVector[mid])
+				return (mid + 1);
+			else
+				return (mid);
+		}
         if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
 		{
 			std::cout << "mid : " << mid << std::endl;
