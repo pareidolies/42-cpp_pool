@@ -70,10 +70,10 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	sortPairsRecursively(vectorPair, vectorPair.size());
 	addFirstHalf(vectorPair, sortedVector);
 
+	size = vectorPair.size();
+
 	printBefore(unsortedVector);
 	printAfter(sortedVector);
-
-	size = vectorPair.size();
 
 	addElementPairedWithFirst(vectorPair, sortedVector);
 
@@ -102,15 +102,21 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 			pos = binarySearch(vectorPair[i - 1].second, sortedVector);
 			sortedVector.insert(sortedVector.begin() + pos, vectorPair[i - 1].second);
 			//vectorPair.erase(vectorPair.begin() + (i - shift));
-			//shift++;
-			
-			std::cout << "hello" << std::endl;
+			//shift++;	
+			std::cout << "jacob: " << i << std::endl;
 		}
 		if (stop == size - 1)
 			break;
 		jacobsthal[0] = jacobsthal[1];
 		jacobsthal[1] = jacobsthal[2];
 		jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
+	}
+
+	if (unsortedVector.size() % 2 == 1)
+	{
+		//std::cout << "last: " << unsortedVector[unsortedVector.size() - 1] << std::endl;
+		pos = binarySearch(*(unsortedVector.end() - 1), sortedVector);
+		sortedVector.insert(sortedVector.begin() + pos, *(unsortedVector.end() - 1));
 	}
 
 	printBefore(unsortedVector);
@@ -129,6 +135,7 @@ void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 		else
 			vectorPair.push_back(std::make_pair(_unsortedVector[i+1],_unsortedVector[i]));
 	}
+	std::cout << "size:" << vectorPair.size() << std::endl;
 }
 
 void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
@@ -181,10 +188,7 @@ int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector)
 				return (mid - 1);
 		}
         if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
-		{
-			std::cout << "mid : " << mid << std::endl;
             return (mid);
-		}
         if (value > sortedVector[mid])
             low = mid + 1;
         if (value < sortedVector[mid])
