@@ -38,11 +38,6 @@ bool    checkDuplicates(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-    std::vector<int>    unsortedVector;
-    std::deque<int>     unsortedDeque;
-    clock_t             start, end;
-    double              time;
-
     if (argc < 2 )
     {
         std::cout << ANSI_RED << "Usage: " << argv[0] << "<NBRS TO SORT>" << ANSI_RESET << std::endl;
@@ -50,8 +45,16 @@ int main(int argc, char **argv)
     }
 
     if (!checkArgs(argc, argv) || !checkDuplicates(argc, argv))
+    {
+        std::cout << ANSI_RED << "Error: Wrong args" << ANSI_RESET << std::endl;
         return (1);
+    }
     
+    std::vector<int>    unsortedVector;
+    std::deque<int>     unsortedDeque;
+    clock_t             start, end;
+    double              time;
+
     start = clock();
     for(int i = 1; i < argc; i++)
         unsortedVector.push_back(atoi(argv[i]));
@@ -62,14 +65,14 @@ int main(int argc, char **argv)
 	std::cout << ANSI_BLUE << "Time to process a range of : " << unsortedVector.size() << " elements with std::vector : "
 	            << time << " us" << std::endl;
 
-    start = clock();
+    /*start = clock();
     for(int i = 1; i < argc; i++)
         unsortedDeque.push_back(atoi(argv[i]));
     PmergeMe deque(unsortedDeque);
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time to process a range of : " << unsortedDeque.size() << " elements with std::deque : "
-	            << time << " us" << ANSI_RESET << std::endl;
+	            << time << " us" << ANSI_RESET << std::endl;*/
 
 	return(0);    
 }

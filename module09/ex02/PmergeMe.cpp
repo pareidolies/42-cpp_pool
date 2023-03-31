@@ -65,6 +65,13 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	int									pos;
 	size_t								stop;
 
+	if (unsortedVector.size() == 1 || isSorted(unsortedVector))
+	{
+		printBefore(unsortedVector);
+		printAfter(unsortedVector);
+		return;
+	}
+
 	createPairs(vectorPair);
 	sortPairsRecursively(vectorPair, vectorPair.size()); //use recursive merge
 
@@ -107,7 +114,11 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 
 	printBefore(unsortedVector);
 	printAfter(sortedVector);
-	isSorted(sortedVector);
+	if (!isSorted(sortedVector))
+		std::cout << ANSI_RED << "Oups... Vector not sorted" << ANSI_RESET << std::endl;
+	else
+		std::cout << ANSI_GREEN << "Vector of size " << sortedVector.size() << " sorted!" << ANSI_RESET << std::endl;
+
 }
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
@@ -137,7 +148,7 @@ void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorP
    }
    sortPairsRecursively(vectorPair, size - 1);
 }
-
+ 
 void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
 {
 	size_t size = vectorPair.size();
@@ -161,7 +172,7 @@ int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector, int first)
 	else
 		high = lower_bound(sortedVector.begin(), sortedVector.end(), first) - sortedVector.begin();
 
-	std::cout << ANSI_BLUE << "HIGH : " << high << "for: " << value << "first: " << first << ANSI_RESET << std::endl;
+	//std::cout << ANSI_BLUE << "HIGH : " << high << "for: " << value << "first: " << first << ANSI_RESET << std::endl;
 
 	while (low <= high) 
 	{
@@ -217,17 +228,18 @@ void	PmergeMe::printAfter(std::vector<int> & vector)
 
 }
 
-void	PmergeMe::isSorted(std::vector<int> & vector)
+bool	PmergeMe::isSorted(std::vector<int> & vector)
 {
 	size_t size = vector.size() - 1;
 
 	for(size_t i = 0; i < size - 1; i++)
 	{
 		if (vector[i] > vector [i + 1])
-			std::cout << ANSI_RED << "Oups... Vector not sorted at: " << vector[i] << ANSI_RESET << std::endl;
+		{
+			return (false);
+		}
 	}
-	std::cout << ANSI_GREEN << "Vector of size " << vector.size() << " sorted!" << ANSI_RESET << std::endl;
-
+	return (true);
 }
 
 /******************************************************************************
