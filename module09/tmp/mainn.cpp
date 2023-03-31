@@ -1,15 +1,15 @@
-# include "PmergeMe.hpp"
+//# include "PmergeMe.hpp"
 
-# include <iostream>
-# include <vector>
-# include <sstream>
-# include <fstream>
-# include <string>
-# include <ctime>
-# include <cstdlib>
+// # include <iostream>
+// # include <vector>
+// # include <sstream>
+// # include <fstream>
+// # include <string>
+// # include <ctime>
+// # include <cstdlib>
 
 
-bool    checkArgs(int argc, char **argv)
+/*bool    checkArgs(int argc, char **argv)
 {
     for(int i = 1; i < argc; i++)
     {
@@ -35,24 +35,25 @@ bool    checkDuplicates(int argc, char **argv)
         }
     }
     return (true);
-}
+}*/
 
 int main(int argc, char **argv)
 {
     (void) argv;
-    if (argc < 2 )
-    {
-        //std::cout << ANSI_RED << "Usage: " << argv[0] << "<NBRS TO SORT>" << ANSI_RESET << std::endl;
-        return (1);
-    }
+    (void) argc;
+    // if (argc < 2 )
+    // {
+    //     //std::cout << ANSI_RED << "Usage: " << argv[0] << "<NBRS TO SORT>" << ANSI_RESET << std::endl;
+    //     return (0);
+    // }
 
-    if (!checkArgs(argc, argv) || !checkDuplicates(argc, argv))
+    /*if (!checkArgs(argc, argv) || !checkDuplicates(argc, argv))
     {
         //std::cout << ANSI_RED << "Error: Wrong args" << ANSI_RESET << std::endl;
         return (1);
-    }
+    }*/
     
-    std::vector<int>    unsortedVector;
+    /*std::vector<int>    unsortedVector;
     std::deque<int>     unsortedDeque;
     clock_t             start, end;
     double              time;
@@ -65,7 +66,7 @@ int main(int argc, char **argv)
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
 	std::cout << ANSI_BLUE << "Time to process a range of : " << unsortedVector.size() << " elements with std::vector : "
-	            << time << " us" << std::endl;
+	            << time << " us" << std::endl;*/
 
     /*start = clock();
     for(int i = 1; i < argc; i++)

@@ -18,7 +18,7 @@ class PmergeMe
 
 		PmergeMe(void);
 		PmergeMe(std::vector<int> unsortedVector);
-		PmergeMe(std::deque<int> unsortedDeque);
+		//PmergeMe(std::deque<int> unsortedDeque);
 		PmergeMe(PmergeMe const & copy);
 		~PmergeMe(void);
 
@@ -26,31 +26,30 @@ class PmergeMe
 
 		//vector
 		void	fordJohnsonSort(std::vector<int> unsortedVector);
-		void	createPairs(std::vector < std::pair<int,int> > & vectorPair);
+		void	createPairs(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> _unsorted);
 		void	sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size);
 		void	recursiveSort(std::vector < std::pair<int,int> > & vectorPair);
 		void	mergeSort(std::vector < std::pair<int,int> > & left, std::vector < std::pair<int,int> > & right, std::vector < std::pair<int,int> > & vectorPair);
 		void	addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
 		void	addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
+		void	insertSecondHalf(std::vector < std::pair<int,int> > & _pair, std::vector<int> & _sorted, size_t size);
 		int		binarySearch(int value, std::vector<int> sortedVector, int first);
 		void	printBefore(std::vector<int> & vector);
 		void	printAfter(std::vector<int> & vector);
 		bool	isSorted(std::vector<int> & vector);
 
 		//deque
-		void	fordJohnsonSort(std::deque<int> unsortedDeque);
+		/*void	fordJohnsonSort(std::deque<int> unsortedDeque);
 		void	createPairs(std::deque < std::pair<int,int> > & dequePair);
 		void	sortPairsRecursively(std::deque < std::pair<int,int> > & dequePair, size_t size);
 		void	addFirstHalf(std::deque < std::pair<int,int> > & dequePair, std::deque<int> & sortedDeque);
 		void	addElementPairedWithFirst(std::deque < std::pair<int,int> > & dequePair, std::deque<int> & sortedDeque);
 		int		binarySearch(int value, std::deque<int> sortedDeque);
 		void	printBefore(std::deque<int> & deque);
-		void	printAfter(std::deque<int> & deque);
+		void	printAfter(std::deque<int> & deque);*/
 
 	private:
 
-		std::vector<int>	_unsortedVector;
-		std::deque<int>		_unsortedDeque;
 };
 
 #endif

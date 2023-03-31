@@ -11,34 +11,30 @@ PmergeMe::PmergeMe(void)
 
 }
 
-PmergeMe::PmergeMe(std::vector<int> vector) : _unsortedVector(vector), 
-											  _unsortedDeque(0)
+PmergeMe::PmergeMe(std::vector<int> vector)
 {
 	fordJohnsonSort(vector);
 }
 
-PmergeMe::PmergeMe(std::deque<int> deque) : _unsortedVector(0), 
-										    _unsortedDeque(deque)
+/*PmergeMe::PmergeMe(std::deque<int> deque)
 {
 	fordJohnsonSort(deque);
-}
+}*/
 
 /******************************************************************************
 *                                   COPY                                      *
 ******************************************************************************/
 
-PmergeMe::PmergeMe(PmergeMe const & copy) : _unsortedVector(copy._unsortedVector), 
-											_unsortedDeque(copy._unsortedDeque)
+PmergeMe::PmergeMe(PmergeMe const & copy)
 {
-
+	(void) copy;
 }
 
 PmergeMe	&PmergeMe::operator=(PmergeMe const & rhs)
 {
 	if (this != &rhs)
 	{
-		_unsortedVector = rhs._unsortedVector;
-		_unsortedDeque = rhs._unsortedDeque;
+
 	}
 	return (*this);
 }
@@ -56,31 +52,198 @@ PmergeMe::~PmergeMe(void)
 *                          VECTOR MEMBER FUNCTIONS                            *
 ******************************************************************************/
 
-void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
+void	PmergeMe::fordJohnsonSort(std::vector<int> _unsorted)
 {
-	std::vector<int>					sortedVector;
-	std::vector < std::pair<int,int> >	vectorPair;
-	size_t								jacobsthal[3];
-	size_t								size;	
-	int									pos;
-	size_t								stop;
+	std::vector<int>					_sorted;
+	std::vector < std::pair<int,int> >	_pair;
+	size_t								size;
+	size_t								pos;
 
-	if (unsortedVector.size() == 1 || isSorted(unsortedVector))
+
+	if (_unsorted.size() == 1 || isSorted(_unsorted))
 	{
-		printBefore(unsortedVector);
-		printAfter(unsortedVector);
+		printBefore(_unsorted);
+		printAfter(_unsorted);
 		return;
 	}
 
-	createPairs(vectorPair);
-	recursiveSort(vectorPair); //use recursive merge
+	createPairs(_pair, _unsorted);
+	recursiveSort(_pair); //use recursive merge
 
-	addFirstHalf(vectorPair, sortedVector);
-	size = vectorPair.size();
-	addElementPairedWithFirst(vectorPair, sortedVector);
+	addFirstHalf(_pair, _sorted);
+	std::cout << "size :" << _sorted.size() << std::endl;
+	size = _pair.size();
+	addElementPairedWithFirst(_pair, _sorted);
+	std::cout << "size :" << _sorted.size() << std::endl;
 	
-	pos = binarySearch(vectorPair[0].second, sortedVector, vectorPair[0].first);
-	sortedVector.insert(sortedVector.begin() + pos, vectorPair[0].second);
+	if (_unsorted.size() > 3)
+	{
+		insertSecondHalf(_pair, _sorted, size);
+	}
+	
+
+	if (_unsorted.size() % 2 == 1)
+	{
+		pos = binarySearch(*(_unsorted.end() - 1), _sorted, -1);
+		_sorted.insert(_sorted.begin() + pos, *(_unsorted.end() - 1));
+	}
+
+	printBefore(_unsorted);
+	printAfter(_sorted);
+	if (!isSorted(_sorted))
+		std::cout << ANSI_RED << "Oups... Vector not sorted" << ANSI_RESET << std::endl;
+	else
+		std::cout << ANSI_GREEN << "Vector of size " << _sorted.size() << " sorted!" << ANSI_RESET << std::endl;
+
+}
+
+void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & _pair, std::vector<int> _unsorted)
+{
+	size_t size = _unsorted.size();
+
+	for(size_t i = 0; i < size - 1; i+=2)
+	{
+		if (_unsorted[i] >_unsorted[i+1])
+			_pair.push_back(std::make_pair(_unsorted[i],_unsorted[i+1]));
+		else
+			_pair.push_back(std::make_pair(_unsorted[i+1],_unsorted[i]));
+	}
+	// for(size_t i = 0; i < _pair.size(); i++)
+	// {
+	// 	std::cout << _pair[i].first << " " << _pair[i].second << std::endl;
+	// }
+}
+
+void	PmergeMe::mergeSort(std::vector < std::pair<int,int> > & left, std::vector < std::pair<int,int> > & right, std::vector < std::pair<int,int> > & _pair)
+{
+    int nL = left.size();
+    int nR = right.size();
+    int i = 0, j = 0, k = 0;
+
+    while (j < nL && k < nR) 
+    {
+        if (left[j].first < right[k].first) 
+		{
+            _pair[i] = left[j];
+            j++;
+        }
+        else 
+		{
+            _pair[i] = right[k];
+            k++;
+        }
+        i++;
+    }
+    while (j < nL) 
+	{
+        _pair[i] = left[j];
+        j++; i++;
+    }
+    while (k < nR) 
+	{
+        _pair[i] = right[k];
+        k++; i++;
+    }
+}
+
+void	PmergeMe::recursiveSort(std::vector < std::pair<int,int> > & _pair) 
+{
+    if (_pair.size() <= 1) 
+		return;
+
+    size_t mid = _pair.size() / 2;
+    
+	std::vector < std::pair<int,int> > left;
+	std::vector < std::pair<int,int> > right;
+
+    for (size_t j = 0; j < mid;j++)
+        left.push_back(_pair[j]);
+    for (size_t j = 0; j < (_pair.size()) - mid; j++)
+        right.push_back(_pair[mid + j]);
+
+    recursiveSort(left);
+    recursiveSort(right);
+    mergeSort(left, right, _pair);
+}
+
+void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & _pair, size_t size)
+{
+	if (size == 1)
+		return;
+
+	for (size_t i = 0; i < size - 1; i++)
+	{
+		if (_pair[i].first > _pair[i + 1].first)
+			std::swap(_pair[i], _pair[i + 1]);
+   }
+   sortPairsRecursively(_pair, size - 1);
+}
+ 
+void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & _pair, std::vector<int> & _sorted)
+{
+	size_t size = _pair.size();
+
+	for(size_t i = 0; i < size; i++)
+		_sorted.push_back(_pair[i].first);
+}
+
+void	PmergeMe::addElementPairedWithFirst(std::vector < std::pair<int,int> > & _pair, std::vector<int> & _sorted)
+{
+	_sorted.insert(_sorted.begin(), _pair[0].second);
+	_pair.erase(_pair.begin());
+}
+
+int		PmergeMe::binarySearch(int value, std::vector<int> _sorted, int first)
+{
+	int	low = 0;
+	int high;
+	if (first == -1)
+		high = _sorted.size() - 1;
+	else
+		high = lower_bound(_sorted.begin(), _sorted.end(), first) - _sorted.begin();
+
+	//std::cout << ANSI_BLUE << "HIGH : " << high << "for: " << value << "first: " << first << ANSI_RESET << std::endl;
+
+	while (low <= high) 
+	{
+        int mid = low + (high - low) / 2;
+
+		if (mid == 0)
+		{
+			if (value < _sorted[0])
+				return (0);
+			else
+				return (1);
+		}
+		if (mid == static_cast<int>(_sorted.size() - 1))
+		{
+			if (value > _sorted.back())
+				return (_sorted.size());
+			else
+				return (_sorted.size() - 1);
+		}
+        if (value >= _sorted[mid - 1] && value <= _sorted[mid])
+		{
+			//if (first == -1)
+			//	std::cout << ANSI_GREEN << "mid:" << mid << ANSI_RESET << std::endl;
+            return (mid);
+		}
+        if (value > _sorted[mid])
+            low = mid + 1;
+        if (value < _sorted[mid])
+            high = mid - 1;
+    }
+	return(0);
+}
+
+void		PmergeMe::insertSecondHalf(std::vector < std::pair<int,int> > & _pair, std::vector<int> & _sorted, size_t size)
+{
+	size_t			jacobsthal[3];
+	int				pos;
+	size_t			stop;
+
+	pos = binarySearch(_pair[0].second, _sorted, _pair[0].first);
+	_sorted.insert(_sorted.begin() + pos, _pair[0].second);
 
 	jacobsthal[0] = 1;
 	jacobsthal[1] = 1;
@@ -94,8 +257,8 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 		stop = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1;
 		for (size_t i = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1; i > jacobsthal[1] && i < size && i >= 0; i--)
 		{
-			pos = binarySearch(vectorPair[i - 1].second, sortedVector, vectorPair[i - 1].first);
-			sortedVector.insert(sortedVector.begin() + pos, vectorPair[i - 1].second);
+			pos = binarySearch(_pair[i - 1].second, _sorted, _pair[i - 1].first);
+			_sorted.insert(_sorted.begin() + pos, _pair[i - 1].second);
 			//std::cout <<ANSI_BLUE << check << ANSI_RESET << std::endl;
 		}
 		if (stop == size - 1)
@@ -106,154 +269,6 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 		//check++;
 	}
 
-	if (unsortedVector.size() % 2 == 1)
-	{
-		pos = binarySearch(*(unsortedVector.end() - 1), sortedVector, -1);
-		sortedVector.insert(sortedVector.begin() + pos, *(unsortedVector.end() - 1));
-	}
-
-	printBefore(unsortedVector);
-	printAfter(sortedVector);
-	if (!isSorted(sortedVector))
-		std::cout << ANSI_RED << "Oups... Vector not sorted" << ANSI_RESET << std::endl;
-	else
-		std::cout << ANSI_GREEN << "Vector of size " << sortedVector.size() << " sorted!" << ANSI_RESET << std::endl;
-
-}
-
-void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
-{
-	size_t size = _unsortedVector.size();
-
-	for(size_t i = 0; i < size - 1; i+=2)
-	{
-		if (_unsortedVector[i] >_unsortedVector[i+1])
-			vectorPair.push_back(std::make_pair(_unsortedVector[i],_unsortedVector[i+1]));
-		else
-			vectorPair.push_back(std::make_pair(_unsortedVector[i+1],_unsortedVector[i]));
-	}
-}
-
-void	PmergeMe::mergeSort(std::vector < std::pair<int,int> > & left, std::vector < std::pair<int,int> > & right, std::vector < std::pair<int,int> > & vectorPair)
-{
-    int nL = left.size();
-    int nR = right.size();
-    int i = 0, j = 0, k = 0;
-
-    while (j < nL && k < nR) 
-    {
-        if (left[j].first < right[k].first) 
-		{
-            vectorPair[i] = left[j];
-            j++;
-        }
-        else 
-		{
-            vectorPair[i] = right[k];
-            k++;
-        }
-        i++;
-    }
-    while (j < nL) 
-	{
-        vectorPair[i] = left[j];
-        j++; i++;
-    }
-    while (k < nR) 
-	{
-        vectorPair[i] = right[k];
-        k++; i++;
-    }
-}
-
-void	PmergeMe::recursiveSort(std::vector < std::pair<int,int> > & vectorPair) 
-{
-    if (vectorPair.size() <= 1) 
-		return;
-
-    size_t mid = vectorPair.size() / 2;
-    
-	std::vector < std::pair<int,int> > left;
-	std::vector < std::pair<int,int> > right;
-
-    for (size_t j = 0; j < mid;j++)
-        left.push_back(vectorPair[j]);
-    for (size_t j = 0; j < (vectorPair.size()) - mid; j++)
-        right.push_back(vectorPair[mid + j]);
-
-    recursiveSort(left);
-    recursiveSort(right);
-    mergeSort(left, right, vectorPair);
-}
-
-void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
-{
-	if (size == 1)
-		return;
-
-	for (size_t i = 0; i < size - 1; i++)
-	{
-		if (vectorPair[i].first > vectorPair[i + 1].first)
-			std::swap(vectorPair[i], vectorPair[i + 1]);
-   }
-   sortPairsRecursively(vectorPair, size - 1);
-}
- 
-void	PmergeMe::addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
-{
-	size_t size = vectorPair.size();
-
-	for(size_t i = 0; i < size; i++)
-		sortedVector.push_back(vectorPair[i].first);
-}
-
-void	PmergeMe::addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector)
-{
-	sortedVector.insert(sortedVector.begin(), vectorPair[0].second);
-	vectorPair.erase(vectorPair.begin());
-}
-
-int		PmergeMe::binarySearch(int value, std::vector<int> sortedVector, int first)
-{
-	int	low = 0;
-	int high;
-	if (first == -1)
-		high = sortedVector.size() - 1;
-	else
-		high = lower_bound(sortedVector.begin(), sortedVector.end(), first) - sortedVector.begin();
-
-	//std::cout << ANSI_BLUE << "HIGH : " << high << "for: " << value << "first: " << first << ANSI_RESET << std::endl;
-
-	while (low <= high) 
-	{
-        int mid = low + (high - low) / 2;
-
-		if (mid == 0)
-		{
-			if (value < sortedVector[0])
-				return (0);
-			else
-				return (1);
-		}
-		if (mid == static_cast<int>(sortedVector.size() - 1))
-		{
-			if (value > sortedVector.back())
-				return (sortedVector.size());
-			else
-				return (sortedVector.size() - 1);
-		}
-        if (value >= sortedVector[mid - 1] && value <= sortedVector[mid])
-		{
-			if (first == -1)
-				std::cout << ANSI_GREEN << "mid:" << mid << ANSI_RESET << std::endl;
-            return (mid);
-		}
-        if (value > sortedVector[mid])
-            low = mid + 1;
-        if (value < sortedVector[mid])
-            high = mid - 1;
-    }
-	return(0);
 }
 
 void	PmergeMe::printBefore(std::vector<int> & vector)
@@ -280,14 +295,13 @@ void	PmergeMe::printAfter(std::vector<int> & vector)
 
 bool	PmergeMe::isSorted(std::vector<int> & vector)
 {
-	size_t size = vector.size() - 1;
+	size_t size = vector.size();
 
 	for(size_t i = 0; i < size - 1; i++)
 	{
+		//std::cout << vector[i] << " " << vector[i+1] << std::endl;
 		if (vector[i] > vector [i + 1])
-		{
 			return (false);
-		}
 	}
 	return (true);
 }
@@ -296,157 +310,3 @@ bool	PmergeMe::isSorted(std::vector<int> & vector)
 *                           DEQUE MEMBER FUNCTIONS                            *
 ******************************************************************************/
 
-void	PmergeMe::fordJohnsonSort(std::deque<int> unsortedDeque)
-{
-	std::deque<int>						sortedDeque;
-	std::deque < std::pair<int,int> >	dequePair;
-	size_t								jacobsthal[3];
-	size_t								size;	
-	int									pos;
-	size_t								stop;
-
-	createPairs(dequePair);
-	sortPairsRecursively(dequePair, dequePair.size());
-
-	addFirstHalf(dequePair, sortedDeque);
-	size = dequePair.size();
-	addElementPairedWithFirst(dequePair, sortedDeque);
-	
-	pos = binarySearch(dequePair[0].second, sortedDeque);
-	sortedDeque.insert(sortedDeque.begin() + pos, dequePair[0].second);
-
-	jacobsthal[0] = 1;
-	jacobsthal[1] = 1;
-	jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
-	stop = 0;
-	
-	while (1)
-	{
-		stop = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1;
-		for (size_t i = (jacobsthal[2] < size) ? jacobsthal[2] : size - 1; i > jacobsthal[1] && i < size && i >= 0; i--)
-		{
-			/*if (dequePair[i - 1].second < sortedDeque.front())
-			{
-				std::cout << ANSI_RED << "coucou" << ANSI_RESET << std::endl;
-				sortedDeque.push_front(dequePair[i - 1].second);
-			}
-			if (dequePair[i - 1].second > sortedDeque.front() && dequePair[i - 1].second < sortedDeque[1])
-			{
-				std::cout << ANSI_RED << "coucou" << ANSI_RESET << std::endl;
-				sortedDeque.push_front(dequePair[i - 1].second);
-				std::swap(sortedDeque[0], sortedDeque[1]);
-			}
-			else if (dequePair[i - 1].second > sortedDeque.back())
-				sortedDeque.push_back(dequePair[i - 1].second);
-			else
-			{*/
-				pos = binarySearch(dequePair[i - 1].second, sortedDeque);
-				sortedDeque.insert(sortedDeque.begin() + pos, dequePair[i - 1].second);
-			//}
-		}
-		if (stop == size - 1)
-			break;
-		jacobsthal[0] = jacobsthal[1];
-		jacobsthal[1] = jacobsthal[2];
-		jacobsthal[2] = 2 * jacobsthal[0] + jacobsthal[1];
-	}
-
-	if (unsortedDeque.size() % 2 == 1)
-	{
-		pos = binarySearch(*(unsortedDeque.end() - 1), sortedDeque);
-		sortedDeque.push_front (*(unsortedDeque.end() - 1));
-	}
-
-	printBefore(unsortedDeque);
-	printAfter(sortedDeque);
-}
-
-void	PmergeMe::createPairs(std::deque < std::pair<int,int> > & dequePair)
-{
-	size_t size = _unsortedDeque.size();
-
-	for(size_t i = 0; i < size - 1; i+=2)
-	{
-		if (_unsortedDeque[i] >_unsortedDeque[i+1])
-			dequePair.push_back(std::make_pair(_unsortedDeque[i],_unsortedDeque[i+1]));
-		else
-			dequePair.push_back(std::make_pair(_unsortedDeque[i+1],_unsortedDeque[i]));
-	}
-}
-
-void	PmergeMe::sortPairsRecursively(std::deque < std::pair<int,int> > & dequePair, size_t size)
-{
-	std::pair<int,int> tmp;
-
-	if (size == 1)
-		return;
-
-	for (size_t i = 0; i < size - 1; i++)
-	{
-		if (dequePair[i].first > dequePair[i + 1].first)
-		{
-			//std::swap(dequePair[i].first, dequePair[i+1].first);
-			tmp = dequePair[i];
-			dequePair[i] = dequePair[i + 1];
-			dequePair[i + 1] = tmp;
-		}
-   }
-   sortPairsRecursively(dequePair, size - 1);
-}
-
-void	PmergeMe::addFirstHalf(std::deque < std::pair<int,int> > & dequePair, std::deque<int> & sortedDeque)
-{
-	size_t size = dequePair.size();
-
-	for(size_t i = 0; i < size; i++)
-		sortedDeque.push_back(dequePair[i].first);
-}
-
-void	PmergeMe::addElementPairedWithFirst(std::deque < std::pair<int,int> > & dequePair, std::deque<int> & sortedDeque)
-{
-	sortedDeque.push_front(dequePair[0].second);
-	dequePair.erase(dequePair.begin());
-}
-
-int		PmergeMe::binarySearch(int value, std::deque<int> sortedDeque)
-{
-	int	low = 0;
-	int	high = sortedDeque.size();
-
-	while (low <= high) 
-	{
-        int mid = low + (high - low) / 2;
-
-		if (mid == 0)
-			return (mid);
-        if (value >= sortedDeque[mid - 1] && value <= sortedDeque[mid])
-            return (mid);
-        if (value > sortedDeque[mid])
-            low = mid + 1;
-        if (value < sortedDeque[mid])
-            high = mid - 1;
-    }
-	return(0);
-}
-
-void	PmergeMe::printBefore(std::deque<int> & deque)
-{
-	size_t size = deque.size();
-
-	std::cout << ANSI_PURPLE << "Before: ";
-	for(size_t i = 0; i < size; i++)
-		std::cout << deque[i] << " ";
-	std::cout << ANSI_RESET << std::endl;
-
-}
-
-void	PmergeMe::printAfter(std::deque<int> & deque)
-{
-	size_t size = deque.size();
-
-	std::cout << ANSI_YELLOW << "After: ";
-	for(size_t i = 0; i < size; i++)
-		std::cout << deque[i] << " ";
-	std::cout << ANSI_RESET << std::endl;
-
-}
