@@ -30,7 +30,7 @@ class PmergeMe
 		void	sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size);
 		void	addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
 		void	addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
-		int		binarySearch(int value, std::vector<int> sortedVector);
+		int		binarySearch(int value, std::vector<int> sortedVector, int first);
 		void	printBefore(std::vector<int> & vector);
 		void	printAfter(std::vector<int> & vector);
 
