@@ -33,6 +33,7 @@ class PmergeMe
 		int		binarySearch(int value, std::vector<int> sortedVector, int first);
 		void	printBefore(std::vector<int> & vector);
 		void	printAfter(std::vector<int> & vector);
+		void	isSorted(std::vector<int> & vector);
 
 		//deque
 		void	fordJohnsonSort(std::deque<int> unsortedDeque);

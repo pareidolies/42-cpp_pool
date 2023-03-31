@@ -107,6 +107,7 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 
 	printBefore(unsortedVector);
 	printAfter(sortedVector);
+	isSorted(sortedVector);
 }
 
 void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
@@ -213,6 +214,19 @@ void	PmergeMe::printAfter(std::vector<int> & vector)
 	for(size_t i = 0; i < size; i++)
 		std::cout << vector[i] << " ";
 	std::cout << ANSI_RESET << std::endl;
+
+}
+
+void	PmergeMe::isSorted(std::vector<int> & vector)
+{
+	size_t size = vector.size() - 1;
+
+	for(size_t i = 0; i < size - 1; i++)
+	{
+		if (vector[i] > vector [i + 1])
+			std::cout << ANSI_RED << "Oups... Vector not sorted at: " << vector[i] << ANSI_RESET << std::endl;
+	}
+	std::cout << ANSI_GREEN << "Vector of size " << vector.size() << " sorted!" << ANSI_RESET << std::endl;
 
 }
 
