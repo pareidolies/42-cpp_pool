@@ -28,6 +28,8 @@ class PmergeMe
 		void	fordJohnsonSort(std::vector<int> unsortedVector);
 		void	createPairs(std::vector < std::pair<int,int> > & vectorPair);
 		void	sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size);
+		void	recursiveSort(std::vector < std::pair<int,int> > & vectorPair);
+		void	mergeSort(std::vector < std::pair<int,int> > & left, std::vector < std::pair<int,int> > & right, std::vector < std::pair<int,int> > & vectorPair);
 		void	addFirstHalf(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
 		void	addElementPairedWithFirst(std::vector < std::pair<int,int> > & vectorPair, std::vector<int> & sortedVector);
 		int		binarySearch(int value, std::vector<int> sortedVector, int first);

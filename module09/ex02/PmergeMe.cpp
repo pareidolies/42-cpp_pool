@@ -73,7 +73,7 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> unsortedVector)
 	}
 
 	createPairs(vectorPair);
-	sortPairsRecursively(vectorPair, vectorPair.size()); //use recursive merge
+	recursiveSort(vectorPair); //use recursive merge
 
 	addFirstHalf(vectorPair, sortedVector);
 	size = vectorPair.size();
@@ -132,6 +132,54 @@ void	PmergeMe::createPairs(std::vector < std::pair<int,int> > & vectorPair)
 		else
 			vectorPair.push_back(std::make_pair(_unsortedVector[i+1],_unsortedVector[i]));
 	}
+}
+
+void	PmergeMe::mergeSort(std::vector < std::pair<int,int> > & left, std::vector < std::pair<int,int> > & right, std::vector < std::pair<int,int> > & vectorPair)
+{
+    int nL = left.size();
+    int nR = right.size();
+    int i = 0, j = 0, k = 0;
+
+    while (j < nL && k < nR) 
+    {
+        if (left[j].first < right[k].first) {
+            vectorPair[i] = left[j];
+            j++;
+        }
+        else {
+            vectorPair[i] = right[k];
+            k++;
+        }
+        i++;
+    }
+    while (j < nL) {
+        vectorPair[i] = left[j];
+        j++; i++;
+    }
+    while (k < nR) {
+        vectorPair[i] = right[k];
+        k++; i++;
+    }
+}
+
+void	PmergeMe::recursiveSort(std::vector < std::pair<int,int> > & vectorPair) 
+{
+    if (vectorPair.size() <= 1) 
+		return;
+
+    size_t mid = vectorPair.size() / 2;
+    
+	std::vector < std::pair<int,int> > left;
+	std::vector < std::pair<int,int> > right;
+
+    for (size_t j = 0; j < mid;j++)
+        left.push_back(vectorPair[j]);
+    for (size_t j = 0; j < (vectorPair.size()) - mid; j++)
+        right.push_back(vectorPair[mid + j]);
+
+    recursiveSort(left);
+    recursiveSort(right);
+    mergeSort(left, right, vectorPair);
 }
 
 void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
