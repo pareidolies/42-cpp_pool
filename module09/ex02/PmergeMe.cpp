@@ -142,21 +142,25 @@ void	PmergeMe::mergeSort(std::vector < std::pair<int,int> > & left, std::vector 
 
     while (j < nL && k < nR) 
     {
-        if (left[j].first < right[k].first) {
+        if (left[j].first < right[k].first) 
+		{
             vectorPair[i] = left[j];
             j++;
         }
-        else {
+        else 
+		{
             vectorPair[i] = right[k];
             k++;
         }
         i++;
     }
-    while (j < nL) {
+    while (j < nL) 
+	{
         vectorPair[i] = left[j];
         j++; i++;
     }
-    while (k < nR) {
+    while (k < nR) 
+	{
         vectorPair[i] = right[k];
         k++; i++;
     }
@@ -184,8 +188,6 @@ void	PmergeMe::recursiveSort(std::vector < std::pair<int,int> > & vectorPair)
 
 void	PmergeMe::sortPairsRecursively(std::vector < std::pair<int,int> > & vectorPair, size_t size)
 {
-	//std::pair<int,int> tmp;
-
 	if (size == 1)
 		return;
 
