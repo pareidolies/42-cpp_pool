@@ -71,10 +71,10 @@ void	PmergeMe::fordJohnsonSort(std::vector<int> _unsorted)
 	recursiveSort(_pair); //use recursive merge
 
 	addFirstHalf(_pair, _sorted);
-	std::cout << "size :" << _sorted.size() << std::endl;
+	//std::cout << "size :" << _sorted.size() << std::endl;
 	size = _pair.size();
 	addElementPairedWithFirst(_pair, _sorted);
-	std::cout << "size :" << _sorted.size() << std::endl;
+	//std::cout << "size :" << _sorted.size() << std::endl;
 	
 	if (_unsorted.size() > 3)
 	{
